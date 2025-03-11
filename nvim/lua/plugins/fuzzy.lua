@@ -4,7 +4,7 @@ return {
    dependencies = { 'nvim-lua/plenary.nvim' },
    config = function()
       require('telescope').setup({
-         defaults = { layout_strategy = 'bottom_pane', layout_config = { height = 0.41, preview_width = 0.37 }, },
+         defaults = { layout_strategy = 'vertical', layout_config = { width = 0.75, height = 0.8 }, },
       })
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>f', builtin.find_files)

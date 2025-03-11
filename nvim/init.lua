@@ -36,6 +36,7 @@ vim.opt.undofile = true
 -- do not let cursor scroll surpass n number of columns when side scrolling.
 vim.opt.sidescrolloff = 10
 vim.opt.signcolumn = 'yes'
+vim.opt.colorcolumn = '80'
 -- preview substitutions live, as you type
 vim.opt.inccommand = 'split'
 vim.opt.startofline = false

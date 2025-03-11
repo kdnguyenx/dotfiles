@@ -73,6 +73,7 @@ vim.api.nvim_create_autocmd('vimenter', {
 -- golden ratio
 vim.api.nvim_create_autocmd('winenter', {
    pattern = '*',
+   group = vim.api.nvim_create_augroup('golden_ratio', { clear = true }),
    callback = function()
       if vim.wo.diff or vim.bo.filetype == 'telescopeprompt' then
          return
@@ -86,6 +87,7 @@ vim.api.nvim_create_autocmd('winenter', {
 -- diffmore resize
 vim.api.nvim_create_autocmd('optionset', {
    pattern = 'diff',
+   group = vim.api.nvim_create_augroup('diff_split_equally', { clear = true }),
    callback = function()
       local width = vim.o.columns
       if vim.fn.winnr('$') > 2 then

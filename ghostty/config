@@ -18,7 +18,7 @@ adjust-underline-thickness = 1
 adjust-strikethrough-thickness = 1
 
 # background
-background-opacity = 0.95
+background-opacity = 1
 background-blur = true
 
 # window
