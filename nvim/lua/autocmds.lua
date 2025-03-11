@@ -71,13 +71,12 @@ vim.api.nvim_create_autocmd('vimenter', {
    end
 })
 -- golden ratio
-vim.api.nvim_create_autocmd('WinEnter', {
+vim.api.nvim_create_autocmd('winenter', {
    pattern = '*',
    callback = function()
-      if vim.wo.diff or vim.bo.filetype == 'TelescopePrompt' then
+      if vim.wo.diff or vim.bo.filetype == 'telescopeprompt' then
          return
       end
-
       local golden_ratio = 1.618
       local width = vim.o.columns
       local golden_width = math.floor(width / golden_ratio)
