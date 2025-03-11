@@ -1,103 +1,103 @@
-local common = require('utils.common')
-
--- Highlight when yanking (copying) text
--- Try it with `yap` in normal mode
-vim.api.nvim_create_autocmd('TextYankPost', {
-   desc = 'Highlight when yanking (copying) text',
-   group = vim.api.nvim_create_augroup('highlight-on-yank', { clear = true }),
+-- highlight when yanking text
+vim.api.nvim_create_autocmd('textyankpost', {
+   group = vim.api.nvim_create_augroup('highlight_on_yank', { clear = true }),
    callback = function()
-      vim.highlight.on_yank()
+      vim.highlight.on_yank({ higroup = 'visual', timeout = 300 })
    end
 })
-
--- Quick exit some filetypes
-vim.api.nvim_create_autocmd('FileType', {
+-- quick exit some filetypes
+vim.api.nvim_create_autocmd('filetype', {
    pattern = { 'help', 'qf', 'diff', 'checkhealth', 'fugitive', 'fugitiveblame', 'dbout' },
-   group = vim.api.nvim_create_augroup('quick-exit-file', { clear = true }),
+   group = vim.api.nvim_create_augroup('quick_exit_filetypes', { clear = true }),
    callback = function()
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':q<CR>', { noremap = true, silent = true })
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':q<cr>', { noremap = true, silent = true })
    end
 })
-
--- Open the quickfix window whenever a quickfix command is executed
-vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+-- open the quickfix window whenever a quickfix command is executed
+vim.api.nvim_create_autocmd('quickfixcmdpost', {
    pattern = '[^l]*',
-   group = vim.api.nvim_create_augroup('quickfix-on-command', { clear = true }),
-   callback = function()
-      vim.cmd('copen')
-   end
+   group = vim.api.nvim_create_augroup('quickfix_command_execution', { clear = true }),
+   callback = function() vim.cmd('cwindow') end
 })
-
--- Create session directory if not exist
-local session_dir = vim.fn.stdpath('data') .. '/sessions'
-if vim.fn.isdirectory(session_dir) == 0 then
-   vim.fn.mkdir(session_dir, 'p')
+-- create session directory if it does not exist
+local function get_session_dir()
+   local dir = vim.fn.stdpath('data') .. '/sessions'
+   if not vim.fn.isdirectory(dir) then
+      vim.fn.mkdir(dir, 'p')
+   end
+   return dir
 end
-
--- Make session automatically when save a buffer or exit vim
-vim.api.nvim_create_autocmd({ 'BufWritePost', 'VimLeavePre' }, {
+-- make session automatically when save a buffer or exit vim
+vim.api.nvim_create_autocmd({ 'bufwritepost', 'vimleavepre' }, {
    pattern = '*',
-   group = vim.api.nvim_create_augroup('make-session', { clear = true }),
+   group = vim.api.nvim_create_augroup('vim_sessionizer', { clear = true }),
    callback = function()
-      common.run_async(function()
-         assert(coroutine.running())
-         local arg = vim.fn.argv()[1]
+      if #vim.v.argv > 3 then
+         return
+      end
+      if #vim.fn.argv() > 0 and vim.fn.argv(0) ~= vim.fn.getcwd() then
+         return
+      end
 
-         if arg == nil or arg == vim.fn.getcwd() then
-            local session_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-            vim.cmd('mksession! ' .. session_dir .. '/' .. session_name .. '.vim')
-         end
-
-         coroutine.yield()
-      end)
+      local dir = get_session_dir()
+      local name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+      vim.cmd('silent! mksession! ' .. dir .. '/' .. name .. '.vim')
    end
 })
-
--- Load session automatically when start vim
-vim.api.nvim_create_autocmd('VimEnter', {
+-- load session automatically when start vim
+vim.api.nvim_create_autocmd('vimenter', {
    pattern = '*',
-   group = vim.api.nvim_create_augroup('load-session', { clear = true }),
+   group = vim.api.nvim_create_augroup('vim_auto_session', { clear = true }),
    callback = function()
-      common.run_async(function()
-         assert(coroutine.running())
-         local session_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-         local session_file = session_dir .. '/' .. session_name .. '.vim'
+      if #vim.v.argv > 3 then
+         return
+      end
+      if #vim.fn.argv() > 0 and vim.fn.argv(0) ~= vim.fn.getcwd() then
+         return
+      end
 
-         if vim.fn.filereadable(session_file) > 0 then
-            local choice = vim.fn.confirm('Load', 'Load last session? &yes\n&no\n&clear', 2, 'Question')
-            if choice == 1 then
-               vim.cmd('source ' .. session_file)
-            end
-            if choice == 3 then
-               vim.fn.delete(session_file)
-            end
+      local dir = get_session_dir()
+      local name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+      local file = dir .. '/' .. name .. '.vim'
+
+      if vim.fn.filereadable(file) == 1 then
+         local choice = vim.fn.confirm('', 'load your stuff? &yeah\n&nah\n&clear', 2)
+         if choice == 1 then
+            vim.cmd('silent! source ' .. file)
+         elseif choice == 3 then
+            vim.fn.delete(file)
          end
-         coroutine.yield()
-      end)
+      end
    end
 })
-
--- Update statusline diagnostic count on the fly
-vim.api.nvim_create_autocmd({ 'BufEnter', 'DiagnosticChanged' }, {
+-- golden ratio
+vim.api.nvim_create_autocmd('WinEnter', {
    pattern = '*',
-   group = vim.api.nvim_create_augroup('diagnostic-count', { clear = true }),
    callback = function()
-      common.run_async(function()
-         assert(coroutine.running())
-         local diagnostics = vim.diagnostic.count(0, { severity = { min = vim.diagnostic.severity.WARN } })
-         local errors = diagnostics[vim.diagnostic.severity.ERROR]
-         local warnings = diagnostics[vim.diagnostic.severity.WARN]
+      if vim.wo.diff or vim.bo.filetype == 'TelescopePrompt' then
+         return
+      end
 
-         local statusline = require('statusline').default()
-         if errors then
-            statusline = statusline .. ' E:' .. errors
-         end
-         if warnings then
-            statusline = statusline .. ' W:' .. warnings
-         end
-
-         vim.opt.statusline = statusline
-         coroutine.yield()
-      end)
+      local golden_ratio = 1.618
+      local width = vim.o.columns
+      local golden_width = math.floor(width / golden_ratio)
+      vim.cmd("silent vertical resize " .. golden_width)
+   end
+})
+-- diffmore resize
+vim.api.nvim_create_autocmd('optionset', {
+   pattern = 'diff',
+   callback = function()
+      local width = vim.o.columns
+      if vim.fn.winnr('$') > 2 then
+         local golden_width = math.floor(width / 3)
+         vim.cmd('silent vertical resize ' .. golden_width)
+         return
+      end
+      if vim.fn.winnr('$') > 1 then
+         local golden_width = math.floor(width / 2)
+         vim.cmd('silent vertical resize ' .. golden_width)
+         return
+      end
    end
 })

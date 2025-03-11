@@ -1,17 +1,21 @@
-local common = require('utils.common')
-local config = require('utils.lsp').make_cfg()
+vim.opt_local.expandtab = true
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
 
-common.run_async(function()
-   assert(coroutine.running())
-   vim.opt.expandtab = true
-   vim.opt.shiftwidth = 2
-   vim.opt.tabstop = 2
-   vim.opt.softtabstop = 2
+if vim.fn.has('mac') > 0 then
+  -- add c/c++ include to path on macos
+  if vim.fn.executable('xcrun') > 0 then
+    local sdk_path = vim.fn.system('xcrun --show-sdk-path'):gsub('\n', '')
+    vim.opt_local.path:append(sdk_path .. '/usr/include')
+    vim.opt_local.path:append(sdk_path .. '/usr/include/c++/v1')
+  end
+  -- c/c++ makeprg, work with :make command
+  vim.opt_local.makeprg = "cd build && cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -G Ninja .. && ninja"
+end
 
-   config['name'] = 'clangd'
-   config['cmd'] = { 'clangd' }
-   config['root_dir'] = vim.fs.root(0, { 'CMakeLists.txt', '.clangd', '.clang-format' }) or vim.fn.getcwd()
-
-   vim.lsp.start(config)
-   coroutine.yield()
-end)
+local config = require('lsp').make_cfg()
+config['name'] = 'clangd'
+config['cmd'] = { 'clangd' }
+config['root_dir'] = vim.fs.root(0, { 'CMakeLists.txt', '.clangd', '.clang-format' }) or vim.fn.getcwd()
+vim.lsp.start(config)

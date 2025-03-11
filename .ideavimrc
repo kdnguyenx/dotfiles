@@ -1,60 +1,42 @@
 " .ideavimrc is a configuration file for IdeaVim plugin. It uses
 "   the same commands as the original .vimrc configuration.
-" You can find a list of commands here: https://jb.gg/h38q75
-" Find more examples here: https://jb.gg/share-ideavimrc
+" you can find a list of commands here: https://jb.gg/h38q75
+" find more examples here: https://jb.gg/share-ideavimrc
 
-" Source your .vimrc
+" source vimrc
 source ~/.vimrc
-
-" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
-set commentary
-set highlightedyank
-
-" IDE specific options
+" ide specific options
 set ideajoin
 set ideastatusicon=gray
 
-" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-" Fuzzy find stuff
-nnoremap <leader>f :action GotoFile<CR>
-vnoremap <leader>f :action GotoFile<CR>
-nnoremap <leader>F :action GotoClass<CR>
-vnoremap <leader>F :action GotoClass<CR>
-nnoremap <leader>g :action FindInPath<CR>
-vnoremap <leader>g :action FindInPath<CR>
-nnoremap <leader>s :action SearchEverywhere<CR>
-vnoremap <leader>s :action SearchEverywhere<CR>
+" --- enable ideavim plugins https://jb.gg/ideavim-plugins
+set commentary
+set highlightedyank
 
-" Buffer switching
-nnoremap <leader>b :action Switcher<CR>
-nnoremap <leader>B :action SwitcherAndRecentFiles<CR>
-
-" Code styles
-nnoremap <silent> gq :action ReformatCode<CR>
-vnoremap <silent> gq :action ReformatCode<CR>
-
-" Jump around
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap gD :action GotoTypeDeclaration<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gt :action GotoTest<CR>
-nnoremap gr :action FindUsages<CR>
-vnoremap gr :action FindUsages<CR>
-
-" Run stuff
-nnoremap gx :action RunMenu<CR>
-nnoremap gX :action RunClass<CR>
-
-" Code actions
-nnoremap ga :action GotoAction<CR>
-nnoremap K :action ShowHoverInfo<CR>
-
-" Project view
-nnoremap - :action SelectInProjectView<CR>
-
-" Hide all windows
-nnoremap X :action HideAllWindows<CR>
-
-" Diagnostics navigation
-nnoremap ]d :action GotoNextError<CR>
-nnoremap [d :action GotoPreviousError<CR>
+" -- map ide actions to ideavim -- https://jb.gg/abva4t
+nmap <leader>f <action>(GotoFile)
+vmap <leader>f <action>(GotoFile)
+nmap <leader>F <action>(GotoClass)
+vmap <leader>F <action>(GotoClass)
+nmap <leader>g <action>(FindInPath)
+vmap <leader>g <action>(FindInPath)
+nmap <leader>ss <action>(SearchEverywhere)
+vmap <leader>ss <action>(SearchEverywhere)
+nmap <leader>b <action>(Switcher)
+nmap <leader>B <action>(SwitcherAndRecentFiles)
+nmap <silent> gq <action>(ReformatCode)
+vmap <silent> gq <action>(ReformatCode)
+nmap <c-]> <action>(GotoDeclaration)
+nmap gi <action>(GotoImplementation)
+nmap gr <action>(FindUsages)
+nmap ga <action>(GotoAction)
+nmap K <action>(ShowHoverInfo)
+nmap <leader>t <action>(GotoTest)
+nmap gx <action>(RunClass)
+nmap <leader>x <action>(RunMenu)
+nmap - <action>(SelectInProjectView)
+nmap <leader>e <action>(ShowNavBar)
+nmap ]d <action>(GotoNextError)
+nmap [d <action>(GotoPreviousError)
+nmap Q <action>(HideAllWindows)
+vnoremap // "0y/<c-r>0<cr>

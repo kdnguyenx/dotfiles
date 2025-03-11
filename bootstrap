@@ -1,80 +1,107 @@
 #!/bin/bash
-# Install essential tools for my development environment
-
-if [[ "$OSTYPE" != "darwin"* ]]; then
-  echo "Unsupported OS."
+## install essential tools for my development environment
+## -----
+set -e
+is_mac=0
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  is_mac=1
+elif [[ "$OSTYPE" != "linux-gnu" ]]; then
+  echo 'unsupported os.'
   exit
 fi
 
-function init() {
-  echo "[-] Installing Xcode Command Line Tools [-]"
+echo '[-] installing some prerequisite packages [-]'
+if [[ $is_mac -eq 1 ]]; then
+  echo '[-] installing xcode command line tools [-]'
   xcode-select --install
-
   if ! hash brew &> /dev/null; then
-    echo "[-] Installing Homebrew [-]"
+    echo '[-] installing homebrew [-]'
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
-}
+  brew update
+  brew install curl wget git coreutils watch ncdu
+else
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt install -y curl wget zsh git coreutils watch ncdu
+fi
 
-# Setup initial tools
-init
+echo '[-] installing favourite font [-]'
+if [[ $is_mac -eq 1 ]]; then
+  brew install --cask font-jetbrains-mono
+else
+  wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
+  mkdir -p ~/.local/share/fonts
+  unzip JetBrainsMono-2.304.zip -d ~/.local/share/fonts
+  rm -f JetBrainsMono-2.304.zip
+  fc-cache -f -v
+fi
 
-# Install prerequisite packages
-echo "[-] Installing some prerequisite packages [-]"
-brew update
-brew install curl wget git coreutils watch ncdu jq fd
-
-# Install font
-echo "[-] Installing Source Code Pro Font [-]"
-brew install --cask font-jetbrains-mono-nerd-font
-
-# Backup dotfiles
 function backup() {
-  local backup_dir=dotfiles-bak-$(date +%s)
+  local backup_dir=dotfiles_bak_$(date +%s)
 
   mkdir ~/$backup_dir
   mv ~/.zshrc ~/$backup_dir/.zshrc
   mv ~/.zshenv ~/$backup_dir/.zshenv
 }
-echo "[-] Backing up dotfiles [-]"
+echo '[-] backing up dotfiles [-]'
 backup
 
-# Link dotfiles
 function linking() {
   ln -s $(pwd)/.zshrc ~/.zshrc
   ln -s $(pwd)/.zshenv ~/.zshenv
   ln -s $(pwd)/.gitignore ~/.gitignore
-  ln -s $(pwd)/.vimrc ~/.vimrc
   ln -s $(pwd)/.fdignore ~/.fdignore
+  ln -s $(pwd)/.vimrc ~/.vimrc
   ln -s $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -s $(pwd)/nvim $XDG_CONFIG_HOME/nvim
   ln -s $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
-  ln -s $(pwd)/scripts ~/scripts
+
+  if [[ $is_mac -eq 1 ]]; then
+    ln -s $(pwd)/aerospace $XDG_CONFIG_HOME/aerospace
+    ln -s $(pwd)/sketchybar $XDG_CONFIG_HOME/sketchybar
+  fi
 }
-echo "[-] Linking dotfiles [-]"
+echo '[-] linking dotfiles [-]'
 linking
 
-# Install some extended packages
-echo "[-] Installing extended packages [-]"
-brew install zsh-autosuggestions parallel ripgrep fzf
-brew install neovim httpie pyenv universal-ctags
+echo '[-] installing extended packages [-]'
+if [[ $is_mac -eq 1 ]]; then
+  brew install zsh-autosuggestions parallel fzf fd ripgrep jq
+  brew install httpie pyenv universal-ctags
+else
+  sudo apt install -y zsh-autosuggestions parallel fzf fd-find ripgrep jq httpie universal-ctags
+  ln -s $(which fdfind) ~/.local/bin/fd
+fi
 
-# Download git-prompt.sh script
-echo "[-] Downloading git-prompt.sh script [-]"
+echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
 
-# Install default terminal emulator
-echo "[-] Installing Ghostty [-]"
-brew install ghostty
+echo '[-] installing vim plugin manager [-]'
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# Change default shell
-# echo "[-] Change default shell to Zsh [-]"
-# chsh -s $(which zsh)
+echo '[-] creating essential directories [-]'
+mkdir -p ~/personal
+mkdir -p ~/repos
+mkdir -p ~/opensource
 
-# Notify configuration finished
-echo "[-] Setup done. Run \`source ~/.zshrc\` to refresh shell config [-]"
+echo '[-] installing ghostty [-]'
+if [[ $is_mac -eq 1 ]]; then
+  brew install ghostty
+else
+  git clone https://github.com/ghostty-org/ghostty ~/repos/ghostty
+  cd ~/opensource/ghostty
+  git checkout v1.1.2
+  sudo apt install -y gtk4 libadwaita pkg-config
+  zig build -p ~/.local -Doptimize=ReleaseFast
+fi
+
+echo '[-] change default shell to zsh [-]'
+chsh -s $(which zsh)
+echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'

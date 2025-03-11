@@ -1,17 +1,10 @@
-local common = require('utils.common')
-local config = require('utils.lsp').make_cfg()
+vim.opt_local.expandtab = false
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4
+vim.opt_local.softtabstop = 4
 
-common.run_async(function()
-   assert(coroutine.running())
-   vim.opt.expandtab = false
-   vim.opt.shiftwidth = 4
-   vim.opt.tabstop = 4
-   vim.opt.softtabstop = 4
-
-   config['name'] = 'gopls'
-   config['cmd'] = { 'gopls' }
-   config['root_dir'] = vim.fs.root(0, { 'go.mod', 'go.work' }) or vim.fn.getcwd()
-
-   vim.lsp.start(config)
-   coroutine.yield()
-end)
+local config = require('lsp').make_cfg()
+config['name'] = 'gopls'
+config['cmd'] = { 'gopls' }
+config['root_dir'] = vim.fs.root(0, { 'go.mod', 'go.work' }) or vim.fn.getcwd()
+vim.lsp.start(config)

@@ -1,18 +1,11 @@
-local common = require('utils.common')
-local config = require('utils.lsp').make_cfg()
+vim.opt_local.expandtab = true
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.softtabstop = 2
 
-common.run_async(function()
-   assert(coroutine.running())
-   vim.opt.expandtab = true
-   vim.opt.shiftwidth = 2
-   vim.opt.tabstop = 2
-   vim.opt.softtabstop = 2
-
-   config['name'] = 'tsserver'
-   config['cmd'] = { 'typescript-language-server', '--stdio' }
-   config['root_dir'] = vim.fs.root(0, { 'package.json', '.git' }) or vim.fn.getcwd()
-   config['init_options'] = { hostInfo = 'neovim' }
-
-   vim.lsp.start(config)
-   coroutine.yield()
-end)
+local config = require('lsp').make_cfg()
+config['name'] = 'tsserver'
+config['cmd'] = { 'typescript-language-server', '--stdio' }
+config['root_dir'] = vim.fs.root(0, { 'package.json', '.git' }) or vim.fn.getcwd()
+config['init_options'] = { hostInfo = 'neovim' }
+vim.lsp.start(config)
