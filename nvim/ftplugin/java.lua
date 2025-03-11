@@ -98,7 +98,7 @@ if vim.fn.executable('mvn') > 0 then
       end
 
       if opts.args and not opts.args:match('^%s*$') then
-         class = string.format('%s\\#%s', class, opts.args:gsub('%s+', ''))
+         class = string.format('%s#%s', class, opts.args:gsub('%s+', ''))
       end
 
       local cmd = 'mvn test -T 1C -pl :' .. module .. ' -Dtest=' .. vim.fn.fnameescape(class) .. ' -DskipTests=false -Dgroups=small,medium'
