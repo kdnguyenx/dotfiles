@@ -3,8 +3,8 @@ vim.opt_local.shiftwidth = 4
 vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
 
-vim.cmd([[setlocal includeexpr=substitute(v:fname,'\\.','/','g')]])
-vim.opt_local.errorformat = "[ERROR] %f:[%l,%v] %m"
+vim.opt_local.includeexpr=vim.v.fname:gsub('.', '/')
+vim.opt_local.errorformat = '[ERROR] %f:[%l\\,%v] %m'
 vim.opt_local.makeprg = 'mvn clean install -T 5'
 vim.opt_local.path:append('*/src/main/java/**')
 vim.opt_local.path:append('*/src/main/test/**')

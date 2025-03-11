@@ -1,23 +1,13 @@
 return {
    { 'tpope/vim-surround' },
+   { 'mfussenegger/nvim-jdtls' },
    {
       'kristijanhusak/vim-dadbod-ui',
       dependencies = { 'tpope/vim-dadbod', lazy = true }
    },
    {
       'williamboman/mason.nvim',
-      config = function()
-         require('mason').setup()
-      end
-   },
-   { 'mfussenegger/nvim-jdtls' },
-   {
-      'tpope/vim-eunuch',
-      config = function()
-         vim.keymap.set('n', '<leader>cp', ':Copy %:.<c-z> %:h<c-z>')
-         vim.keymap.set('n', '<leader>mv', ':Move %:.<c-z> %:h<c-z>')
-         vim.keymap.set('n', '<leader>rm', ':Delete %:.<c-z>')
-      end
+      config = function() require('mason').setup() end
    },
    {
       'vimwiki/vimwiki',

@@ -17,13 +17,13 @@ vim.keymap.set('c', '<c-b>', '<up>')
 vim.keymap.set('c', '<c-f>', '<down>')
 -- navigate through quickfix list
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz')
-vim.keymap.set('n', ']q', '<cmd>cprev<cr>zz')
+vim.keymap.set('n', '[q', '<cmd>cprev<cr>zz')
 -- navigate through loclist
 vim.keymap.set('n', ']l', '<cmd>lnext<cr>zz')
-vim.keymap.set('n', ']l', '<cmd>lprev<cr>zz')
+vim.keymap.set('n', '[l', '<cmd>lprev<cr>zz')
 -- navigate through buffer
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>zz')
-vim.keymap.set('n', ']b', '<cmd>bprev<cr>zz')
+vim.keymap.set('n', '[b', '<cmd>bprev<cr>zz')
 -- search current marked text
 vim.keymap.set('v', '//', [[y/\v<c-r>=escape(@",'/\')<cr><cr>]])
 -- yank marked text/paste to/from global register
@@ -35,6 +35,10 @@ vim.keymap.set('n', '<leader>P', '"+P')
 -- search and replace
 vim.keymap.set('n', '<leader>rr', ':%s/<c-r><c-w>//g<left><left>')
 vim.keymap.set('v', '<leader>rr', '"5y:%s/<c-r>5//g<left><left>')
+-- unix commands
+vim.keymap.set('n', '<leader>cp', ':!cp -r %:.<c-z> %:h<c-z>')
+vim.keymap.set('n', '<leader>mv', ':!mv %:.<c-z> %:h<c-z>')
+vim.keymap.set('n', '<leader>rm', ':!rm -rf %:.<c-z>')
 -- default fuzzy find
 vim.keymap.set('n', '<leader>f', ':find **/*')
 vim.keymap.set('v', '<leader>f', '"0y:find **/*<c-r>0<c-z>')
