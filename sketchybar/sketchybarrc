@@ -12,7 +12,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar display=main position=top shadow=on height=30 blur_radius=95 corner_radius=9 y_offset=5 margin=5 color=0xd9191724
+sketchybar --bar display=main position=top shadow=on height=31 blur_radius=95 corner_radius=0 y_offset=0 margin=0 color=0xd9191724
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -22,8 +22,8 @@ sketchybar --bar display=main position=top shadow=on height=30 blur_radius=95 co
 default=(
   padding_left=5
   padding_right=5
-  icon.font="jetbrains mono:bold:13.0"
-  label.font="jetbrains mono:bold:13.0"
+  icon.font="jetbrains mono:medium:13.0"
+  label.font="jetbrains mono:medium:13.0"
   icon.color=0xd9e0def4
   label.color=0xd9e0def4
   icon.padding_left=4
@@ -44,11 +44,11 @@ for sid in $(aerospace list-workspaces --all); do
              --subscribe space.$sid aerospace_workspace_change \
              --set space.$sid \
                background.color=0xd9524f67 \
-               background.corner_radius=5 \
-               background.height=20 \
+               background.corner_radius=2 \
+               background.height=23 \
                background.drawing=off \
                label="$sid" \
-               label.background.corner_radius=5 \
+               label.background.corner_radius=2 \
                label.padding_left=0 \
                label.padding_right=9 \
                click_script="aerospace workspace $sid" \

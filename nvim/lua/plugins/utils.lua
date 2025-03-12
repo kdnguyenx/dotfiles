@@ -1,12 +1,7 @@
 return {
-  { "mfussenegger/nvim-jdtls" },
   {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = { "tpope/vim-dadbod", lazy = true }
-  },
-  {
-    "williamboman/mason.nvim",
-    config = function() require("mason").setup() end
   },
   {
     "vimwiki/vimwiki",

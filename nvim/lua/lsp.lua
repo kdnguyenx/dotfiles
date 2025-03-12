@@ -22,10 +22,9 @@ function M.make_cfg()
         vim.diagnostic.setloclist(vim.diagnostic.toqflist(diagnostics))
       end)
       -- diagnostic signs
-      vim.diagnostic.config({ virtual_text = true, underline = true, float = false })
+      vim.diagnostic.config({ virtual_text = true, underline = true })
     end,
     detached = true,
   }
 end
-
 return M
