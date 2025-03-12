@@ -53,6 +53,9 @@ automatically-unhide-macos-hidden-apps = false
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 [[on-window-detected]]
+if.app-name-regex-substring = 'music'
+run = 'layout floating'
+[[on-window-detected]]
 if.app-name-regex-substring = '1password'
 run = 'layout floating'
 [[on-window-detected]]
