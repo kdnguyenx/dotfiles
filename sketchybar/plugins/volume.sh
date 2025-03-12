@@ -2,16 +2,17 @@
 # the volume_change event supplies a $info variable in which the current volume
 # percentage is passed to the script.
 if [ "$SENDER" = "volume_change" ]; then
-  volume_percentage=$INFO
-  value="+inf"
-  if (( volume_percentage == 0 )); then
-    value="-inf"  # log(0) is negative infinity
+  percentage=$INFO
+  result="+inf"
+  if (( percentage == 0 )); then
+    # log(0) is negative infinity
+    result="-inf"
   else
     # convert the percentage to a decimal
-    volume_decimal=$(echo "scale=3; $volume_percentage / 100" | bc -l)
-    # calculate db using the formula: 20 * log10(volume_decimal)
-    db=$(echo "scale=3; 20 * l($volume_decimal) / l(10)" | bc -l)
-    value="$db dB"
+    fraction=$(echo "scale=2; $percentage / 100" | bc -l)
+    # calculate db using the formula: 20 * log10(fraction)
+    result=$(echo "scale=3; 20 * (l($fraction) / l(10))" | bc -l)
+    result="$result dB"
   fi
-  sketchybar --set "$NAME" icon="|" label="$value"
+  sketchybar --set "$NAME" icon="|" label="$result"
 fi
