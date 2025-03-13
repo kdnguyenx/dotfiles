@@ -2,9 +2,9 @@ local M = {}
 function M.make_cfg()
   return {
     on_attach = function(client, bufnr)
-      -- enable inlay hint and autocompletion
+      -- enable inlay hint
       vim.lsp.inlay_hint.enable(true)
-      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+      -- vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
       -- mappings.
       -- see `:help vim.lsp.*` for documentation on any of the below functions
       -- lsp navigation keymaps
@@ -22,7 +22,7 @@ function M.make_cfg()
         vim.diagnostic.setloclist(vim.diagnostic.toqflist(diagnostics))
       end)
       -- diagnostic signs
-      vim.diagnostic.config({ virtual_text = true, underline = true })
+      vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "none", } })
     end,
     detached = true,
   }

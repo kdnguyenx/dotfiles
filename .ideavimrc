@@ -6,24 +6,25 @@
 " source vimrc
 source ~/.vimrc
 " ide specific options
-set ideajoin
 set ideastatusicon=gray
+set ideajoin
+set ideamarks
+set ideawrite=file
+set visualdelay=50
 
 " --- enable ideavim plugins https://jb.gg/ideavim-plugins
 set commentary
+set surround
 set highlightedyank
 
 " -- map ide actions to ideavim -- https://jb.gg/abva4t
-nmap <leader>f <action>(GotoFile)
-vmap <leader>f <action>(GotoFile)
-nmap <leader>F <action>(GotoClass)
-vmap <leader>F <action>(GotoClass)
-nmap <leader>g <action>(FindInPath)
-vmap <leader>g <action>(FindInPath)
-nmap <leader>ss <action>(SearchEverywhere)
-vmap <leader>ss <action>(SearchEverywhere)
-nmap <leader>b <action>(Switcher)
-nmap <leader>B <action>(SwitcherAndRecentFiles)
+nmap <leader>ff <action>(GotoFile)
+nmap <leader>fc <action>(GotoClass)
+nmap <leader>gg <action>(FindInPath)
+vmap <leader>gg <action>(FindInPath)
+nmap <leader>/ <action>(SearchEverywhere)
+nmap <leader>bb <action>(Switcher)
+nmap <leader>bs <action>(SwitcherAndRecentFiles)
 nmap <silent> gq <action>(ReformatCode)
 vmap <silent> gq <action>(ReformatCode)
 nmap <c-]> <action>(GotoDeclaration)
@@ -31,11 +32,11 @@ nmap gi <action>(GotoImplementation)
 nmap gr <action>(FindUsages)
 nmap ga <action>(GotoAction)
 nmap K <action>(ShowHoverInfo)
-nmap <leader>t <action>(GotoTest)
+nmap gt <action>(GotoTest)
 nmap gx <action>(RunClass)
-nmap <leader>x <action>(RunMenu)
+nmap <leader>xx <action>(RunMenu)
 nmap - <action>(SelectInProjectView)
-nmap <leader>e <action>(ShowNavBar)
+nmap <leader>ee <action>(ShowNavBar)
 nmap ]d <action>(GotoNextError)
 nmap [d <action>(GotoPreviousError)
 nmap Q <action>(HideAllWindows)

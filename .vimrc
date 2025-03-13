@@ -8,7 +8,7 @@ autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :q<cr>
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
 set list listchars=tab:⇀\ ,eol:¬,nbsp:␣,trail:⋅ showbreak=↪
-set signcolumn=no sidescrolloff=10 title
+set signcolumn=no colorcolumn=80 sidescrolloff=10 title
 " set default regexp engine to nfa
 set regexpengine=2
 syntax enable
@@ -79,7 +79,7 @@ set wildmenu wildmode=full wildcharm=<c-z> wildmenu
 nnoremap <leader>ff :find **/*
 nnoremap <leader>ee :e %:h<c-z>
 nnoremap <leader>bb :b <c-z>
-nnoremap <leader>ju :jumps<cr>
+nnoremap <leader>jj :jumps<cr>
 nnoremap <leader>mm :marks<cr>
 nnoremap <leader>gg :vimgrep //f **
 vnoremap <leader>gg "0y:vimgrep /<c-r>0/f **
@@ -106,7 +106,7 @@ if executable('ctags')
     let l:job = job_start(l:cmd, {'in_io': 'null', 'out_io': 'null', 'err_io': 'null'})
     echo 'generate tags..., status: ' . job_status(l:job)
   endfunction
-  nnoremap <leader>tag :call <sid>generate_tags()<cr>
+  nnoremap <leader>tg :call <sid>generate_tags()<cr>
 else
   echo 'no ctags installation found'
 endif
@@ -128,5 +128,5 @@ highlight statusline cterm=NONE ctermbg=NONE ctermfg=grey
 highlight statuslinenc cterm=NONE ctermbg=NONE ctermfg=darkgrey
 " netrw search text hl
 highlight link netrwmarkfile search
-nnoremap - :Explore<cr>
+nmap - :Explore<cr>
 autocmd filetype netrw nnoremap <buffer> <c-c> :Rexplore<cr>
