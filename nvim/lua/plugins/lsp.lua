@@ -21,6 +21,10 @@ return {
       end
       local cmp = require("cmp")
       cmp.setup({
+        window = {
+          completion = cmp.config.window.bordered({ border = "single" }),
+          documentation = cmp.config.window.bordered({ border = "single" }),
+        },
         mapping = cmp.mapping.preset.insert({
           ["<c-u>"] = cmp.mapping.scroll_docs(-5),
           ["<c-d>"] = cmp.mapping.scroll_docs(5),

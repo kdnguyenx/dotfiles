@@ -26,7 +26,7 @@ vim.keymap.set("n", "[l", "<cmd>lprev<cr>zz")
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>zz")
 vim.keymap.set("n", "[b", "<cmd>bprev<cr>zz")
 -- search current marked text
-vim.keymap.set("v", "//", [[y/\v<c-r>=escape(@","/\")<cr><cr>]])
+vim.keymap.set("v", "//", [[y/\v<c-r>=escape(@",'/\')<cr><cr>]])
 -- yank marked text/paste to/from global register
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("v", "<leader>y", [["+y]])

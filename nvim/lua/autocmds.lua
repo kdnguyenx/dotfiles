@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd("textyankpost", {
   group = vim.api.nvim_create_augroup("highlight_on_yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank({ higroup = "incsearch", timeout = 50 })
-  end
+  end,
 })
 -- quick exit some filetypes
 vim.api.nvim_create_autocmd("filetype", {
@@ -11,23 +11,13 @@ vim.api.nvim_create_autocmd("filetype", {
   group = vim.api.nvim_create_augroup("quick_exit_filetypes", { clear = true }),
   callback = function()
     vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>bd!<cr>", { noremap = true, silent = true })
-  end
-})
--- custom netrw
-vim.api.nvim_create_autocmd("filetype", {
-  pattern = "netrw",
-  group = vim.api.nvim_create_augroup("custom_netrw", { clear = true }),
-  callback = function()
-    vim.opt_local.cursorline = false
-    vim.opt_local.colorcolumn = ""
-    vim.api.nvim_buf_set_keymap(0, "n", "<c-c>", "<cmd>Rexplore<cr>", { noremap = true, silent = true })
-  end
+  end,
 })
 -- open the quickfix window whenever a quickfix command is executed
 vim.api.nvim_create_autocmd("quickfixcmdpost", {
   pattern = "[^l]*",
   group = vim.api.nvim_create_augroup("quickfix_command_execution", { clear = true }),
-  callback = function() vim.cmd("cwindow") end
+  callback = function() vim.cmd("cwindow") end,
 })
 -- create session directory if it does not exist
 local function get_session_dir()
@@ -51,7 +41,7 @@ vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
     local dir = get_session_dir()
     local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     vim.cmd("silent! mksession! " .. dir .. "/" .. name .. ".vim")
-  end
+  end,
 })
 -- load session automatically when start vim
 vim.api.nvim_create_autocmd("vimenter", {
@@ -75,7 +65,7 @@ vim.api.nvim_create_autocmd("vimenter", {
         vim.fn.delete(file)
       end
     end
-  end
+  end,
 })
 -- golden ratio
 vim.api.nvim_create_autocmd("winenter", {
@@ -89,7 +79,7 @@ vim.api.nvim_create_autocmd("winenter", {
     local width = vim.o.columns
     local golden_width = math.floor(width / golden_ratio)
     vim.cmd("silent vertical resize " .. golden_width)
-  end
+  end,
 })
 -- diffmore resize
 vim.api.nvim_create_autocmd("optionset", {
@@ -107,5 +97,5 @@ vim.api.nvim_create_autocmd("optionset", {
       vim.cmd("silent vertical resize " .. golden_width)
       return
     end
-  end
+  end,
 })
