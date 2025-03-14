@@ -1,18 +1,5 @@
 return {
-  {
-    "tpope/vim-fugitive",
-    config = function()
-      vim.api.nvim_create_autocmd("filetype", {
-        pattern = "fugitive",
-        group = vim.api.nvim_create_augroup("custom_fugitive", { clear = true }),
-        callback = function()
-          vim.opt_local.number = false
-          vim.opt_local.relativenumber = false
-          vim.opt_local.colorcolumn = ""
-        end
-      })
-    end
-  },
+  { "tpope/vim-fugitive" },
   {
     "lewis6991/gitsigns.nvim",
     config = function()

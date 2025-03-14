@@ -66,10 +66,6 @@ config["settings"] = {
 }
 config["init_options"] = {
   bundles = {},
-  extendedClientCapabilities = {
-    classFileContentsSupport = true,
-    advancedOrganizeImportsSupport = true,
-  }
 }
 require("jdtls").start_or_attach(config)
 -- maven test

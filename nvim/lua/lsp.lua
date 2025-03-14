@@ -18,7 +18,7 @@ function M.make_cfg()
       vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end)
       vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end)
       vim.keymap.set("n", "<leader>dl", function()
-        local diagnostics = vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.WARN } })
+        local diagnostics = vim.diagnostic.get(0, { severity = { min = vim.diagnostic.severity.ERROR } })
         vim.diagnostic.setloclist(vim.diagnostic.toqflist(diagnostics))
       end)
       -- diagnostic signs

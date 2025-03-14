@@ -42,6 +42,7 @@ vim.keymap.set("n", "<leader>mv", ":!mv %:.<c-z> %:h<c-z>")
 vim.keymap.set("n", "<leader>rm", ":!rm -rf %:.<c-z>")
 -- default fuzzy find
 vim.keymap.set("n", "<leader>ff", ":find **/*")
+vim.keymap.set("n", "<leader>fw", ":find **/*<c-r><c-w>")
 vim.keymap.set("n", "<leader>ee", ":e %:h<c-z>")
 vim.keymap.set("n", "<leader>bb", ":b <c-z>")
 vim.keymap.set("n", "<leader>jj", vim.cmd.jumps)
