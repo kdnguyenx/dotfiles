@@ -28,10 +28,10 @@ return {
           documentation = cmp.config.window.bordered({ border = "single" }),
         },
         mapping = cmp.mapping.preset.insert({
-          ["<c-u>"] = cmp.mapping.scroll_docs(-5),
-          ["<c-d>"] = cmp.mapping.scroll_docs(5),
-          ["<c-space>"] = cmp.mapping.complete(),
-          ["<c-e>"] = cmp.mapping.abort(),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
+          ["<C-d>"] = cmp.mapping.scroll_docs(5),
+          ["<C-space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
           ["<cr>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({ { name = "nvim_lsp" }, }, { { name = "buffer" }, })

@@ -2,20 +2,20 @@
 vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch)
 vim.keymap.set("n", "-", vim.cmd.Explore)
 -- use ctrl+<hjkl> to switch between windows
-vim.keymap.set("n", "<c-h>", "<c-w><c-h>")
-vim.keymap.set("n", "<c-l>", "<c-w><c-l>")
-vim.keymap.set("n", "<c-j>", "<c-w><c-j>")
-vim.keymap.set("n", "<c-k>", "<c-w><c-k>")
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 -- use arrow keys for resize
 vim.keymap.set("n", "<up>", "<cmd>resize +2<cr>")
 vim.keymap.set("n", "<down>", "<cmd>resize -2<cr>")
 vim.keymap.set("n", "<left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<right>", "<cmd>vertical resize +2<cr>")
 -- command mode navigation
-vim.keymap.set("c", "<c-a>", "<home>")
-vim.keymap.set("c", "<c-e>", "<end>")
-vim.keymap.set("c", "<c-b>", "<up>")
-vim.keymap.set("c", "<c-f>", "<down>")
+vim.keymap.set("c", "<C-a>", "<home>")
+vim.keymap.set("c", "<C-e>", "<end>")
+vim.keymap.set("c", "<C-b>", "<up>")
+vim.keymap.set("c", "<C-f>", "<down>")
 -- navigate through quickfix list
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>zz")
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>zz")
@@ -26,7 +26,7 @@ vim.keymap.set("n", "[l", "<cmd>lprev<cr>zz")
 vim.keymap.set("n", "]b", "<cmd>bnext<cr>zz")
 vim.keymap.set("n", "[b", "<cmd>bprev<cr>zz")
 -- search current marked text
-vim.keymap.set("v", "//", [[y/\v<c-r>=escape(@",'/\')<cr><cr>]])
+vim.keymap.set("v", "//", [[y/\v<C-r>=escape(@",'/\')<cr><cr>]])
 -- yank marked text/paste to/from global register
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("v", "<leader>y", [["+y]])
@@ -34,24 +34,24 @@ vim.keymap.set("n", "<leader>p", [["+p]])
 vim.keymap.set("v", "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>P", [["+P]])
 -- search and replace
-vim.keymap.set("n", "<leader>rr", [[:%s/<c-r><c-w>//g<left><left>]])
-vim.keymap.set("v", "<leader>rr", [["5y:%s/<c-r>5//g<left><left>]])
+vim.keymap.set("n", "<leader>rr", [[:%s/<C-r><C-w>//g<left><left>]])
+vim.keymap.set("v", "<leader>rr", [["5y:%s/<C-r>5//g<left><left>]])
 -- unix commands
-vim.keymap.set("n", "<leader>cp", ":!cp -r %:.<c-z> %:h<c-z>")
-vim.keymap.set("n", "<leader>mv", ":!mv %:.<c-z> %:h<c-z>")
-vim.keymap.set("n", "<leader>rm", ":!rm -rf %:.<c-z>")
+vim.keymap.set("n", "<leader>cp", ":!cp -r %:.<C-z> %:h<C-z>")
+vim.keymap.set("n", "<leader>mv", ":!mv %:.<C-z> %:h<C-z>")
+vim.keymap.set("n", "<leader>rm", ":!rm -rf %:.<C-z>")
 -- default fuzzy find
 vim.keymap.set("n", "<leader>ff", ":find **/*")
-vim.keymap.set("n", "<leader>fw", ":find **/*<c-r><c-w>")
-vim.keymap.set("n", "<leader>e", ":e %:h<c-z>")
-vim.keymap.set("n", "<leader>b", ":b <c-z>")
+vim.keymap.set("n", "<leader>fw", ":find **/*<C-r><C-w>")
+vim.keymap.set("n", "<leader>e", ":e %:h<C-z>")
+vim.keymap.set("n", "<leader>b", ":b <C-z>")
 vim.keymap.set("n", "<leader>ju", vim.cmd.jumps)
 vim.keymap.set("n", "<leader>mm", vim.cmd.marks)
 -- default grep
 if vim.fn.executable("rg") > 0 then
   vim.keymap.set("n", "<leader>gg", [[:silent grep! ''<left>]])
-  vim.keymap.set("v", "<leader>gg", [["0y:silent grep! --case-sensitive '<c-r>0'<left>]])
-  vim.keymap.set("n", "<leader>gw", [[:silent grep! --case-sensitive '<c-r><c-w>'<cr>]])
+  vim.keymap.set("v", "<leader>gg", [["0y:silent grep! --case-sensitive '<C-r>0'<left>]])
+  vim.keymap.set("n", "<leader>gw", [[:silent grep! --case-sensitive '<C-r><C-w>'<cr>]])
   vim.keymap.set("n", "<leader>/", [[:silent grep! --hidden --no-ignore ''<left>]])
 end
 -- diff mode
