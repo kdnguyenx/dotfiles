@@ -18,6 +18,7 @@ vim.opt.smartcase = true
 -- configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.colorcolumn = "80"
 -- sets how neovim will display certain whitespace characters in the editor.
 vim.opt.listchars = { tab = "⇀ ", trail = "·", eol = "¬", nbsp = "␣" }
 vim.opt.showbreak = "↪"
