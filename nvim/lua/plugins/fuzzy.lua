@@ -17,9 +17,9 @@ return {
     vim.keymap.set("n", "<leader>fg", builtin.git_files)
     vim.keymap.set("n", "<leader>gg", builtin.live_grep)
     vim.keymap.set("n", "<leader>gw", function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
-    vim.keymap.set("n", "<leader>bb", builtin.buffers)
-    vim.keymap.set("n", "<leader>jj", builtin.jumplist)
+    vim.keymap.set("n", "<leader>b", builtin.buffers)
+    vim.keymap.set("n", "<leader>ju", builtin.jumplist)
     vim.keymap.set("n", "<leader>mm", builtin.marks)
-    vim.keymap.set("n", "<leader>oo", builtin.resume)
+    vim.keymap.set("n", "<leader>o", builtin.resume)
   end
 }

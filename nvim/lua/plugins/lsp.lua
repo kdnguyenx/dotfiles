@@ -8,6 +8,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
+      -- lspconfig
       local servers = { "clangd", "gopls", "lua_ls", "pyright", "jdtls", "ts_ls" }
       require("mason").setup()
       require("mason-lspconfig").setup({ ensure_installed = servers })
@@ -19,6 +20,7 @@ return {
           lspconfig[server].setup(config)
         end -- use nvim-jdtls for java
       end
+      -- completion
       local cmp = require("cmp")
       cmp.setup({
         window = {

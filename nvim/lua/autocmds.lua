@@ -1,12 +1,12 @@
 -- highlight when yanking text
-vim.api.nvim_create_autocmd("textyankpost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_on_yank", { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ higroup = "incsearch", timeout = 50 })
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 50 })
   end,
 })
 -- quick exit some filetypes
-vim.api.nvim_create_autocmd("filetype", {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "qf", "diff", "checkhealth", "fugitive", "fugitiveblame", "dbout" },
   group = vim.api.nvim_create_augroup("quick_exit_filetypes", { clear = true }),
   callback = function()
@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("filetype", {
   end,
 })
 -- open the quickfix window whenever a quickfix command is executed
-vim.api.nvim_create_autocmd("quickfixcmdpost", {
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   pattern = "[^l]*",
   group = vim.api.nvim_create_augroup("quickfix_command_execution", { clear = true }),
   callback = function() vim.cmd("cwindow") end,
@@ -28,7 +28,7 @@ local function get_session_dir()
   return dir
 end
 -- make session automatically when save a buffer or exit vim
-vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
+vim.api.nvim_create_autocmd({ "BufWritePost", "VimLeavePre" }, {
   pattern = "*",
   group = vim.api.nvim_create_augroup("vim_sessionizer", { clear = true }),
   callback = function()
@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
   end,
 })
 -- load session automatically when start vim
-vim.api.nvim_create_autocmd("vimenter", {
+vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("vim_auto_session", { clear = true }),
   callback = function()
@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("vimenter", {
   end,
 })
 -- golden ratio
-vim.api.nvim_create_autocmd("winenter", {
+vim.api.nvim_create_autocmd("WinEnter", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("golden_ratio", { clear = true }),
   callback = function()
@@ -81,8 +81,8 @@ vim.api.nvim_create_autocmd("winenter", {
     vim.cmd("silent vertical resize " .. golden_width)
   end,
 })
--- diffmore resize
-vim.api.nvim_create_autocmd("optionset", {
+-- diffmode resize
+vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
   group = vim.api.nvim_create_augroup("diff_split_equally", { clear = true }),
   callback = function()

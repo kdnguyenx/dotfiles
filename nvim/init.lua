@@ -68,5 +68,3 @@ vim.g.mapleader = " "
 require("keymaps")
 require("autocmds")
 require("plugins")
--- highlight marked files in the same way search matches are
-vim.api.nvim_set_hl(0, "netrwmarkfile", { link = "search" })

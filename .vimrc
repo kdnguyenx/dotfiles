@@ -77,9 +77,10 @@ nnoremap [b :bprev<cr>zz
 set wildmenu wildmode=full wildcharm=<c-z> wildmenu
 " fuzzy find
 nnoremap <leader>ff :find **/*
-nnoremap <leader>ee :e %:h<c-z>
-nnoremap <leader>bb :b <c-z>
-nnoremap <leader>jj :jumps<cr>
+nnoremap <leader>fw :find **/*<c-r><c-w>
+nnoremap <leader>e :e %:h<c-z>
+nnoremap <leader>b :b <c-z>
+nnoremap <leader>ju :jumps<cr>
 nnoremap <leader>mm :marks<cr>
 nnoremap <leader>gg :vimgrep //f **
 vnoremap <leader>gg "0y:vimgrep /<c-r>0/f **

@@ -43,9 +43,9 @@ vim.keymap.set("n", "<leader>rm", ":!rm -rf %:.<c-z>")
 -- default fuzzy find
 vim.keymap.set("n", "<leader>ff", ":find **/*")
 vim.keymap.set("n", "<leader>fw", ":find **/*<c-r><c-w>")
-vim.keymap.set("n", "<leader>ee", ":e %:h<c-z>")
-vim.keymap.set("n", "<leader>bb", ":b <c-z>")
-vim.keymap.set("n", "<leader>jj", vim.cmd.jumps)
+vim.keymap.set("n", "<leader>e", ":e %:h<c-z>")
+vim.keymap.set("n", "<leader>b", ":b <c-z>")
+vim.keymap.set("n", "<leader>ju", vim.cmd.jumps)
 vim.keymap.set("n", "<leader>mm", vim.cmd.marks)
 -- default grep
 if vim.fn.executable("rg") > 0 then

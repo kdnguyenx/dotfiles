@@ -20,7 +20,6 @@ require("lazy").setup({
     require("plugins.treesitter"),
     require("plugins.git"),
     require("plugins.lsp"),
-    require("plugins.trouble"),
     require("plugins.utils"),
   },
   -- configure any other settings here. see the documentation for more details.

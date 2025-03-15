@@ -18,16 +18,15 @@ function M.make_cfg()
       vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, { buffer = bufnr })
       vim.keymap.set("v", "ga", function() vim.lsp.buf.code_action() end, { buffer = bufnr })
       vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, { buffer = bufnr })
-      -- diagnostic keymaps
+      -- diagnostics keymaps
       vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end)
       vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end)
+      -- diagnostics list
       vim.keymap.set("n", "<leader>dl", function()
-        local diagnostics = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-        if #diagnostics > 0 then
-          vim.diagnostic.setloclist(vim.diagnostic.toqflist(diagnostics))
-        else
-          print("no errors found")
-        end
+        vim.diagnostic.setloclist({ severity = vim.diagnostic.severity.ERROR })
+      end)
+      vim.keymap.set("n", "<leader>dq", function()
+        vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
       end)
       -- diagnostic signs
       vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
