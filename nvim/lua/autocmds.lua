@@ -7,10 +7,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 -- quick exit some filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "qf", "diff", "checkhealth", "fugitive", "fugitiveblame", "dbout" },
+  pattern = { "help", "qf", "diff", "fugitive", "fugitiveblame", "dbout" },
   group = vim.api.nvim_create_augroup("quick_exit_filetypes", { clear = true }),
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>bd!<cr>", { noremap = true, silent = true })
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.colorcolumn = ""
+    vim.keymap.set("n", "q", "<cmd>bd!<cr>", { buffer = true });
+  end,
+})
+-- netrw
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  group = vim.api.nvim_create_augroup("custom_netrw", { clear = true }),
+  callback = function()
+    vim.opt_local.colorcolumn = ""
+    vim.keymap.set("n", "<c-c>", "<cmd>Rexplore<cr>", { buffer = true });
   end,
 })
 -- open the quickfix window whenever a quickfix command is executed
