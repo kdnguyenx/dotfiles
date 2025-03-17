@@ -35,12 +35,11 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "VimLeavePre" }, {
     if #vim.v.argv > 3 then
       return
     end
-    if #vim.fn.argv() > 0 and vim.fn.argv(0) ~= vim.fn.getcwd() then
-      return
+    if vim.fn.argv(0) == "." or vim.fn.argv(0) == vim.fn.getcwd() then
+      local dir = get_session_dir()
+      local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+      vim.cmd("silent! mksession! " .. dir .. "/" .. name .. ".vim")
     end
-    local dir = get_session_dir()
-    local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    vim.cmd("silent! mksession! " .. dir .. "/" .. name .. ".vim")
   end,
 })
 -- load session automatically when start vim
@@ -51,18 +50,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
     if #vim.v.argv > 3 then
       return
     end
-    if #vim.fn.argv() > 0 and vim.fn.argv(0) ~= vim.fn.getcwd() then
-      return
-    end
-    local dir = get_session_dir()
-    local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    local file = dir .. "/" .. name .. ".vim"
-    if vim.fn.filereadable(file) == 1 then
-      local choice = vim.fn.confirm("", "load your stuff? &yeah\n&nah\n&clear", 2)
-      if choice == 1 then
-        vim.cmd("silent! source " .. file)
-      elseif choice == 3 then
-        vim.fn.delete(file)
+    if vim.fn.argv(0) == "." or vim.fn.argv(0) == vim.fn.getcwd() then
+      local dir = get_session_dir()
+      local name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+      local file = dir .. "/" .. name .. ".vim"
+      if vim.fn.filereadable(file) == 1 then
+        local choice = vim.fn.confirm("", "load your stuff? &yeah\n&nah\n&clear", 2)
+        if choice == 1 then
+          vim.cmd("silent! source " .. file)
+        elseif choice == 3 then
+          vim.fn.delete(file)
+        end
       end
     end
   end,

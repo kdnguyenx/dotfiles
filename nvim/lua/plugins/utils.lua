@@ -1,6 +1,12 @@
 return {
   { "tpope/vim-surround" },
   {
+    "mbbill/undotree",
+    config = function()
+      vim.keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<cr>")
+    end
+  },
+  {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = { "tpope/vim-dadbod", lazy = true }
   },

@@ -25,7 +25,7 @@ if [[ $is_mac -eq 1 ]]; then
 else
   sudo apt update
   sudo apt upgrade -y
-  sudo apt install -y curl wget zsh git coreutils watch ncdu
+  sudo apt install -y curl wget zip zsh git sway coreutils watch ncdu
 fi
 
 echo '[-] installing favourite font [-]'
@@ -92,10 +92,10 @@ if [[ $is_mac -eq 1 ]]; then
   brew install ghostty
 else
   git clone https://github.com/ghostty-org/ghostty ~/repos/ghostty
-  cd ~/opensource/ghostty
-  git checkout v1.1.2
-  sudo apt install -y gtk4 libadwaita pkg-config
-  zig build -p ~/.local -Doptimize=ReleaseFast
+  # cd ~/opensource/ghostty
+  # git checkout v1.1.2
+  # sudo apt install -y gtk4 libadwaita pkg-config
+  # zig build -p ~/.local -Doptimize=ReleaseFast
 fi
 
 echo '[-] change default shell to zsh [-]'
