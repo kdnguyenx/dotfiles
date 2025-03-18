@@ -63,7 +63,6 @@ function linking() {
 
   if [[ $is_mac -eq 1 ]]; then
     ln -s $(pwd)/aerospace $XDG_CONFIG_HOME/aerospace
-    ln -s $(pwd)/sketchybar $XDG_CONFIG_HOME/sketchybar
   fi
 }
 echo '[-] linking dotfiles [-]'

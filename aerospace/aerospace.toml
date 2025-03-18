@@ -6,10 +6,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ['exec-and-forget sketchybar']
-
-# Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+after-startup-command = []
 
 # Start AeroSpace at login
 start-at-login = true
@@ -58,6 +55,9 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = '1password'
 run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = 'zoom*'
+run = 'layout floating'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -72,7 +72,7 @@ run = 'layout floating'
     inner.vertical = 0
     outer.left = 0
     outer.bottom = 0
-    outer.top = [{ monitor.'built-in.*' = 0 }, 31]
+    outer.top = [{ monitor.'built-in.*' = 0 }, 24]
     outer.right = 0
 
 # 'main' binding mode declaration
