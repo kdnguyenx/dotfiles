@@ -31,7 +31,6 @@ PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F
 # activate autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # aliases
-alias tmuxx='tmux new -s personal'
 alias vgit='nvim -c ":G"'
 alias vwiki='nvim -c ":VimwikiIndex"'
 alias vdb='nvim -c ":DBUIToggle"'

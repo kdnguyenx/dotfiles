@@ -2,7 +2,7 @@
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_on_yank", { clear = true }),
   callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 50 })
+    vim.hl.on_yank({ higroup = "IncSearch", timeout = 50 })
   end,
 })
 -- quick exit some filetypes
@@ -97,15 +97,12 @@ vim.api.nvim_create_autocmd("OptionSet", {
   group = vim.api.nvim_create_augroup("diff_split_equally", { clear = true }),
   callback = function()
     local width = vim.o.columns
-    if vim.fn.winnr("$") > 2 then
+    if vim.fn.winnr("$") > 3 then
       local golden_width = math.floor(width / 3)
       vim.cmd("silent vertical resize " .. golden_width)
-      return
-    end
-    if vim.fn.winnr("$") > 1 then
+    else
       local golden_width = math.floor(width / 2)
       vim.cmd("silent vertical resize " .. golden_width)
-      return
     end
   end,
 })
