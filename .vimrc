@@ -49,24 +49,17 @@ nnoremap <space> <nop>
 let g:mapleader = ' '
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
-" dismiss highlights
-nnoremap <silent> <esc> :nohlsearch<cr>
-tnoremap <silent> <esc> <C-\><C-n>
 " re-size split windows using arrow keys
-nnoremap <up> :resize +2<cr>
-nnoremap <left> :vertical resize +2<cr>
-nnoremap <down> :resize -2<cr>
-nnoremap <right> :vertical resize -2<cr>
+nnoremap <Up> :resize +2<cr>
+nnoremap <Left> :vertical resize +2<cr>
+nnoremap <Down> :resize -2<cr>
+nnoremap <Right> :vertical resize -2<cr>
 " netrw
 nmap - :Explore<cr>
 autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<cr>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
-cnoremap <C-p> <up>
-cnoremap <C-n> <down>
-cnoremap <C-b> <left>
-cnoremap <C-f> <right>
 " navigate through quickfix list
 nnoremap ]q :cnext<cr>zz
 nnoremap [q :cprev<cr>zz
