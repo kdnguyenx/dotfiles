@@ -39,32 +39,22 @@ else
   fc-cache -f -v
 fi
 
-function backup() {
-  local backup_dir=dotfiles_bak_$(date +%s)
-
-  mkdir ~/$backup_dir
-  mv ~/.zshrc ~/$backup_dir/.zshrc
-  mv ~/.zshenv ~/$backup_dir/.zshenv
-}
-echo '[-] backing up dotfiles [-]'
-backup
-
 function linking() {
-  ln -s $(pwd)/.zshrc ~/.zshrc
-  ln -s $(pwd)/.zshenv ~/.zshenv
-  ln -s $(pwd)/.gitignore ~/.gitignore
-  ln -s $(pwd)/.fdignore ~/.fdignore
-  ln -s $(pwd)/.vimrc ~/.vimrc
-  ln -s $(pwd)/.ideavimrc ~/.ideavimrc
+  ln -sfn $(pwd)/.zshrc ~/.zshrc
+  ln -sfn $(pwd)/.zshenv ~/.zshenv
+  ln -sfn $(pwd)/.gitignore ~/.gitignore
+  ln -sfn $(pwd)/.fdignore ~/.fdignore
+  ln -sfn $(pwd)/.vimrc ~/.vimrc
+  ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -s $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-  ln -s $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
+  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+  ln -sfn $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
 
   if [[ $is_mac -eq 1 ]]; then
-    ln -s $(pwd)/aerospace $XDG_CONFIG_HOME/aerospace
+    ln -sfn $(pwd)/aerospace $XDG_CONFIG_HOME/aerospace
   else
-    ln -s $(pwd)/sway $XDG_CONFIG_HOME/sway
+    ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   fi
 }
 echo '[-] linking dotfiles [-]'
@@ -76,7 +66,8 @@ if [[ $is_mac -eq 1 ]]; then
   brew install httpie pyenv universal-ctags
 else
   sudo apt install -y zsh-autosuggestions parallel fzf fd-find ripgrep jq httpie universal-ctags
-  ln -s $(which fdfind) ~/.local/bin/fd
+  mkdir -p ~/.local/bin
+  ln -sfn $(which fdfind) ~/.local/bin/fd
 fi
 
 echo '[-] downloading git-prompt.sh script [-]'
@@ -92,12 +83,15 @@ echo '[-] installing ghostty [-]'
 if [[ $is_mac -eq 1 ]]; then
   brew install ghostty
 else
-  git clone https://github.com/ghostty-org/ghostty ~/repos/ghostty
+  git clone https://github.com/ghostty-org/ghostty ~/opensource/ghostty
   # cd ~/opensource/ghostty
   # git checkout v1.1.2
   # sudo apt install -y gtk4 libadwaita pkg-config
   # zig build -p ~/.local -Doptimize=ReleaseFast
 fi
+
+echo '[-] installing neovim [-]'
+git clone https://github.com/neovim/neovim ~/opensource/neovim
 
 echo '[-] change default shell to zsh [-]'
 chsh -s $(which zsh)
