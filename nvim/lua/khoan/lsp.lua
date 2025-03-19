@@ -11,7 +11,7 @@ function M.make_cfg()
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
       vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
       vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, { buffer = bufnr })
-      vim.keymap.set("i", "<C-s>", function()
+      vim.keymap.set("i", "<c-s>", function()
         vim.lsp.buf.signature_help({ border = "single", title = "help" })
       end, { buffer = bufnr })
       -- lsp actions

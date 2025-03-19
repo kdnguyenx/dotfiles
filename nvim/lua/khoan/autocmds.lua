@@ -1,12 +1,12 @@
 -- highlight when yanking text
-vim.api.nvim_create_autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd("textyankpost", {
   group = vim.api.nvim_create_augroup("highlight_on_yank", { clear = true }),
   callback = function()
-    vim.hl.on_yank({ higroup = "IncSearch", timeout = 50 })
+    vim.hl.on_yank({ higroup = "incsearch", timeout = 50 })
   end,
 })
 -- quick exit some filetypes
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("filetype", {
   pattern = { "help", "qf", "diff", "fugitive", "fugitiveblame", "dbout" },
   group = vim.api.nvim_create_augroup("quick_exit_filetypes", { clear = true }),
   callback = function()
@@ -17,16 +17,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 -- netrw
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("filetype", {
   pattern = "netrw",
-  group = vim.api.nvim_create_augroup("custom_netrw", { clear = true }),
+  group = vim.api.nvim_create_augroup("khoan_netrw", { clear = true }),
   callback = function()
     vim.opt_local.colorcolumn = ""
     vim.keymap.set("n", "<c-c>", "<cmd>Rexplore<cr>", { buffer = true });
   end,
 })
 -- open the quickfix window whenever a quickfix command is executed
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+vim.api.nvim_create_autocmd("quickfixcmdpost", {
   pattern = "[^l]*",
   group = vim.api.nvim_create_augroup("quickfix_command_execution", { clear = true }),
   callback = function() vim.cmd("cwindow") end,
@@ -40,9 +40,9 @@ local function get_session_dir()
   return dir
 end
 -- make session automatically when save a buffer or exit vim
-vim.api.nvim_create_autocmd({ "BufWritePost", "VimLeavePre" }, {
+vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
   pattern = "*",
-  group = vim.api.nvim_create_augroup("vim_sessionizer", { clear = true }),
+  group = vim.api.nvim_create_augroup("khoan_sessionizer", { clear = true }),
   callback = function()
     if #vim.v.argv > 3 then
       return
@@ -55,9 +55,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost", "VimLeavePre" }, {
   end,
 })
 -- load session automatically when start vim
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd("vimenter", {
   pattern = "*",
-  group = vim.api.nvim_create_augroup("vim_auto_session", { clear = true }),
+  group = vim.api.nvim_create_augroup("khoan_auto_session", { clear = true }),
   callback = function()
     if #vim.v.argv > 3 then
       return
@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 -- golden ratio
-vim.api.nvim_create_autocmd("WinEnter", {
+vim.api.nvim_create_autocmd("winenter", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("golden_ratio", { clear = true }),
   callback = function()
@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
   end,
 })
 -- diffmode resize
-vim.api.nvim_create_autocmd("OptionSet", {
+vim.api.nvim_create_autocmd("optionset", {
   pattern = "diff",
   group = vim.api.nvim_create_augroup("diff_split_equally", { clear = true }),
   callback = function()

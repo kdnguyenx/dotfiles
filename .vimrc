@@ -1,9 +1,9 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 " open the quickfix window whenever a quickfix command is executed
-autocmd QuickFixCmdPost [^l]* cwindow
+autocmd quickfixcmdpost [^l]* cwindow
 " quick exit some filetypes
-autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :q<cr>
+autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :q<cr>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
@@ -50,13 +50,13 @@ let g:mapleader = ' '
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " re-size split windows using arrow keys
-nnoremap <Up> :resize +2<cr>
-nnoremap <Left> :vertical resize +2<cr>
-nnoremap <Down> :resize -2<cr>
-nnoremap <Right> :vertical resize -2<cr>
+nnoremap <up> :resize +2<cr>
+nnoremap <left> :vertical resize +2<cr>
+nnoremap <down> :resize -2<cr>
+nnoremap <right> :vertical resize -2<cr>
 " netrw
 nmap - :Explore<cr>
-autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<cr>
+autocmd filetype netrw nnoremap <buffer> <c-c> :rexplore<cr>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
@@ -73,16 +73,16 @@ nnoremap [b :bprev<cr>zz
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
 " fuzzy find
 nnoremap <leader>ff :find **/*
-nnoremap <leader>fw :find **/*<C-r><C-w>
-nnoremap <leader>e :e %:h<C-z>
-nnoremap <leader>b :b <C-z>
+nnoremap <leader>fw :find **/*<c-r><c-w>
+nnoremap <leader>e :e %:h<c-z>
+nnoremap <leader>b :b <c-z>
 nnoremap <leader>ju :jumps<cr>
 nnoremap <leader>mm :marks<cr>
 nnoremap <leader>gg :vimgrep //f **
-vnoremap <leader>gg "0y:vimgrep /<C-r>0/f **
-nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
+vnoremap <leader>gg "0y:vimgrep /<c-r>0/f **
+nnoremap <leader>gw :vimgrep /<c-r><c-w>/f **
 " search current marked text
-vnoremap // y/\v<C-r>=escape(@",'/\')<cr><cr>
+vnoremap // y/\v<c-r>=escape(@",'/\')<cr><cr>
 " copy marked text/paste to/from global register
 nnoremap <leader>Y "+Y
 vnoremap <leader>y "+y
@@ -90,12 +90,12 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 " find and replace
-nnoremap <leader>rr :%s/<C-r><C-w>//g<left><left>
-vnoremap <leader>rr "0y:%s/<C-r>0//g<left><left>
+nnoremap <leader>rr :%s/<c-r><c-w>//g<left><left>
+vnoremap <leader>rr "0y:%s/<c-r>0//g<left><left>
 " copy, move and remove file
-nnoremap <leader>cp :!cp -r %:.<C-z> %:h<C-z>
-nnoremap <leader>mv :!mv %:.<C-z> %:h<C-z>
-nnoremap <leader>rm :!rm -rf %:.<C-z>
+nnoremap <leader>cp :!cp -r %:.<c-z> %:h<c-z>
+nnoremap <leader>mv :!mv %:.<c-z> %:h<c-z>
+nnoremap <leader>rm :!rm -rf %:.<c-z>
 " vsplit on gf
 nnoremap <silent> gf :vertical wincmd f<cr>
 " set mark before gd/#/*
@@ -103,10 +103,10 @@ nnoremap <silent> gd mmgd
 nnoremap <silent> # mm#
 nnoremap <silent> * mm*
 " use ctrl+<hjkl> to move between windows
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-l> <C-w>l
+nnoremap <silent> <c-h> <c-w>h
+nnoremap <silent> <c-j> <c-w>j
+nnoremap <silent> <c-k> <c-w>k
+nnoremap <silent> <c-l> <c-w>l
 " basic highlights
 highlight Normal cterm=NONE ctermbg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE

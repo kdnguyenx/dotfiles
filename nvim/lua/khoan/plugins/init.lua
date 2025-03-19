@@ -15,12 +15,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- import your plugins
-    require("plugins.colors"),
-    require("plugins.fuzzy"),
-    require("plugins.treesitter"),
-    require("plugins.git"),
-    require("plugins.lsp"),
-    require("plugins.utils"),
+    require("khoan.plugins.colors"),
+    require("khoan.plugins.fuzzy"),
+    require("khoan.plugins.treesitter"),
+    require("khoan.plugins.git"),
+    require("khoan.plugins.lsp"),
+    require("khoan.plugins.utils"),
   },
   -- configure any other settings here. see the documentation for more details.
   -- colorscheme that will be used when installing plugins.

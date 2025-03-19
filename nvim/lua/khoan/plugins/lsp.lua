@@ -13,7 +13,7 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({ ensure_installed = servers })
       local lspconfig = require("lspconfig")
-      local config = require("lsp").make_cfg()
+      local config = require("khoan.lsp").make_cfg()
       config["capabilities"] = require("cmp_nvim_lsp").default_capabilities()
       for _, server in ipairs(servers) do
         if server ~= "jdtls" then
@@ -28,10 +28,10 @@ return {
           documentation = cmp.config.window.bordered({ border = "single" }),
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
-          ["<C-d>"] = cmp.mapping.scroll_docs(5),
-          ["<C-space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
+          ["<c-u>"] = cmp.mapping.scroll_docs(-5),
+          ["<c-d>"] = cmp.mapping.scroll_docs(5),
+          ["<c-space>"] = cmp.mapping.complete(),
+          ["<c-e>"] = cmp.mapping.abort(),
           ["<tab>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({ { name = "nvim_lsp" }, }, { { name = "buffer" }, })
