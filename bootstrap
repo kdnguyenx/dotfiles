@@ -62,10 +62,10 @@ linking
 
 echo '[-] installing extended packages [-]'
 if [[ $is_mac -eq 1 ]]; then
-  brew install zsh-autosuggestions parallel fzf fd ripgrep jq
+  brew install parallel fzf fd ripgrep jq
   brew install httpie pyenv universal-ctags
 else
-  sudo apt install -y zsh-autosuggestions parallel fzf fd-find ripgrep jq httpie universal-ctags
+  sudo apt install -y parallel fzf fd-find ripgrep jq httpie universal-ctags
   mkdir -p ~/.local/bin
   ln -sfn $(which fdfind) ~/.local/bin/fd
 fi
@@ -73,6 +73,9 @@ fi
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
+
+echo '[-] cloning zsh-autosuggestions [-]'
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 echo '[-] creating essential directories [-]'
 mkdir -p ~/personal
