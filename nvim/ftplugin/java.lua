@@ -2,13 +2,6 @@ vim.opt_local.expandtab = true
 vim.opt_local.shiftwidth = 4
 vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
--- set path and format
-vim.opt_local.includeexpr = vim.v.fname:gsub('.', '/')
-vim.opt_local.errorformat = '[ERROR] %f:[%l\\,%v] %m'
-vim.opt_local.makeprg = 'mvn clean install -T 5'
-vim.opt_local.path:append('*/src/main/java/**')
-vim.opt_local.path:append('*/src/main/test/**')
-vim.opt_local.path:append('*/src/main/resources/**')
 -- lsp config
 local data_home = os.getenv('XDG_DATA_HOME')
 local workspace_dir = data_home .. '/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')

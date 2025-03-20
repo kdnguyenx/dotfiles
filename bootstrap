@@ -46,6 +46,7 @@ function linking() {
   ln -sfn $(pwd)/.fdignore ~/.fdignore
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
+  ln -sfn $(pwd)/.psqlrc ~/.psqlrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
