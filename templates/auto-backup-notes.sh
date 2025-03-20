@@ -5,7 +5,7 @@
 cd ~/notes
 if [[ `git status --porcelain` ]]; then
   git add .
-  PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "automated commit $(date)"
+  git commit -m "automated commit $(date)"
   git push origin main
 else
   echo "no changes to commit"

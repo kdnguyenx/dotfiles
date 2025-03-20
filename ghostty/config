@@ -1,10 +1,10 @@
 # theme and font
 term = xterm-256color
 theme = rose-pine
-font-family = jetbrains mono
+font-family = fantasque sans mono
 font-style = regular
 font-thicken = true
-font-size = 15
+font-size = 17
 font-feature = -calt, -liga, -dlig
 
 # cursor
@@ -27,7 +27,7 @@ window-padding-y = 5,5
 window-padding-balance = true
 window-padding-color = background
 window-theme = dark
-window-title-font-family = jetbrains mono
+window-title-font-family = fantasque sans mono
 window-vsync = true
 bold-is-bright = false
 

@@ -1,7 +1,7 @@
 -- enables the experimental lua module loader
 vim.loader.enable()
 -- enable mouse mode
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 vim.opt.regexpengine = 2
 -- don't show the mode, since it's already in the status line
 vim.opt.showmode = true
@@ -18,10 +18,10 @@ vim.opt.smartcase = true
 -- configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 -- sets how neovim will display certain whitespace characters in the editor.
-vim.opt.listchars = { tab = "⇀ ", trail = "·", eol = "¬", nbsp = "␣" }
-vim.opt.showbreak = "↪"
+vim.opt.listchars = { tab = '⇀ ', trail = '·', eol = '¬', nbsp = '␣' }
+vim.opt.showbreak = '↪'
 vim.opt.list = true
 -- set default indentation
 vim.opt.expandtab = true
@@ -35,37 +35,37 @@ vim.opt.swapfile = false
 vim.opt.wrap = false
 vim.opt.undofile = true
 -- preview substitutions live, as you type
-vim.opt.inccommand = "split"
+vim.opt.inccommand = 'split'
 vim.opt.startofline = false
 vim.opt.sidescrolloff = 10
-vim.opt.diffopt:append("vertical")
+vim.opt.diffopt:append('vertical')
 -- enable auto completion menu after pressing tab
 vim.opt.wildmenu = true
-vim.opt.wildmode = { "full" }
-vim.opt.wildcharm = string.byte(vim.api.nvim_replace_termcodes("<c-z>", true, true, true))
+vim.opt.wildmode = { 'full' }
+vim.opt.wildcharm = string.byte(vim.api.nvim_replace_termcodes('<c-z>', true, true, true))
 -- ignore these
 vim.opt.wildignore = {
-  "*.o", "*~", "*.a", "*.so", "*.pyc", "*.swp", "*.class",
-  "*/target/*", "*/build/*", "*/generated-sources/*",
-  "*/__pycache__/*", "*/node_modules/*",
-  "*/.git/*", "*/.hg/*", "*/.svn/*", "*/.idea/*", "*/.vscode/*"
+  '*.o', '*~', '*.a', '*.so', '*.pyc', '*.swp', '*.class',
+  '*/target/*', '*/build/*', '*/generated-sources/*',
+  '*/__pycache__/*', '*/node_modules/*',
+  '*/.git/*', '*/.hg/*', '*/.svn/*', '*/.idea/*', '*/.vscode/*'
 }
-if vim.fn.has("mac") > 0 then
-  vim.opt.wildignore:append("*/Library/*")
-  vim.opt.wildignore:append("*/.DS_Store")
+if vim.fn.has('mac') > 0 then
+  vim.opt.wildignore:append('*/Library/*')
+  vim.opt.wildignore:append('*/.DS_Store')
 end
 -- basic theming
-vim.opt.background = "dark"
+vim.opt.background = 'dark'
 vim.opt.termguicolors = true
 vim.opt.laststatus = 2
 -- program to use for the :grep command
-if vim.fn.executable("rg") > 0 then
-  vim.opt.grepprg = "rg --vimgrep --smart-case --no-heading --column"
-  vim.opt.grepformat:prepend("%f:%l:%c:%m")
+if vim.fn.executable('rg') > 0 then
+  vim.opt.grepprg = 'rg --vimgrep --smart-case --no-heading --column'
+  vim.opt.grepformat:prepend('%f:%l:%c:%m')
 end
 -- make sure to setup `mapleader` and `maplocalleader` before
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 -- load essential modules
-require("khoan.keymaps")
-require("khoan.autocmds")
-require("khoan.plugins")
+require'armletz.keymaps'
+require'armletz.autocmds'
+require'armletz.plugins'

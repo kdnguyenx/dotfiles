@@ -3,11 +3,12 @@ set nocompatible
 " open the quickfix window whenever a quickfix command is executed
 autocmd quickfixcmdpost [^l]* cwindow
 " quick exit some filetypes
-autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :q<cr>
+autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :quit<cr>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
-set list listchars=tab:⇀\ ,eol:¬,nbsp:␣,trail:⋅ showbreak=↪
+set list listchars=tab:⇀\ ,eol:¬,nbsp:␣,trail:⋅
+set showbreak=↪
 set signcolumn=no sidescrolloff=10 title
 " set default regexp engine to nfa
 set regexpengine=2
@@ -32,8 +33,6 @@ set backspace=indent,eol,start
 set visualbell
 " add numbers to each line on the left-hand side.
 set number relativenumber ruler hidden
-" limit command height to 1 line
-set cmdheight=1
 set nopaste completeopt=menu,preview
 " this option controls the behavior when switching between buffers
 set switchbuf=uselast
@@ -56,21 +55,21 @@ nnoremap <down> :resize -2<cr>
 nnoremap <right> :vertical resize -2<cr>
 " netrw
 nmap - :Explore<cr>
-autocmd filetype netrw nnoremap <buffer> <c-c> :rexplore<cr>
+autocmd filetype netrw nnoremap <buffer> <c-c> :Rexplore<cr>
 " command mode navigation
-cnoremap <C-a> <home>
-cnoremap <C-e> <end>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
 " navigate through quickfix list
-nnoremap ]q :cnext<cr>zz
-nnoremap [q :cprev<cr>zz
+nnoremap ]q :cnext<cr>
+nnoremap [q :cprev<cr>
 " navigate through loclist
-nnoremap ]l :lnext<cr>zz
-nnoremap [l :lprev<cr>zz
+nnoremap ]l :lnext<cr>
+nnoremap [l :lprev<cr>
 " navigate through buffers
-nnoremap ]b :bnext<cr>zz
-nnoremap [b :bprev<cr>zz
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
 " enable auto completion menu after pressing tab.
-set wildmenu wildmode=full wildcharm=<C-z> wildmenu
+set wildmenu wildmode=full wildcharm=<c-z> wildmenu
 " fuzzy find
 nnoremap <leader>ff :find **/*
 nnoremap <leader>fw :find **/*<c-r><c-w>
@@ -78,8 +77,8 @@ nnoremap <leader>e :e %:h<c-z>
 nnoremap <leader>b :b <c-z>
 nnoremap <leader>ju :jumps<cr>
 nnoremap <leader>mm :marks<cr>
-nnoremap <leader>gg :vimgrep //f **
-vnoremap <leader>gg "0y:vimgrep /<c-r>0/f **
+nnoremap <leader>gg :vimgrep //f **<s-left><s-left><right>
+vnoremap <leader>gg "0y:vimgrep /<c-r>0/f **<s-left><left><left><left>
 nnoremap <leader>gw :vimgrep /<c-r><c-w>/f **
 " search current marked text
 vnoremap // y/\v<c-r>=escape(@",'/\')<cr><cr>
@@ -108,7 +107,8 @@ nnoremap <silent> <c-j> <c-w>j
 nnoremap <silent> <c-k> <c-w>k
 nnoremap <silent> <c-l> <c-w>l
 " basic highlights
-highlight Normal cterm=NONE ctermbg=NONE
-highlight NormalNC cterm=NONE ctermbg=NONE
 highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
 highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight Normal cterm=NONE ctermbg=NONE
+highlight NormalNC cterm=NONE ctermbg=NONE
+highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
