@@ -66,6 +66,6 @@ end
 -- make sure to setup `mapleader` and `maplocalleader` before
 vim.g.mapleader = ' '
 -- load essential modules
-require'armletz.keymaps'
-require'armletz.autocmds'
-require'armletz.plugins'
+require('armletz.keymaps')
+require('armletz.autocmds')
+require('armletz.plugins')
