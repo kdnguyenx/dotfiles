@@ -13,15 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- setup lazy.nvim
 require('lazy').setup({
-  -- import your plugins
-  spec = {
-    require('armletz.plugins.colors'),
-    require('armletz.plugins.fuzzy'),
-    require('armletz.plugins.treesitter'),
-    require('armletz.plugins.git'),
-    require('armletz.plugins.lsp'),
-    require('armletz.plugins.utils'),
-  },
-  -- automatically check for plugin updates
+  spec = 'armlet.plugins',
   checker = { enabled = false },
 })

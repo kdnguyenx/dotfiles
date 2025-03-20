@@ -13,7 +13,7 @@ return {
       require('mason').setup()
       require('mason-lspconfig').setup({ ensure_installed = servers })
       local lspconfig = require('lspconfig')
-      local config = require('armletz.lsp').make_cfg()
+      local config = require('armlet.lsp').make_cfg()
       config['capabilities'] = require('cmp_nvim_lsp').default_capabilities()
       for _, server in ipairs(servers) do
         if server ~= 'jdtls' then
