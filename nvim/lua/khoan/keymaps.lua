@@ -7,13 +7,23 @@ vim.keymap.set("n", "<c-j>", "<c-w>j")
 vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "<c-l>", "<c-w>l")
 -- use arrow keys for resize
-vim.keymap.set("n", "<up>", function() vim.cmd.resize("+5") end)
-vim.keymap.set("n", "<down>", function() vim.cmd.resize("-5") end)
+vim.keymap.set("n", "<up>", function()
+    vim.cmd.resize("+5")
+end)
+vim.keymap.set("n", "<down>", function()
+    vim.cmd.resize("-5")
+end)
 vim.keymap.set("n", "<left>", function()
-    vim.cmd.resize({ args = { "-5" }, mods = { vertical = true } })
+    vim.cmd.resize({
+        args = { "-5" },
+        mods = { vertical = true }
+    })
 end)
 vim.keymap.set("n", "<right>", function()
-    vim.cmd.resize({ args = { "+5" }, mods = { vertical = true } })
+    vim.cmd.resize({
+        args = { "+5" },
+        mods = { vertical = true }
+    })
 end)
 -- command mode navigation
 vim.keymap.set("c", "<c-a>", "<home>")
@@ -29,8 +39,6 @@ vim.keymap.set("n", "]b", vim.cmd.bnext)
 vim.keymap.set("n", "[b", vim.cmd.bprevious)
 -- search current marked text
 vim.keymap.set("v", "//", [[y/\v<c-r>=escape(@",'/\')<cr><cr>]])
--- visual normal motion
-vim.keymap.set("v", "<leader>n", [[:norm]])
 -- yank marked text/paste to/from global register
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("v", "<leader>y", [["+y]])
@@ -58,10 +66,14 @@ if vim.fn.executable("rg") > 0 then
     vim.keymap.set("n", "<leader>/", [[:silent grep! --hidden --no-ignore ''<left>]])
 end
 -- diff mode
-vim.keymap.set("n", "<leader>du", function() vim.cmd.diffget("//3") end)
-vim.keymap.set("n", "<leader>dh", function() vim.cmd.diffget("//2") end)
+vim.keymap.set("n", "<leader>du", function()
+    vim.cmd.diffget("//3")
+end)
+vim.keymap.set("n", "<leader>dh", function()
+    vim.cmd.diffget("//2")
+end)
 -- vsplit on gf
-vim.keymap.set("n", "gf", "<cmd>vertical wincmd f<cr>", { silent = true })
+vim.keymap.set("n", "gf", "<cmd>vertical wincmd f<cr>")
 -- set global mark before gd/#/*
 vim.keymap.set("n", "gd", "mMgd")
 vim.keymap.set("n", "#", "mM#")

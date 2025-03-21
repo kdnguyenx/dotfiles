@@ -22,8 +22,11 @@ function M.make_cfg()
             vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end)
             vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end)
             -- diagnostics list
-            vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist)
-            vim.keymap.set("n", "<leader>dq", function()
+            vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist)
+            vim.keymap.set("n", "<leader>xw", function()
+                vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.WARN })
+            end)
+            vim.keymap.set("n", "<leader>xx", function()
                 vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
             end)
             -- diagnostic signs
