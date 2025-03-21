@@ -98,9 +98,9 @@ nnoremap <leader>rm :!rm -rf %:.<c-z>
 " vsplit on gf
 nnoremap <silent> gf :vertical wincmd f<cr>
 " set mark before gd/#/*
-nnoremap <silent> gd mmgd
-nnoremap <silent> # mm#
-nnoremap <silent> * mm*
+nnoremap <silent> gd mMgd
+nnoremap <silent> # mM#
+nnoremap <silent> * mM*
 " use ctrl+<hjkl> to move between windows
 nnoremap <silent> <c-h> <c-w>h
 nnoremap <silent> <c-j> <c-w>j

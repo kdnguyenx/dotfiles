@@ -30,7 +30,8 @@ fi
 
 echo '[-] installing favourite font [-]'
 if [[ $is_mac -eq 1 ]]; then
-  brew install --cask font-fantasque-sans-mono
+  brew install --cask font-sf-pro
+  brew install --cask font-sf-mono
 else
   wget 'https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip'
   mkdir -p ~/.local/share/fonts
