@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("filetype", {
 -- open the quickfix window whenever a quickfix command is executed
 vim.api.nvim_create_autocmd("quickfixcmdpost", {
     pattern = "[^l]*",
-    group = vim.api.nvim_create_augroup("qfoncmdexec", { clear = true }),
+    group = vim.api.nvim_create_augroup("qfonexec", { clear = true }),
     callback = function() vim.cmd.cwindow() end,
 })
 -- create session directory if it does not exist

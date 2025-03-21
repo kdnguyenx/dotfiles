@@ -1,25 +1,32 @@
 return {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
+    "junegunn/fzf.vim",
     dependencies = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release" },
+        "junegunn/fzf",
+        build = ":call fzf#install()",
     },
-    config = function()
-        require("telescope").setup({
-            defaults = { layout_strategy = "bottom_pane", layout_config = { height = 0.41, preview_width = 0.41 }, path_display = { "truncate" } },
-            extensions = { fzf = { fuzzy = true, override_generic_sorter = true, override_file_sorter = true, case_mode = "smart_case", } }
+    config = function ()
+        vim.g.fzf_layout = { down = "41%" }
+        vim.api.nvim_create_autocmd("filetype", {
+            pattern = "fzf",
+            group = vim.api.nvim_create_augroup("khoanfzf", { clear = true }),
+            callback = function()
+                vim.opt_local.laststatus = 0
+                vim.opt_local.showmode = false
+                vim.opt_local.ruler = false
+
+                vim.api.nvim_create_autocmd('bufleave', {
+                    buffer = 0,
+                    callback = function()
+                        vim.opt_local.laststatus = 2
+                        vim.opt_local.showmode = true
+                        vim.opt_local.ruler = true
+                    end,
+                })
+            end,
         })
-        require("telescope").load_extension("fzf")
-        local builtin = require("telescope.builtin")
-        vim.keymap.set("n", "<leader>ff", builtin.find_files)
-        vim.keymap.set("n", "<leader>fw", function() builtin.find_files({ search_file = vim.fn.expand("<cword>") }) end)
-        vim.keymap.set("n", "<leader>fg", builtin.git_files)
-        vim.keymap.set("n", "<leader>gg", builtin.live_grep)
-        vim.keymap.set("n", "<leader>gw", function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
-        vim.keymap.set("n", "<leader>b", builtin.buffers)
-        vim.keymap.set("n", "<leader>ju", builtin.jumplist)
-        vim.keymap.set("n", "<leader>mm", builtin.marks)
-        vim.keymap.set("n", "<leader>o", builtin.resume)
+        vim.keymap.set("n", "<leader>f", vim.cmd.Files)
+        vim.keymap.set("n", "<leader>b", vim.cmd.Buffers)
+        vim.keymap.set("n", "<leader>ju", vim.cmd.Jumps)
+        vim.keymap.set("n", "<leader>mm", vim.cmd.Marks)
     end
 }

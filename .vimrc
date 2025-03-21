@@ -71,8 +71,7 @@ nnoremap [b :bprev<cr>
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<c-z> wildmenu
 " fuzzy find
-nnoremap <leader>ff :find **/*
-nnoremap <leader>fw :find **/*<c-r><c-w>
+nnoremap <leader>f :find **/*
 nnoremap <leader>e :e %:h<c-z>
 nnoremap <leader>b :b <c-z>
 nnoremap <leader>ju :jumps<cr>
