@@ -6,7 +6,7 @@ vim.opt_local.softtabstop = 4
 local data_home = os.getenv("XDG_DATA_HOME")
 local workspace_dir = data_home .. "/jdtls/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local jdtls = data_home .. "/nvim/mason/packages/jdtls"
-local config = require("khoarm.lsp").make_cfg()
+local config = require("khoan.lsp").make_cfg()
 config["name"] = "jdtls"
 config["cmd"] = {
   os.getenv("JDK21") .. "/bin/java",

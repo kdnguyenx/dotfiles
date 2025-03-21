@@ -14,7 +14,7 @@ if vim.fn.has("mac") > 0 then
   vim.opt_local.makeprg = "cd build && cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -G Ninja .. && ninja"
 end
 -- lsp config
-local config = require("khoarm.lsp").make_cfg()
+local config = require("khoan.lsp").make_cfg()
 config["name"] = "clangd"
 config["cmd"] = { "clangd" }
 config["root_dir"] = vim.fs.root(0, { "CMakeLists.txt", ".clangd", ".clang-format" }) or vim.fn.getcwd()

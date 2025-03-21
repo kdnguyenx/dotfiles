@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("filetype", {
 -- netrw
 vim.api.nvim_create_autocmd("filetype", {
     pattern = "netrw",
-    group = vim.api.nvim_create_augroup("khoarmnetrw", { clear = true }),
+    group = vim.api.nvim_create_augroup("khoannetrw", { clear = true }),
     callback = function()
         vim.opt_local.colorcolumn = ""
         vim.keymap.set("n", "<c-c>", vim.cmd.Rexplore, { buffer = true });
@@ -42,7 +42,7 @@ end
 -- make session automatically when save a buffer or exit vim
 vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
     pattern = "*",
-    group = vim.api.nvim_create_augroup("khoarmsessionizer", { clear = true }),
+    group = vim.api.nvim_create_augroup("khoansessionizer", { clear = true }),
     callback = function()
         if #vim.v.argv > 3 then
             return
@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd({ "bufwritepost", "vimleavepre" }, {
 -- load session automatically when start vim
 vim.api.nvim_create_autocmd("vimenter", {
     pattern = "*",
-    group = vim.api.nvim_create_augroup("khoarmautosession", { clear = true }),
+    group = vim.api.nvim_create_augroup("khoanautosession", { clear = true }),
     callback = function()
         if #vim.v.argv > 3 then
             return

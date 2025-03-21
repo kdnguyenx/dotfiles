@@ -3,7 +3,7 @@ vim.opt_local.shiftwidth = 4
 vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
 -- lsp config
-local config = require("khoarm.lsp").make_cfg()
+local config = require("khoan.lsp").make_cfg()
 config["name"] = "pyright"
 config["cmd"] = { "pyright-langserver", "--stdio" }
 config["root_dir"] = vim.fn.getcwd()

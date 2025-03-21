@@ -4,7 +4,7 @@ return {
         vim.keymap.set("n", "<leader>dt", "<cmd>Gvdiffsplit!<cr>")
         vim.api.nvim_create_autocmd("filetype", {
             pattern = "fugitive",
-            group = vim.api.nvim_create_augroup("khoarmfugitive", { clear = true }),
+            group = vim.api.nvim_create_augroup("khoanfugitive", { clear = true }),
             callback = function()
                 vim.cmd.resize(20)
                 vim.keymap.set("n", "<leader>p", function()

@@ -2,7 +2,7 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 -- load essential modules
-require("khoarm.options")
-require("khoarm.keymaps")
-require("khoarm.autocmds")
-require("khoarm.plugs")
+require("khoan.options")
+require("khoan.keymaps")
+require("khoan.autocmds")
+require("khoan.plugs")

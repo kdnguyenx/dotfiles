@@ -13,6 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- setup lazy.nvim
 require("lazy").setup({
-    spec = "khoarm.plugins",
+    spec = "khoan.plugins",
     checker = { enabled = false },
 })
