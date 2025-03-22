@@ -14,7 +14,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<c-u>"] = cmp.mapping.scroll_docs(-5),
                 ["<c-d>"] = cmp.mapping.scroll_docs(5),
-                ["<esc>"] = cmp.mapping.abort(),
+                ["<c-e>"] = cmp.mapping.abort(),
                 ["<tab>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } })
