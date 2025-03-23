@@ -30,13 +30,12 @@ fi
 
 echo '[-] installing favourite font [-]'
 if [[ $is_mac -eq 1 ]]; then
-  brew install --cask font-sf-pro
-  brew install --cask font-sf-mono
+  brew install --cask font-hack
 else
-  wget 'https://github.com/belluzj/fantasque-sans/releases/download/v1.8.0/FantasqueSansMono-Normal.zip'
+  wget 'https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip'
   mkdir -p ~/.local/share/fonts
-  unzip FantasqueSansMono-Normal.zip -d ~/.local/share/fonts
-  rm -f FantasqueSansMono-Normal.zip
+  unzip Hack-v3.003-ttf.zip -d ~/.local/share/fonts
+  rm -f Hack-v3.003-ttf.zip
   fc-cache -f -v
 fi
 
@@ -45,9 +44,6 @@ function linking() {
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   ln -sfn $(pwd)/.fdignore ~/.fdignore
-  ln -sfn $(pwd)/.vimrc ~/.vimrc
-  ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
-  ln -sfn $(pwd)/.psqlrc ~/.psqlrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
@@ -58,6 +54,10 @@ function linking() {
   else
     ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   fi
+
+  ln -sfn $(pwd)/.vimrc ~/.vimrc
+  ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
+  ln -sfn $(pwd)/.psqlrc ~/.psqlrc
 }
 echo '[-] linking dotfiles [-]'
 linking
