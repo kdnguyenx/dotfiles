@@ -7,33 +7,19 @@ vim.keymap.set("n", "<c-j>", "<c-w>j")
 vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "<c-l>", "<c-w>l")
 -- use arrow keys for resize
-vim.keymap.set("n", "<up>", function()
-    vim.cmd.resize("+5")
-end)
-vim.keymap.set("n", "<down>", function()
-    vim.cmd.resize("-5")
-end)
-vim.keymap.set("n", "<left>", function()
-    vim.cmd.resize({
-        args = { "-5" },
-        mods = { vertical = true }
-    })
-end)
-vim.keymap.set("n", "<right>", function()
-    vim.cmd.resize({
-        args = { "+5" },
-        mods = { vertical = true }
-    })
-end)
+vim.keymap.set("n", "<up>", "<cmd>resize +5<cr>")
+vim.keymap.set("n", "<down>", "<cmd>resize -5<cr>")
+vim.keymap.set("n", "<left>", "<cmd>vertical resize -5<cr>")
+vim.keymap.set("n", "<right>", "<cmd>vertical resize +5<cr>")
 -- command mode navigation
 vim.keymap.set("c", "<c-a>", "<home>")
 vim.keymap.set("c", "<c-e>", "<end>")
 -- navigate through quickfix list
-vim.keymap.set("n", "]q", vim.cmd.cnext)
-vim.keymap.set("n", "[q", vim.cmd.cprevious)
+vim.keymap.set("n", "]q", ":cnext<cr>zz")
+vim.keymap.set("n", "[q", ":cprev<cr>zz")
 -- navigate through loclist
-vim.keymap.set("n", "]l", vim.cmd.lnext)
-vim.keymap.set("n", "[l", vim.cmd.lprevious)
+vim.keymap.set("n", "]l", ":lnext<cr>zz")
+vim.keymap.set("n", "[l", ":lprev<cr>zz")
 -- navigate through buffer
 vim.keymap.set("n", "]b", vim.cmd.bnext)
 vim.keymap.set("n", "[b", vim.cmd.bprevious)

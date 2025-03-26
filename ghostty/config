@@ -6,7 +6,6 @@ font-style = regular
 font-thicken = true
 font-size = 17
 font-feature = -calt, -liga, -dlig
-
 # cursor
 cursor-style = block
 cursor-style-blink = true
@@ -16,11 +15,9 @@ mouse-hide-while-typing = true
 adjust-cursor-thickness = 3
 adjust-underline-thickness = 1
 adjust-strikethrough-thickness = 1
-
 # background
 background-opacity = 1
 background-blur = true
-
 # window
 window-padding-x = 9,9
 window-padding-y = 5,5
@@ -30,13 +27,11 @@ window-theme = dark
 window-title-font-family = jetbrains mono
 window-vsync = true
 bold-is-bright = false
-
 # macos
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
 macos-window-shadow = true
-
 # shell integration
 shell-integration = zsh
 shell-integration-features = no-cursor

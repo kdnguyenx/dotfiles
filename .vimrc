@@ -3,7 +3,7 @@ set nocompatible
 " open the quickfix window whenever a quickfix command is executed
 autocmd quickfixcmdpost [^l]* cwindow
 " quick exit some filetypes
-autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :quit<cr>
+autocmd filetype help,qf,diff nnoremap <silent> <buffer> <c-c> :quit<cr>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
@@ -60,11 +60,11 @@ autocmd filetype netrw nnoremap <buffer> <c-c> :Rexplore<cr>
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 " navigate through quickfix list
-nnoremap ]q :cnext<cr>
-nnoremap [q :cprev<cr>
+nnoremap ]q :cnext<cr>zz
+nnoremap [q :cprev<cr>zz
 " navigate through loclist
-nnoremap ]l :lnext<cr>
-nnoremap [l :lprev<cr>
+nnoremap ]l :lnext<cr>zz
+nnoremap [l :lprev<cr>zz
 " navigate through buffers
 nnoremap ]b :bnext<cr>
 nnoremap [b :bprev<cr>
@@ -94,8 +94,6 @@ vnoremap <leader>rr "0y:%s/<c-r>0//g<left><left>
 nnoremap <leader>cp :!cp -r %:.<c-z> %:h<c-z>
 nnoremap <leader>mv :!mv %:.<c-z> %:h<c-z>
 nnoremap <leader>rm :!rm -rf %:.<c-z>
-" vsplit on gf
-nnoremap <silent> gf :vertical wincmd f<cr>
 " set mark before gd/#/*
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
@@ -106,8 +104,8 @@ nnoremap <silent> <c-j> <c-w>j
 nnoremap <silent> <c-k> <c-w>k
 nnoremap <silent> <c-l> <c-w>l
 " basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
-highlight Normal cterm=NONE ctermbg=NONE
-highlight NormalNC cterm=NONE ctermbg=NONE
-highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight statusline cterm=NONE ctermbg=NONE ctermfg=grey
+highlight statuslinenc cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight normal cterm=NONE ctermbg=NONE
+highlight normalnc cterm=NONE ctermbg=NONE
+highlight vertsplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
