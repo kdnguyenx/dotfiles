@@ -18,5 +18,4 @@ local config = require("khoan.lsp").make_cfg()
 config["name"] = "clangd"
 config["cmd"] = { "clangd" }
 config["root_dir"] = vim.fs.root(0, { "CMakeLists.txt", ".clangd", ".clang-format" }) or vim.fn.getcwd()
-config["capabilities"] = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.start(config)

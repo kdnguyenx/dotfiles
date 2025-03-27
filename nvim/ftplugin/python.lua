@@ -7,7 +7,6 @@ local config = require("khoan.lsp").make_cfg()
 config["name"] = "pyright"
 config["cmd"] = { "pyright-langserver", "--stdio" }
 config["root_dir"] = vim.fn.getcwd()
-config["capabilities"] = require("cmp_nvim_lsp").default_capabilities()
 config["settings"] = {
     python = {
         analysis = {

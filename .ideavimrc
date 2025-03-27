@@ -3,24 +3,25 @@
 " you can find a list of commands here: https://jb.gg/h38q75
 " find more examples here: https://jb.gg/share-ideavimrc
 source ~/.vimrc
+set colorcolumn=120
+set breakindent
 " ide specific options
 set ideastatusicon=gray
 set ideajoin
 set ideamarks
 set ideawrite=file
 set visualdelay=50
-" -- enable ideavim plugins https://jb.gg/ideavim-plugins
+" enable ideavim plugins https://jb.gg/ideavim-plugins
 set commentary
 set surround
 set highlightedyank
-" -- map ide actions to ideavim -- https://jb.gg/abva4t
+" map ide actions to ideavim -- https://jb.gg/abva4t
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)
 nmap <leader>e <action>(ShowNavBar)
 nmap <leader>b <action>(Switcher)
-nmap <leader>s <action>(SwitcherAndRecentFiles)
-nmap <leader>gg <action>(FindInPath)
-vmap <leader>gg <action>(FindInPath)
+nmap <leader>g <action>(FindInPath)
+vmap <leader>g <action>(FindInPath)
 nmap <leader>/ <action>(SearchEverywhere)
 nmap gq <action>(ReformatCode)
 vmap gq <action>(ReformatCode)
@@ -33,7 +34,7 @@ nmap gt <action>(GotoTest)
 nmap gx <action>(RunClass)
 nmap gX <action>(RunMenu)
 nmap - <action>(SelectInProjectView)
-nmap ]d <action>(GotoNextError)
-nmap [d <action>(GotoPreviousError)
-nmap Q <action>(HideAllWindows)
-vnoremap // "0y/<c-r>0<cr>
+nmap <leader>j <action>(GotoNextError)
+nmap <leader>k <action>(GotoPreviousError)
+nmap <c-w>o <action>(HideAllWindows)
+nnoremap <silent> <esc> :noh<cr>

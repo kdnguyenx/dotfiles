@@ -49,18 +49,6 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
-[[on-window-detected]]
-if.app-name-regex-substring = 'music'
-run = 'layout floating'
-[[on-window-detected]]
-if.app-name-regex-substring = '1password'
-run = 'layout floating'
-[[on-window-detected]]
-if.app-name-regex-substring = 'whatsapp'
-run = 'layout floating'
-[[on-window-detected]]
-if.app-name-regex-substring = 'zoom*'
-run = 'layout floating'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:

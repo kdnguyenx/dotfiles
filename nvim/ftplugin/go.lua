@@ -7,5 +7,4 @@ local config = require("khoan.lsp").make_cfg()
 config["name"] = "gopls"
 config["cmd"] = { "gopls" }
 config["root_dir"] = vim.fs.root(0, { "go.mod", "go.work" }) or vim.fn.getcwd()
-config["capabilities"] = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.start(config)

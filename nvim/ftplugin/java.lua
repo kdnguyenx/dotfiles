@@ -23,7 +23,6 @@ config["cmd"] = {
     "-data", workspace_dir,
 }
 config["root_dir"] = vim.fn.getcwd() -- or vim.fs.root(0, {"pom.xml", ".git", "mvnw", "gradlew"}),
-config["capabilities"] = require("cmp_nvim_lsp").default_capabilities()
 config["settings"] = {
     java = {
         references = {

@@ -19,8 +19,8 @@ function M.make_cfg()
             vim.keymap.set("v", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
             vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = bufnr })
             -- diagnostics keymaps
-            vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end)
-            vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end)
+            vim.keymap.set("n", "<leader>k", function() vim.diagnostic.jump({ count = -1, float = false }) end)
+            vim.keymap.set("n", "<leader>j", function() vim.diagnostic.jump({ count = 1, float = false }) end)
             -- diagnostics list
             vim.keymap.set("n", "<leader>xl", vim.diagnostic.setloclist)
             vim.keymap.set("n", "<leader>xw", function()
@@ -32,6 +32,7 @@ function M.make_cfg()
             -- diagnostic signs
             vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
         end,
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
         detached = true,
     }
 end

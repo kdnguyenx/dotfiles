@@ -6,7 +6,6 @@ return {
             pattern = "fugitive",
             group = vim.api.nvim_create_augroup("khoanfugitive", { clear = true }),
             callback = function()
-                vim.cmd.resize(20)
                 vim.keymap.set("n", "<leader>p", function()
                     vim.cmd.Git("pull --rebase")
                 end, { buffer = true });
