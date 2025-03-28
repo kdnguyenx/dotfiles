@@ -22,6 +22,7 @@ function linking() {
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   ln -sfn $(pwd)/.fdignore ~/.fdignore
+  ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc

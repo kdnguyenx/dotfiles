@@ -19,7 +19,7 @@ HISTSIZE=10000
 export TERM=screen-256color
 export CLICOLOR=1
 # fzf
-export FZF_DEFAULT_COMMAND='fd --hidden --type f --strip-cwd-prefix=always'
+export FZF_DEFAULT_COMMAND='fd --hidden --type f --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='
   --color=fg:#908caa,bg:-1,hl:#ebbcba
   --color=fg+:#e0def4,bg+:-1,hl+:#ebbcba
