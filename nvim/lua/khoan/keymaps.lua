@@ -39,7 +39,7 @@ vim.keymap.set("n", "<leader>F", [[:find **/*<c-r><c-w><cr>]])
 vim.keymap.set("n", "<leader>e", [[:e %:h<c-z>]])
 vim.keymap.set("n", "<leader>b", [[:b <c-z>]])
 vim.keymap.set("n", "<leader>ma", vim.cmd.marks)
--- default grep
+-- ripgrep
 if vim.fn.executable("rg") > 0 then
     vim.keymap.set("n", "<leader>g", [[:silent grep! ''<left>]])
     vim.keymap.set("v", "<leader>g", [["0y:silent grep! --case-sensitive '<c-r>0'<left>]])

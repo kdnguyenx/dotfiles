@@ -1,19 +1,21 @@
-#!/usr/bin/bash
+#!/bin/bash
 ## install essential tools for my development environment
 ## -----
 set -e
 
-echo '[-] installing prerequisite packages [-]'
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build sway
+echo '[-] installing xcode command line tools [-]'
+xcode-select --install
+if ! hash brew &> /dev/null; then
+  echo '[-] installing homebrew [-]'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+brew update
+brew install curl wget git coreutils watch ncdu cmake ninja
 
 echo '[-] installing favourite font [-]'
-wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
-mkdir -p ~/.local/share/fonts
-unzip JetBrainsMono-2.304.zip -d ~/.local/share/fonts
-rm -f JetBrainsMono-2.304.zip
-fc-cache -f -v
+brew install --cask font-jetbrains-mono
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -25,16 +27,14 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+  ln -sfn $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
 }
 echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel fzf fd-find ripgrep jq httpie universal-ctags
-mkdir -p ~/.local/bin
-ln -sfn $(which fdfind) ~/.local/bin/fd
+brew install parallel fzf fd ripgrep jq httpie universal-ctags
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -52,13 +52,13 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
+echo '[-] installing ghostty [-]'
+brew install ghostty
+
 echo '[-] installing neovim [-]'
 git clone https://github.com/neovim/neovim ~/opensource/neovim
 cd ~/opensource/neovim
 make CMAKE_BUILD_TYPE=Release
 sudo make install
-
-echo '[-] change default shell to zsh [-]'
-chsh -s $(which zsh)
 
 echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'

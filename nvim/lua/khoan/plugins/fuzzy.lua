@@ -26,7 +26,6 @@ return {
             end,
         })
         vim.keymap.set("n", "<leader>f", vim.cmd.Files)
-        vim.keymap.set("n", "<leader>b", vim.cmd.Buffers)
         vim.keymap.set("n", "<leader>ma", vim.cmd.Marks)
     end
 }
