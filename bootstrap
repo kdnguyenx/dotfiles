@@ -57,7 +57,7 @@ mkdir -p ~/opensource
 echo '[-] installing wmenu [-]'
 git clone https://codeberg.org/adnano/wmenu.git ~/opensource/wmenu
 cd ~/opensource/wmenu
-sudo apt install -y cairo pango wayland xkbcommon scdoc meson
+sudo apt install -y libcairo2-dev libpango1.0-dev libwayland-dev libxkbcommon-dev scdoc meson
 meson setup build
 ninja -C build
 sudo ninja -C build install
