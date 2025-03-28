@@ -54,6 +54,14 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
+echo '[-] installing wmenu [-]'
+git clone https://codeberg.org/adnano/wmenu.git ~/opensource/wmenu
+cd ~/opensource/wmenu
+sudo apt install -y cairo pango wayland xkbcommon scdoc meson
+meson setup build
+ninja -C build
+sudo ninja -C build install
+
 echo '[-] installing neovim [-]'
 git clone https://github.com/neovim/neovim ~/opensource/neovim
 cd ~/opensource/neovim
