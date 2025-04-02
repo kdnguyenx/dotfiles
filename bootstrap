@@ -10,7 +10,7 @@ sudo apt install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build
 echo '[-] installing essential apps [-]'
 sudo apt install -y wayland-protocols
 sudo apt install -y sway swayidle swaylock
-sudo apt install -y network-manager thunar grim
+sudo apt install -y network-manager thunar grim tmux
 
 echo '[-] installing favourite font [-]'
 wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'

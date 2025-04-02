@@ -7,11 +7,12 @@ vim.api.nvim_create_autocmd("textyankpost", {
 })
 -- quick exit some filetypes
 vim.api.nvim_create_autocmd("filetype", {
-    pattern = { "help", "qf", "diff", "fugitive", "fugitiveblame", "dbout" },
+    pattern = { "help", "qf", "diff", "fugitive", "fugitiveblame" },
     group = vim.api.nvim_create_augroup("quickexitft", { clear = true }),
     callback = function()
         vim.opt_local.colorcolumn = ""
-        vim.keymap.set("n", "q", vim.cmd.quit, { buffer = true });
+        vim.opt_local.cursorline = true
+        vim.keymap.set("n", "<c-c>", vim.cmd.quit, { buffer = true });
     end,
 })
 -- netrw
