@@ -2,7 +2,5 @@
 tags
 tags.lock
 tags.temp
-/aerospace/aerospace
-/sway/sway
-/nvim/nvim
 /ghostty/ghostty
+/nvim/nvim
