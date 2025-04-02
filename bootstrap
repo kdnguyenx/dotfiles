@@ -8,6 +8,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build
 
 echo '[-] installing essential apps [-]'
+sudo apt install -y wayland-protocols
 sudo apt install -y sway swayidle swaylock
 sudo apt install -y network-manager thunar grim
 
@@ -29,6 +30,7 @@ Pin: origin packages.mozilla.org
 Pin-Priority: 1000
 ' | sudo tee /etc/apt/preferences.d/mozilla
 sudo apt update && sudo apt install -y firefox
+sudo apt upgrade -y
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
