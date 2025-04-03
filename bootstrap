@@ -32,7 +32,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel fzf fd-find ripgrep jq httpie universal-ctags
+sudo apt install -y parallel tmux fzf fd-find ripgrep jq httpie universal-ctags
 mkdir -p ~/.local/bin
 ln -sfn $(which fdfind) ~/.local/bin/fd
 
