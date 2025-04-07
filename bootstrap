@@ -5,10 +5,9 @@ set -e
 
 echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build
+sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo dnf install -y wayland-protocols
 sudo dnf install -y sway swayidle swaylock swaybg
 
 echo '[-] installing favourite font [-]'
@@ -40,9 +39,8 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo dnf install -y parallel vim tmux fzf fd-find ripgrep jq httpie universal-ctags
+sudo dnf install -y parallel vim tmux fzf fd-find ripgrep jq httpie
 mkdir -p ~/.local/bin
-ln -sfn $(which fdfind) ~/.local/bin/fd
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
