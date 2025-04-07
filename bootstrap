@@ -4,12 +4,12 @@
 set -e
 
 echo '[-] installing prerequisite packages [-]'
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build
+sudo dnf upgrade -y
+sudo dnf install -y curl wget zip zsh git coreutils watch ncdu cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo apt install -y i3 network-manager
-# sudo apt install -y wayland-protocols sway swayidle swaylock
+sudo dnf install -y wayland-protocols
+sudo dnf install -y sway swayidle swaylock swaybg
 
 echo '[-] installing favourite font [-]'
 wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
@@ -29,14 +29,18 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
+  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
+  ln -sfn $(pwd)/foot $XDG_CONFIG_HOME/foot
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+
+  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
+  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
 }
 echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel vim tmux fzf fd-find ripgrep jq httpie universal-ctags
+sudo dnf install -y parallel vim tmux fzf fd-find ripgrep jq httpie universal-ctags
 mkdir -p ~/.local/bin
 ln -sfn $(which fdfind) ~/.local/bin/fd
 
