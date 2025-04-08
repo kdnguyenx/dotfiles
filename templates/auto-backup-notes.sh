@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim:ft=bash
+# vim: ft=bash
 # - edit the cron jobs using `crontab -e`
 # - add to the script `0 0 * * * /path/to/this >/tmp/stdout.log 2>/tmp/stderr.log` (0AM)
 cd ~/notes
