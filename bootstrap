@@ -34,6 +34,9 @@ function linking() {
   ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
   ln -sfn $(pwd)/foot $XDG_CONFIG_HOME/foot
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+
+  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
+  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
 }
 echo '[-] linking dotfiles [-]'
 linking
