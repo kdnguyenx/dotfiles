@@ -8,8 +8,8 @@ sudo dnf upgrade -y
 sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo dnf install -y sway swayidle swaylock swaybg
-sudo dnf swap sway-config sway-config-upstream
+sudo dnf install -y sway swayidle swaylock swaybg rofi-wayland
+sudo dnf swap sway-config -y sway-config-upstream
 
 echo '[-] installing favourite font [-]'
 wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
