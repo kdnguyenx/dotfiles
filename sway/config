@@ -20,7 +20,7 @@ set $lock swaylock -f
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg $HOME/dotfiles/images/default.png fill
+output * bg $HOME/dotfiles/images/bay.jpg fill
 #
 # display configuration:
 #

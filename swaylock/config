@@ -1,7 +1,7 @@
 # Image path supports environment variables and shell expansions,
 # e.g. image=$HOME/Pictures/default.png
 # image=@BACKGROUND@
-image=$HOME/dotfiles/images/default.png
+image=$HOME/dotfiles/images/bay.jpg
 scaling=fill
 # background color
 color=#232136
