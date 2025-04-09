@@ -22,7 +22,7 @@ set $lock swaylock -f
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
 output * bg $HOME/dotfiles/images/bay.jpg fill
 #
-# display configuration:
+# Display configuration:
 #
 output DP-3 resolution 3840x2160 scale 1.8
 output DP-6 resolution 3840x2160 scale 1.8
@@ -194,7 +194,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    bindsym $mod+Shift+s exec grim
 
 #
 # Status Bar:

@@ -9,6 +9,7 @@ sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing window manager [-]'
 sudo dnf install -y sway swayidle swaylock swaybg rofi-wayland
+sudo dnf install -y xdg-desktop-portal-wlr xdg-desktop-portal
 sudo dnf swap sway-config -y sway-config-upstream
 
 echo '[-] installing favourite font [-]'
@@ -70,7 +71,10 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install
 fi
 
-echo '[-] change default shell to zsh [-]'
-chsh -s $(which zsh)
+current_shell=$(echo $SHELL)
+if [ "$current_shell" != "/usr/bin/zsh" ]; then
+  echo '[-] change default shell to zsh [-]'
+  chsh -s $(which zsh)
+fi
 
-echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'
+echo '[-] Setup done. [-]'

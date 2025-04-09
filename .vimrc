@@ -1,9 +1,9 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 " open the quickfix window whenever a quickfix command is executed
-autocmd quickfixcmdpost [^l]* cwindow
+autocmd QuickFixCmdPost [^l]* cwindow
 " quick exit some filetypes
-autocmd filetype help,qf,diff nnoremap <silent> <buffer> q :quit<cr>
+autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
@@ -43,58 +43,59 @@ set nostartofline
 set ttyfast history=10000
 set background=dark laststatus=2
 " re-map leader key
-nnoremap <space> <nop>
+nnoremap <Space> <Nop>
 let g:mapleader = ' '
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " re-size split windows using arrow keys
-nnoremap <up> :resize +5<cr>
-nnoremap <down> :resize -5<cr>
-nnoremap <left> :vertical resize -5<cr>
-nnoremap <right> :vertical resize +5<cr>
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+nnoremap <Left> :vertical resize -5<CR>
+nnoremap <Right> :vertical resize +5<CR>
 " netrw
-nnoremap - :Explore<cr>
-autocmd filetype netrw nnoremap <buffer> <c-c> :Rexplore<cr>
+nnoremap - :Explore<CR>
+autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<CR>
 " command mode navigation
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
+cnoremap <C-a> <home>
+cnoremap <C-e> <end>
 " navigate through quickfix list
-nnoremap <c-j> :cnext<cr>zz
-nnoremap <c-k> :cprev<cr>zz
+nnoremap <C-j> :cnext<CR>zz
+nnoremap <C-k> :cprev<CR>zz
 " navigate through buffers
-nnoremap <c-l> :bnext<cr>
-nnoremap <c-h> :bprev<cr>
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprev<CR>
 " enable auto completion menu after pressing tab.
-set wildmenu wildmode=full wildcharm=<c-z> wildmenu
+set wildmenu wildmode=full wildcharm=<C-z> wildmenu
 " fuzzy find
 nnoremap <leader>f :find **/*
-nnoremap <leader>F :find **/*<c-r><c-w><cr>
-nnoremap <leader>e :e %:h<c-z>
-nnoremap <leader>b :b <c-z>
-nnoremap <leader>ma :marks<cr>
-nnoremap <leader>g :vimgrep //f **<s-left><s-left><right>
-vnoremap <leader>g "0y:vimgrep /<c-r>0/f **<s-left><left><left><left>
-nnoremap <leader>G :vimgrep /<c-r><c-w>/f **
+nnoremap <leader>F :find **/*<C-r><C-w><CR>
+nnoremap <leader>e :e %:h<C-z>
+nnoremap <leader>b :b <C-z>
+nnoremap <leader>ma :marks<CR>
+nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
+vnoremap <leader>g "0y:vimgrep /<C-r>0/f **<S-Left><Left><Left><Left>
+nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
 " search current marked text
-vnoremap // y/\v<c-r>=escape(@",'/\')<cr><cr>
+vnoremap // y/\v<C-r>=escape(@",'/\')<CR><CR>
 " copy marked text/paste to/from global register
+nnoremap <leader>Y "*Y
 vnoremap <leader>y "*y
 nnoremap <leader>p "*p
 nnoremap <leader>P "*P
 vnoremap <leader>p "*p
 " find and replace
-nnoremap <leader>r :%s/<c-r><c-w>//gI<left><left><left>
-vnoremap <leader>r "0y:%s/<c-r>0//gI<left><left><left>
+nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <leader>r "0y:%s/<C-r>0//gI<Left><Left><Left>
 " unix command
-nnoremap <leader>cp :!cp -r %<c-z> %:h<c-z>
-nnoremap <leader>mv :!mv %<c-z> %:h<c-z>
+nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
+nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
 " set mark before gd/#/*
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
 " basic highlights
-highlight statusline cterm=NONE ctermbg=NONE ctermfg=grey
-highlight statuslinenc cterm=NONE ctermbg=NONE ctermfg=darkgrey
-highlight normal cterm=NONE ctermbg=NONE
-highlight normalnc cterm=NONE ctermbg=NONE
-highlight vertsplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
+highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight Normal cterm=NONE ctermbg=NONE
+highlight NormalNC cterm=NONE ctermbg=NONE
+highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey

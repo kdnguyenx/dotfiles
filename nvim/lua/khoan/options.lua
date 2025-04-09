@@ -40,7 +40,7 @@ vim.opt.diffopt:append("vertical")
 -- enable auto completion menu after pressing tab
 vim.opt.wildmenu = true
 vim.opt.wildmode = { "full" }
-vim.opt.wildcharm = string.byte(vim.api.nvim_replace_termcodes("<c-z>", true, true, true))
+vim.opt.wildcharm = string.byte(vim.api.nvim_replace_termcodes("<C-z>", true, true, true))
 -- ignore these
 vim.opt.wildignore = {
   "*.o", "*~", "*.a", "*.so", "*.pyc", "*.swp", "*.class",
