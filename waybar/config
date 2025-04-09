@@ -4,7 +4,7 @@
     // "height": 20, // Waybar height (to be removed for auto height)
     "spacing": 10, // Gaps between modules (px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "sway/window"],
     "modules-right": ["temperature", "pulseaudio", "cpu", "memory", "network", "sway/language", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
@@ -15,6 +15,9 @@
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/language": {
+        "format": "{short}"
     },
     "sway/scratchpad": {
         "format": "sp: {count}",
@@ -40,10 +43,10 @@
         "tooltip": false
     },
     "temperature": {
-        // "thermal-zone": 1,
-        "hwmon-path": ["/sys/class/hwmon/hwmon1/temp1_input", "/sys/class/hwmon/hwmon1/temp2_input", "/sys/class/hwmon/hwmon1/temp3_input"],
+        "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon",
+        "input-filename": "temp2_input",
         "critical-threshold": 80,
-        "format": "temp: {temperatureC}°C"
+        "format": "gpu: {temperatureC}°C"
     },
     "network": {
         "format-wifi": "{essid} [up: {bandwidthUpBits} | down: {bandwidthDownBits}]",
@@ -55,10 +58,10 @@
     },
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "vol: {volume}% | mic: {format_source}",
-        "format-bluetooth": "vol: {volume}% | mic: {format_source}",
-        "format-bluetooth-muted": "muted | {format_source}",
-        "format-muted": "muted | {format_source}",
+        "format": "vol: {volume}%",
+        "format-bluetooth": "vol: {volume}%",
+        "format-bluetooth-muted": "muted",
+        "format-muted": "muted",
         "format-source": "{volume}%",
         "format-source-muted": "muted",
         "on-click": "pavucontrol"
