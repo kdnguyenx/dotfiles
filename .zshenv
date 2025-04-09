@@ -26,6 +26,8 @@ export FZF_DEFAULT_OPTS='
   --color=border:#403d52,header:#31748f,gutter:-1
   --color=spinner:#f6c177,info:#9ccfd8
   --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa'
+# golang
+export GOPATH=$HOME/go
 # jdk
 export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
 export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn

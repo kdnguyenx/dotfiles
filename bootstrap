@@ -61,6 +61,20 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
+target_dir=~/opensource/emptty
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building emptty [-]'
+  git clone https://github.com/tvrzna/emptty.git $target_dir
+  cd $target_dir
+  sudo dnf install gcc golang pam-devel
+  mkdir -p ~/go
+  make build
+  sudo make install
+  sudo make install-config
+  sudo make install-runit
+  sudo ln -sfn /etc/sv/emptty /var/service
+fi
+
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
