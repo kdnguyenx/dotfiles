@@ -23,10 +23,10 @@ vim.keymap.set("n", "<c-h>", vim.cmd.bprevious)
 -- search current marked text
 vim.keymap.set("v", "//", [[y/\v<c-r>=escape(@",'/\')<cr><cr>]])
 -- yank marked text/paste to/from global register
-vim.keymap.set("v", "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>p", [["+p]])
-vim.keymap.set("n", "<leader>P", [["+P]])
-vim.keymap.set("v", "<leader>p", [["+p]])
+vim.keymap.set("v", "<leader>y", [["*y]])
+vim.keymap.set("n", "<leader>p", [["*p]])
+vim.keymap.set("n", "<leader>P", [["*P]])
+vim.keymap.set("v", "<leader>p", [["*p]])
 -- search and replace
 vim.keymap.set("n", "<leader>r", [[:%s/<c-r><c-w>//gI<left><left><left>]])
 vim.keymap.set("v", "<leader>r", [["0y:%s/<c-r>0//gI<left><left><left>]])
