@@ -1,15 +1,43 @@
 @import "./rose-pine-moon.css";
 
 * {
-  /* reference the color by using @color-name */
-  background: @base;
-  border: 1px solid @overlay;
+  font-family: JetBrains Mono, monospace, sans-serif;
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: @base;
+  color: @text;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+button {
+  border: 1px solid @muted;
+  border-radius: 0;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background-color: @overlay;
+}
+
+#workspaces button.focused {
+  background-color: @pine;
+}
+
+#language {
+  color: @pine;
+}
+
+#cpu {
+  color: @rose;
 }
 
 #memory {
-  color: @foam;
+  color: @gold;
 }
 
 #temperature {
-  color: @rose;
+  color: @love;
 }
