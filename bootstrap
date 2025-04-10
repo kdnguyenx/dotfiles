@@ -4,13 +4,13 @@
 set -e
 
 echo '[-] installing prerequisite packages [-]'
-sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo dnf install -y sway swayidle swaylock swaybg rofi-wayland
-sudo dnf install -y xdg-desktop-portal-wlr xdg-desktop-portal
-sudo dnf swap sway-config -y sway-config-upstream
+sudo apt install -y wayland-protocols sway swayidle swaylock swaybg
+sudo apt install -y network-manager thunar grim
+sudo apt install -y xdg-desktop-portal-wlr xdg-desktop-portal
 
 echo '[-] installing favourite font [-]'
 wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
@@ -45,7 +45,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo dnf install -y parallel vim tmux fzf fd-find ripgrep jq httpie
+sudo apt install -y parallel vim tmux fzf fd-find ripgrep jq httpie universal-ctags
 mkdir -p ~/.local/bin
 
 echo '[-] downloading git-prompt.sh script [-]'
@@ -63,6 +63,17 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
+target_dir=~/opensource/dmenu
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building neovim [-]'
+  echo '[-] building wmenu [-]'
+  git clone https://codeberg.org/adnano/wmenu.git $target_dir
+  sudo apt install -y libcairo2-dev libpango1.0-dev libwayland-dev libxkbcommon-dev scdoc meson
+  meson setup build
+  ninja -C build
+  sudo ninja -C build install
+fi
+
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
@@ -78,19 +89,17 @@ if [ ! -d "$target_dir" ] ; then
   echo '[-] building emptty [-]'
   git clone https://github.com/tvrzna/emptty.git $target_dir
   cd $target_dir
-  sudo dnf install -y gcc golang pam-devel libX11-devel
+  sudo apt install -y gcc golang pam-devel libx11-devel
   mkdir -p ~/go
   make build TAGS=noxlib
   sudo make install
   sudo make install-config
   sudo make install-systemd
-  sudo make install-pam-fedora
+  sudo make install-pam
   sudo make install-manual
   sudo ln -sfn /etc/sv/emptty /var/service
+  sudo systemctl enable emptty.service
 fi
-
-sudo systemctl disable sddm.service
-sudo systemctl enable emptty.service
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
