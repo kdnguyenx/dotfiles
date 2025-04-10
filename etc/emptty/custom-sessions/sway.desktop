@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Sway
 Comment=An i3-compatible Wayland compositor
-Exec=start-sway
+Exec=/usr/bin/sway
 Type=Application
 DesktopNames=sway
 Environment=wayland
