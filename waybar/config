@@ -4,7 +4,7 @@
     // "height": 20, // Waybar height (to be removed for auto height)
     "spacing": 10, // Gaps between modules (px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-right": ["temperature", "pulseaudio", "cpu", "memory", "network", "sway/language", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
@@ -20,7 +20,7 @@
         "format": "{short}"
     },
     "sway/scratchpad": {
-        "format": "sp: {count}",
+        "format": "scratches: {count}",
         "show-empty": false,
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
@@ -49,7 +49,7 @@
         "format": "gpu: {temperatureC}°C"
     },
     "network": {
-        "format-wifi": "{essid} [up: {bandwidthUpBits} | down: {bandwidthDownBits}]",
+        "format-wifi": "{essid} [up:{bandwidthUpBits},down:{bandwidthDownBits}]",
         "format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format": "{ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",

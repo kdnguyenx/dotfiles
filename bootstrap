@@ -61,20 +61,6 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
-target_dir=~/opensource/emptty
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building emptty [-]'
-  git clone https://github.com/tvrzna/emptty.git $target_dir
-  cd $target_dir
-  sudo dnf install -y gcc golang pam-devel
-  mkdir -p ~/go
-  make build
-  sudo make install
-  sudo make install-config
-  sudo make install-runit
-  sudo ln -sfn /etc/sv/emptty /var/service
-fi
-
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
@@ -83,6 +69,22 @@ if [ ! -d "$target_dir" ] ; then
   git checkout nightly
   make CMAKE_BUILD_TYPE=Release
   sudo make install
+fi
+
+target_dir=~/opensource/emptty
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building emptty [-]'
+  git clone https://github.com/tvrzna/emptty.git $target_dir
+  cd $target_dir
+  sudo dnf install -y gcc golang pam-devel libX11-devel
+  mkdir -p ~/go
+  make build TAGS=noxlib
+  sudo make install
+  sudo make install-config
+  sudo make install-systemd
+  sudo make install-pam-fedora
+  sudo make install-manual
+  sudo ln -sfn /etc/sv/emptty /var/service
 fi
 
 current_shell=$(echo $SHELL)
