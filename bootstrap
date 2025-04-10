@@ -29,6 +29,7 @@ function linking() {
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
   ln -sfn $(pwd)/.emptty ~/.emptty
+  ln -sfn $(pwd)/start-sway ~/start-sway
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
