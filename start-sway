@@ -41,4 +41,5 @@ fi
 dbus-update-activation-environment DISPLAY
 # Start sway with extra arguments and send output to the journal
 # shellcheck disable=SC2086 # quoted expansion of EXTRA_ARGS can produce empty field
-exec systemd-cat -- $_SWAY_COMMAND $_SWAY_EXTRA_ARGS "$@"
+# exec systemd-cat -- $_SWAY_COMMAND $_SWAY_EXTRA_ARGS "$@"
+exec dbus-run-session $_SWAY_COMMAND $_SWAY_EXTRA_ARGS "$@"
