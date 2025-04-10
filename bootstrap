@@ -28,6 +28,7 @@ function linking() {
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
+  ln -sfn $(pwd)/.emptty ~/.emptty
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
@@ -86,6 +87,9 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install-manual
   sudo ln -sfn /etc/sv/emptty /var/service
 fi
+
+sudo systemctl disable sddm.service
+sudo systemctl enable emptty.service
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
