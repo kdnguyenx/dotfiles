@@ -65,9 +65,9 @@ mkdir -p ~/opensource
 
 target_dir=~/opensource/dmenu
 if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
   echo '[-] building wmenu [-]'
   git clone https://codeberg.org/adnano/wmenu.git $target_dir
+  cd $target_dir
   sudo apt install -y libcairo2-dev libpango1.0-dev libwayland-dev libxkbcommon-dev scdoc meson
   meson setup build
   ninja -C build
@@ -89,7 +89,7 @@ if [ ! -d "$target_dir" ] ; then
   echo '[-] building emptty [-]'
   git clone https://github.com/tvrzna/emptty.git $target_dir
   cd $target_dir
-  sudo apt install -y gcc golang pam-devel libx11-devel
+  sudo apt install -y gcc golang pam-devel
   mkdir -p ~/go
   make build TAGS=noxlib
   sudo make install
