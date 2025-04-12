@@ -19,6 +19,7 @@ fc-cache -f -v
 
 function linking() {
   ln -sfn $(pwd)/.Xresources ~/.Xresources
+  ln -sfn $(pwd)/.xinitrc ~/.xinitrc
   ln -sfn $(pwd)/.xbindkeysrc ~/.xbindkeysrc
 
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -34,9 +35,6 @@ function linking() {
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
   ln -sfn $(pwd)/alacritty  $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-
-  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
-  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
 }
 echo '[-] linking dotfiles [-]'
 linking

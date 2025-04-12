@@ -9,5 +9,4 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 setxkbmap -model apple -layout us -variant intl
 xbindkeys
 numlockx &
-./.scripts/monitors.sh
 exec i3
