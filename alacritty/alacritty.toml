@@ -1,0 +1,13 @@
+[window]
+opacity = 0.91
+padding.x = 10
+padding.y = 10
+decorations = "Full"
+decorations_theme_variant = "Dark"
+
+[font]
+normal.family = "JetBrains Mono"
+bold.family = "JetBrains Mono"
+italic.family = "JetBrains Mono"
+bold_italic.family = "JetBrains Mono"
+size = 15.0

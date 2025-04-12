@@ -18,6 +18,7 @@ HISTSIZE=10000
 # use 256 color term
 export TERM=screen-256color
 export CLICOLOR=1
+export TERMINAL=alacritty
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden --type f --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='
