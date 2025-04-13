@@ -33,6 +33,7 @@ function linking() {
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
+  ln -sfn $(pwd)/i3status $XDG_CONFIG_HOME/i3status
   ln -sfn $(pwd)/alacritty  $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 }
@@ -40,7 +41,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel vim tmux fzf fd-find ripgrep jq httpie universal-ctags
+sudo apt install -y parallel vim tmux golang npm fzf fd-find ripgrep jq httpie universal-ctags
 mkdir -p ~/.local/bin
 ln -sfn $(which fdfind) ~/.local/bin/fd
 
@@ -67,6 +68,15 @@ if [ ! -d "$target_dir" ] ; then
   git checkout nightly
   make CMAKE_BUILD_TYPE=Release
   sudo make install
+fi
+
+if ! command -v -- amdgpu-install > /dev/null 2>&1; then
+  echo '[-] install amdgpu drivers [-]'
+  wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/jammy/amdgpu-install_6.3.60304-1_all.deb
+  sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
+  sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
+  sudo usermod -a -G render,video $LOGNAME
+  rm -f amdgpu-install_6.3.60304-1_all.deb
 fi
 
 current_shell=$(echo $SHELL)
