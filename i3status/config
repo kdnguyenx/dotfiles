@@ -19,10 +19,19 @@ order += "memory"
 order += "ipv6"
 order += "wireless wlp10s0"
 order += "ethernet eth0"
+order += "volume master"
 order += "disk /"
 order += "battery all"
 order += "load"
 order += "tztime local"
+
+volume master {
+    format = "vol: %volume"
+    format_muted = "Muted"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
 
 cpu_temperature 0 {
     format = "gpu: %degrees°C"

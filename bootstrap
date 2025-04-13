@@ -8,7 +8,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo apt install -y i3 feh picom xautolock alacritty network-manager
+sudo apt install -y i3 feh picom xautolock alacritty network-manager pulseaudio xbacklight
 
 echo '[-] installing favourite font [-]'
 wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
