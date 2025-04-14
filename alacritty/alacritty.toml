@@ -2,15 +2,27 @@
 opacity = 0.91
 padding.x = 5
 padding.y = 5
-decorations = "Full"
+decorations = "Transparent"
 decorations_theme_variant = "Dark"
+startup_mode = "Maximized"
+dynamic_title = true
+option_as_alt = "Both"
 
 [font]
 normal.family = "JetBrains Mono"
+normal.style = "Medium"
 bold.family = "JetBrains Mono"
+bold.style = "Bold"
 italic.family = "JetBrains Mono"
+italic.style = "MediumItalic"
 bold_italic.family = "JetBrains Mono"
+bold_italic.style = "BoldItalic"
 size = 13.0
+
+[cursor]
+style.shape = "Block"
+style.blinking = "Always"
+blink_interval = 500
 
 [colors.primary]
 foreground = "#e0def4"
