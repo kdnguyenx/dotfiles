@@ -20,6 +20,7 @@ export TERM=screen-256color
 export CLICOLOR=1
 export TERMINAL=alacritty
 # fzf
+export PATH="$PATH:$XDG_DATA_HOME/nvim/lazy/fzf/bin"
 export FZF_DEFAULT_COMMAND='fd --hidden --type f --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='
   --color=fg:#908caa,bg:-1,hl:#ebbcba
