@@ -22,7 +22,7 @@ exec --no-startup-id feh --bg-fill ~/dotfiles/images/bay.jpg
 exec --no-startup-id picom --daemon
 
 # Repeat rate
-exec_always --no-startup-id xset r rate 250 25
+exec --no-startup-id xset r rate 250 25
 
 # Fix the display after switch off the monitor,
 # when the there ain't any signal on the screen, press this
