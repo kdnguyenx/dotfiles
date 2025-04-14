@@ -2,7 +2,7 @@
 opacity = 0.91
 padding.x = 5
 padding.y = 5
-decorations = "Transparent"
+decorations = "Full"
 decorations_theme_variant = "Dark"
 startup_mode = "Maximized"
 dynamic_title = true

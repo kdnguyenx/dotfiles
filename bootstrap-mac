@@ -28,8 +28,8 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
+  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-  ln -sfn $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
 }
 echo '[-] linking dotfiles [-]'
 linking
@@ -49,8 +49,8 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
-echo '[-] installing ghostty [-]'
-brew install ghostty
+echo '[-] installing alacritty [-]'
+brew install alacritty
 
 echo '[-] installing neovim [-]'
 git clone https://github.com/neovim/neovim ~/opensource/neovim

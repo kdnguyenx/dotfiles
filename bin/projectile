@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # vim: ft=bash
 dir=$(find ~/personal ~/repos ~/opensource -maxdepth 3 -type d | fzf --tmux)
 if [ -z "${dir}" ]; then

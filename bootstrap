@@ -20,7 +20,6 @@ fc-cache -f -v
 function linking() {
   ln -sfn $(pwd)/.Xresources ~/.Xresources
   ln -sfn $(pwd)/.xinitrc ~/.xinitrc
-  # ln -sfn $(pwd)/.xbindkeysrc ~/.xbindkeysrc
 
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
@@ -34,7 +33,7 @@ function linking() {
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
   ln -sfn $(pwd)/i3status $XDG_CONFIG_HOME/i3status
-  ln -sfn $(pwd)/alacritty  $XDG_CONFIG_HOME/alacritty
+  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
