@@ -9,6 +9,12 @@ return {
                 layout_config = { height = 0.41, preview_width = 0.41 },
                 path_display = { "truncate" }
             },
+            pickers = {
+                find_files = {
+                    -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`.
+                    find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" }
+                },
+            },
         })
         local builtin = require("telescope.builtin")
         vim.keymap.set("n", "<leader>f", builtin.find_files)

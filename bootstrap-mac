@@ -21,7 +21,6 @@ function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.gitignore ~/.gitignore
-  ln -sfn $(pwd)/.fdignore ~/.fdignore
   ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
@@ -35,7 +34,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fd ripgrep jq httpie universal-ctags
+brew install parallel tmux ripgrep jq httpie universal-ctags
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
