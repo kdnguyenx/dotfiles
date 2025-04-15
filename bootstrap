@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-## install essential tools for my development environment
+## install essential tools for my xubuntu development environment
 ## -----
 set -e
 

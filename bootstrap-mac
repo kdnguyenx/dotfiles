@@ -1,5 +1,5 @@
 #!/bin/bash
-## install essential tools for my development environment
+## install essential tools for my mac development environment
 ## -----
 set -e
 
