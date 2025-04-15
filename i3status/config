@@ -35,7 +35,7 @@ volume master {
 
 cpu_temperature 0 {
     format = "gpu: %degrees°C"
-    path = "/sys/class/hwmon/hwmon3/temp*_input"
+    path = "/sys/class/hwmon/hwmon1/temp2_input" # junction temp
 }
 
 memory {
