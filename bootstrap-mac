@@ -35,7 +35,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fzf fd ripgrep jq httpie universal-ctags
+brew install parallel tmux fd ripgrep jq httpie universal-ctags
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

@@ -1,31 +1,20 @@
 return {
-    "junegunn/fzf.vim",
-    dependencies = {
-        "junegunn/fzf",
-        build = ":call fzf#install()",
-    },
-    config = function ()
-        vim.g.fzf_layout = { down = "41%" }
-        vim.g.fzf_vim = { preview_window = {} }
-        vim.api.nvim_create_autocmd("filetype", {
-            pattern = "fzf",
-            group = vim.api.nvim_create_augroup("khoanfzf", { clear = true }),
-            callback = function()
-                vim.opt_local.laststatus = 0
-                vim.opt_local.showmode = false
-                vim.opt_local.ruler = false
-
-                vim.api.nvim_create_autocmd('bufleave', {
-                    buffer = 0,
-                    callback = function()
-                        vim.opt_local.laststatus = 2
-                        vim.opt_local.showmode = true
-                        vim.opt_local.ruler = true
-                    end,
-                })
-            end,
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+        require("telescope").setup({
+            defaults = {
+                layout_strategy = "bottom_pane",
+                layout_config = { height = 0.41, preview_width = 0.41 },
+                path_display = { "truncate" }
+            },
         })
-        vim.keymap.set("n", "<leader>f", vim.cmd.Files)
-        vim.keymap.set("n", "<leader>ma", vim.cmd.Marks)
+        local builtin = require("telescope.builtin")
+        vim.keymap.set("n", "<leader>f", builtin.find_files)
+        vim.keymap.set("n", "<leader>F", function() builtin.find_files({ search_file = vim.fn.expand("<cword>") }) end)
+        vim.keymap.set("n", "<leader>l", builtin.live_grep)
+        vim.keymap.set("n", "<leader>ma", builtin.marks)
+        vim.keymap.set("n", "<leader>o", builtin.resume)
     end
 }
