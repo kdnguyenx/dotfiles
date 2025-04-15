@@ -62,9 +62,8 @@ mkdir -p ~/opensource
 
 echo '[-] installing ibus-bamboo [-]'
 sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo
-sudo apt-get update
-sudo apt-get install ibus ibus-bamboo --install-recommends
-# ibus restart
+sudo apt update -y
+sudo apt install -y ibus ibus-bamboo --install-recommends
 
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
@@ -91,4 +90,4 @@ if [ "$current_shell" != "/usr/bin/zsh" ]; then
   chsh -s $(which zsh)
 fi
 
-echo '[-] Setup done. [-]'
+echo '[-] Device ready, restart your computer. [-]'

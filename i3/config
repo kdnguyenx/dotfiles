@@ -106,7 +106,7 @@ bindsym $mod+minus scratchpad show
 # Always open some programs on specified workspace
 assign [class="^firefox"] number 1
 assign [class="^Alacritty"] number 2
-assign [class="^Discord"] number 3
+assign [class="^discord"] number 3
 assign [class="^Thunderbird"] number 4
 assign [class="^steam"] number 5
 
