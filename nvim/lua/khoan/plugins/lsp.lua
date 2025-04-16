@@ -8,7 +8,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-        local servers = { "clangd", "rust_analyzer", "gopls", "lua_ls", "pyright", "ts_ls" }
+        local servers = { "clangd", "lua_ls", "pyright", "ts_ls" }
         require("mason").setup()
         require("mason-lspconfig").setup({ ensure_installed = servers })
         local lspconfig = require("lspconfig")
