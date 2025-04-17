@@ -102,6 +102,10 @@ if ! command -v -- amdgpu-install > /dev/null 2>&1; then
   rm -f amdgpu-install_6.3.60304-1_all.deb
 fi
 
+echo '[-] setting up localtime [-]'
+sudo rm -f /etc/localtime
+sudo ln -sfn /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
   echo '[-] change default shell to zsh [-]'

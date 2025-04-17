@@ -9,7 +9,7 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt EXTENDED_HISTORY
 setopt NO_BEEP
 # use emacs keybinding
-# bindkey -e
+bindkey -e
 # autocompletion (based on history)
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
@@ -30,7 +30,6 @@ NL=$'\n'
 PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F{red})%(!.#.$)%f%b '
 # activate autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey '^E' autosuggest-clear
 bindkey '^Y' autosuggest-accept
 # aliases
 alias vgit='nvim -c ":Git"'
