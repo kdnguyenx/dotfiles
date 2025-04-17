@@ -92,12 +92,6 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install
 fi
 
-current_shell=$(echo $SHELL)
-if [ "$current_shell" != "/usr/bin/zsh" ]; then
-  echo '[-] change default shell to zsh [-]'
-  chsh -s $(which zsh)
-fi
-
 # remove if target device do not have any amdgpu
 if ! command -v -- amdgpu-install > /dev/null 2>&1; then
   echo '[-] install amdgpu drivers [-]'
@@ -106,6 +100,12 @@ if ! command -v -- amdgpu-install > /dev/null 2>&1; then
   sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
   sudo usermod -a -G render,video $LOGNAME
   rm -f amdgpu-install_6.3.60304-1_all.deb
+fi
+
+current_shell=$(echo $SHELL)
+if [ "$current_shell" != "/usr/bin/zsh" ]; then
+  echo '[-] change default shell to zsh [-]'
+  chsh -s $(which zsh)
 fi
 
 echo '[-] Device ready, restart your computer. [-]'
