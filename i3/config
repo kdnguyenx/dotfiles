@@ -23,6 +23,7 @@ exec --no-startup-id picom --daemon
 
 # Use xfce4-appearance-settings to change theme
 exec --no-startup-id xfsettingsd
+exec --no-startup-id xfce4-clipman
 
 # Repeat rate
 exec --no-startup-id xset r rate 250 25
