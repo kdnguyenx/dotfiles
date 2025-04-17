@@ -45,8 +45,8 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Lock screen
-# exec xautolock -detectsleep -time 10 -locker 'i3lock -n -c 000000'
-# bindsym $mod+Ctrl+q exec i3lock -n -c 000000
+exec --no-startup-id xautolock -detectsleep -time 10 -locker 'i3lock --nofork -c 000000'
+bindsym $mod+Ctrl+q exec i3lock --nofork -c 000000
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -121,6 +121,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+
+# Screenshots
+bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --select > ~/Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Screenshots/screenshot_$NOW.png
 
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
