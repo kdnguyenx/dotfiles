@@ -8,13 +8,17 @@ return {
         "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-        local servers = { "clangd", "lua_ls", "pyright", "ts_ls" }
+        local servers = { "clangd", "jdtls", "lua_ls", "pyright", "ts_ls" }
         require("mason").setup()
         require("mason-lspconfig").setup({ ensure_installed = servers })
-        local lspconfig = require("lspconfig")
-        local config = require("khoan.lsp").make_cfg()
         for _, server in ipairs(servers) do
-            lspconfig[server].setup(config)
+            local config = require("khoan.lsp").make_cfg()
+            if server == "jdtls" then
+                config["settings"] = require("khoan.lsp").jdtls_settings()
+                config["root_dir"] = vim.fn.getcwd()
+            end
+            vim.lsp.config(server, config)
+            vim.lsp.enable(server)
         end
         -- completion
         local cmp = require("cmp")

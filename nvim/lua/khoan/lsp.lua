@@ -34,8 +34,63 @@ function M.make_cfg()
             -- vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
         end,
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        autostart = false,
         detached = true,
+    }
+end
+
+function M.jdtls_settings()
+    return {
+        java = {
+            references = {
+                includeDecompiledSources = true,
+            },
+            eclipse = {
+                downloadSources = true,
+            },
+            maven = {
+                downloadSources = true,
+            },
+            signatureHelp = { enabled = true },
+            contentProvider = { preferred = "fernflower" },
+            completion = {
+                importOrder = {
+                    "java",
+                    "javax",
+                    "com",
+                    "org",
+                },
+            },
+            sources = {
+                organizeImports = {
+                    starThreshold = 9999,
+                    staticStarThreshold = 9999,
+                },
+            },
+            codeGeneration = {
+                toString = {
+                    template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
+                },
+                hashCodeEquals = {
+                    useJava7Objects = false,
+                    useInstanceOf = true,
+                },
+                useBlocks = true,
+                addFinalForNewDeclaration = "fields",
+            },
+            configuration = {
+                runtimes = {
+                    {
+                        name = "JavaSE-11",
+                        path = os.getenv("JDK11"),
+                        default = true,
+                    },
+                    {
+                        name = "JavaSE-17",
+                        path = os.getenv("JDK17"),
+                    },
+                }
+            }
+        }
     }
 end
 

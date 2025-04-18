@@ -25,3 +25,6 @@ export CLICOLOR=1
 export TERMINAL=alacritty
 # golang
 export GOPATH=$HOME/go
+# jdk
+export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
+export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn

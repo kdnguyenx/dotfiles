@@ -1,7 +1,7 @@
 vim.opt_local.expandtab = true
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
-vim.opt_local.softtabstop = 2
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4
+vim.opt_local.softtabstop = 4
 -- set path
 if vim.fn.has("mac") > 0 then
     -- add c/c++ include to path on macos
