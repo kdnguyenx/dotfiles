@@ -26,8 +26,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-u>"] = cmp.mapping.scroll_docs(-5),
                 ["<C-d>"] = cmp.mapping.scroll_docs(5),
-                ["<C-e>"] = cmp.mapping.abort(),
-                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<C-e>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } })
         })

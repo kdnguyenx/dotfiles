@@ -43,7 +43,7 @@ set nostartofline
 set ttyfast history=10000
 set background=dark laststatus=2
 " re-map leader key
-nnoremap <Space> <Nop>
+nnoremap <space> <nop>
 let g:mapleader = ' '
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>

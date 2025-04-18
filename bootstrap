@@ -78,11 +78,6 @@ Pin-Priority: 1000
   sudo apt update -y && sudo apt install -y firefox
 fi
 
-echo '[-] installing ibus-bamboo [-]'
-sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo -y
-sudo apt update -y
-sudo apt install -y ibus ibus-bamboo --install-recommends
-
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
@@ -105,6 +100,11 @@ fi
 echo '[-] setting up localtime [-]'
 sudo rm -f /etc/localtime
 sudo ln -sfn /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
+echo '[-] installing ibus-bamboo [-]'
+sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo -y
+sudo apt update -y
+sudo apt install -y ibus ibus-bamboo --install-recommends
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
