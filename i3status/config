@@ -45,7 +45,7 @@ memory {
 }
 
 wireless wlp10s0 {
-    format_up = "W: (%essid%quality, %bitrate) %ip"
+    format_up = "W: %essid%quality, %bitrate"
     format_down = "W: down"
 }
 
@@ -67,5 +67,5 @@ load {
 }
 
 tztime local {
-    format = "%Y-%m-%d %H:%M"
+    format = "%a %d %b, %Y - %r"
 }
