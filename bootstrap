@@ -4,6 +4,11 @@
 ## -----
 set -e
 
+if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
+  echo "could not determine the secure boot state."
+  exit 1
+fi
+
 echo '[-] installing prerequisite packages [-]'
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
