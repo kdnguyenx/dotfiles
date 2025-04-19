@@ -86,7 +86,7 @@ fi
 # remove if target device do not have any amdgpu
 if ! command -v -- amdgpu-install > /dev/null 2>&1; then
   echo '[-] install amdgpu drivers [-]'
-  wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/jammy/amdgpu-install_6.3.60304-1_all.deb
+  wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/noble/amdgpu-install_6.3.60304-1_all.deb
   sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
   sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
   sudo usermod -a -G render,video $LOGNAME
