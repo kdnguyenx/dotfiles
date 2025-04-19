@@ -9,15 +9,15 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "JetBrains Mono"
+normal.family = "Ubuntu Mono"
 normal.style = "Medium"
-bold.family = "JetBrains Mono"
+bold.family = "Ubuntu Mono"
 bold.style = "Bold"
-italic.family = "JetBrains Mono"
+italic.family = "Ubuntu Mono"
 italic.style = "MediumItalic"
-bold_italic.family = "JetBrains Mono"
+bold_italic.family = "Ubuntu Mono"
 bold_italic.style = "BoldItalic"
-size = 12.5
+size = 25.5
 
 [cursor]
 style.shape = "Block"
