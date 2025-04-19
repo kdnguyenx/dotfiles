@@ -23,6 +23,7 @@ exec --no-startup-id picom --daemon
 
 # Use xfce4-appearance-settings to change theme
 exec --no-startup-id xfsettingsd
+exec --no-startup-id xfce4-clipman
 
 # Repeat rate
 # exec --no-startup-id xset r rate 250 25
@@ -45,7 +46,7 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Lock screen
-exec --no-startup-id xautolock -detectsleep -killer '~/dotfiles/bin/autolock.sh' -time 15 -locker 'i3lock --nofork -c 000000'
+exec --no-startup-id xautolock -detectsleep -killer ~/dotfiles/bin/autolock.sh -time 15 -locker 'i3lock --nofork -c 000000'
 bindsym $mod+Ctrl+q exec i3lock --nofork -c 000000
 
 # Drag floating windows by holding down $mod and left mouse button.
