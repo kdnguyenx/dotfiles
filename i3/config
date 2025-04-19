@@ -23,14 +23,13 @@ exec --no-startup-id picom --daemon
 
 # Use xfce4-appearance-settings to change theme
 exec --no-startup-id xfsettingsd
-exec --no-startup-id xfce4-clipman
 
 # Repeat rate
-exec --no-startup-id xset r rate 250 25
+# exec --no-startup-id xset r rate 250 25
 
 # Fix the display after switch off the monitor,
 # when the there ain't any signal on the screen, press this
-bindsym $mod+Shift+d exec --no-startup-id ~/dotfiles/bin/display.sh
+# bindsym $mod+Shift+d exec --no-startup-id ~/dotfiles/bin/display.sh
 
 # Start a terminal
 bindsym $mod+Return exec $term
@@ -171,3 +170,6 @@ bindsym $mod+r mode "resize"
 bar {
     status_command i3status
 }
+
+# Merge Xresources
+exec_always --no-startup-id xrdb -merge ~/.Xresources
