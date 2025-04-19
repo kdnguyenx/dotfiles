@@ -85,12 +85,17 @@ fi
 
 # remove if target device do not have any amdgpu
 if ! command -v -- amdgpu-install > /dev/null 2>&1; then
-  echo '[-] install amdgpu drivers [-]'
+  echo '[-] installing amdgpu drivers [-]'
   wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/noble/amdgpu-install_6.3.60304-1_all.deb
   sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
   sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
   sudo usermod -a -G render,video $LOGNAME
   rm -f amdgpu-install_6.3.60304-1_all.deb
+
+  echo '[-] installing steam essential packages [-]'
+  sudo dpkg --add-architecture i386
+  sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
+  sudo apt install -y policykit-desktop-privileges policykit-1-gnome
 fi
 
 if ! command -v -- ibus > /dev/null 2>&1; then
