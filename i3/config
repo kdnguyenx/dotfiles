@@ -107,7 +107,7 @@ bindsym $mod+minus scratchpad show
 assign [class="^firefox"] number 1
 assign [class="^Alacritty"] number 2
 assign [class="^discord"] number 3
-assign [class="^Thunderbird"] number 4
+assign [class="^thunderbird"] number 4
 assign [class="^steam"] number 5
 
 # Volume controls
