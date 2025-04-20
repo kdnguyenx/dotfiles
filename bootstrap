@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-## install essential tools for my xubuntu development environment
-## make sure SECURE BOOT is enabled
-## -----
+# install essential tools for my xubuntu development environment
+# vim: ft=bash
+# -----
 set -e
 
 if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
@@ -60,6 +60,19 @@ mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 
+echo '[-] purging snapd [-]'
+snaps=$(snap list | awk 'NR>1 {print $1}')
+for pkg in $snaps; do
+  echo "removing snap package: $pkg"
+  sudo snap remove --purge "$pkg"
+done
+sudo systemctl stop snapd
+sudo systemctl disable snapd
+sudo apt purge --autoremove -y snapd
+sudo apt autoremove -y
+sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd
+sudo apt-mark hold snapd
+
 if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
   echo '[-] installing firefox [-]'
   sudo install -d -m 0755 /etc/apt/keyrings
@@ -83,14 +96,15 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install
 fi
 
-# remove if target device do not have any amdgpu
-if ! command -v -- amdgpu-install > /dev/null 2>&1; then
-  echo '[-] installing amdgpu drivers [-]'
-  wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/noble/amdgpu-install_6.3.60304-1_all.deb
-  sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
-  sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
-  sudo usermod -a -G render,video $LOGNAME
-  rm -f amdgpu-install_6.3.60304-1_all.deb
+if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
+  if ! command -v -- amdgpu-install > /dev/null 2>&1; then
+    echo '[-] installing amdgpu drivers [-]'
+    wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/noble/amdgpu-install_6.3.60304-1_all.deb
+    sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
+    sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
+    sudo usermod -a -G render,video $LOGNAME
+    rm -f amdgpu-install_6.3.60304-1_all.deb
+  fi
 
   echo '[-] installing steam essential packages [-]'
   sudo dpkg --add-architecture i386
@@ -111,4 +125,3 @@ if [ "$current_shell" != "/usr/bin/zsh" ]; then
 fi
 
 echo '[-] Device ready, restart your computer. [-]'
-# vim: ft=bash
