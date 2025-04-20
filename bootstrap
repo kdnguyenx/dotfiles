@@ -14,7 +14,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo apt install -y i3 feh picom alacritty network-manager pulseaudio
+sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
 sudo apt install -y xautolock xbacklight xclip maim xfce4-clipman gnupg2
 
 function linking() {
