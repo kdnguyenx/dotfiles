@@ -38,6 +38,26 @@ function M.make_cfg()
     }
 end
 
+function M.jdtls_cmd()
+    local jdtls = os.getenv("XDG_DATA_HOME") .. "/nvim/mason/packages/jdtls"
+    local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+    return {
+        os.getenv("JDK21") .. "/bin/java",
+        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+        "-Dosgi.bundles.defaultStartLevel=4",
+        "-Declipse.product=org.eclipse.jdt.ls.core.product",
+        "-Dlog.protocol=true",
+        "-Dlog.level=ALL",
+        "-Xmx2g",
+        "--add-modules=ALL-SYSTEM",
+        "--add-opens", "java.base/java.util=ALL-UNNAMED",
+        "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+        "-jar", vim.fn.glob(jdtls .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+        "-configuration", jdtls .. "/config_mac_arm",
+        "-data", workspace_dir,
+    }
+end
+
 function M.jdtls_settings()
     return {
         java = {
@@ -87,6 +107,10 @@ function M.jdtls_settings()
                     {
                         name = "JavaSE-17",
                         path = os.getenv("JDK17"),
+                    },
+                    {
+                        name = "JavaSE-21",
+                        path = os.getenv("JDK21"),
                     },
                 }
             }

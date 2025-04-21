@@ -8,8 +8,15 @@ setopt SHARE_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt EXTENDED_HISTORY
 setopt NO_BEEP
-# use emacs keybinding
-bindkey -e
+# use vi keybinding
+bindkey -v
+function zle-line-init zle-keymap-select {
+  RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+  RPS2=$RPS1
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 # autocompletion (based on history)
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward

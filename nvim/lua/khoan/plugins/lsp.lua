@@ -14,8 +14,9 @@ return {
         for _, server in ipairs(servers) do
             local config = require("khoan.lsp").make_cfg()
             if server == "jdtls" then
-                config["settings"] = require("khoan.lsp").jdtls_settings()
                 config["root_dir"] = vim.fn.getcwd()
+                config["cmd"] = require("khoan.lsp").jdtls_cmd()
+                config["settings"] = require("khoan.lsp").jdtls_settings()
             end
             vim.lsp.config(server, config)
             vim.lsp.enable(server)
@@ -30,7 +31,8 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-u>"] = cmp.mapping.scroll_docs(-5),
                 ["<C-d>"] = cmp.mapping.scroll_docs(5),
-                ["<C-e>"] = cmp.mapping.confirm({ select = true }),
+                ['<C-e>'] = cmp.mapping.abort(),
+                ["<Tab>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } })
         })
