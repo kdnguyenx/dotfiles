@@ -59,6 +59,7 @@ echo '[-] creating essential directories [-]'
 mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
+mkdir -p ~/notes
 
 echo '[-] purging snapd [-]'
 snaps=$(snap list | awk 'NR>1 {print $1}')
