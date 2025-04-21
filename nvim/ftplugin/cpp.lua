@@ -10,7 +10,7 @@ if vim.fn.has("mac") > 0 then
         vim.opt_local.path:append(sdk_path .. "/usr/include")
         vim.opt_local.path:append(sdk_path .. "/usr/include/c++/v1")
     end
-    -- c/c++ makeprg, work with :make command
-    vim.opt_local.makeprg =
-    "cd build && cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -G Ninja .. && ninja"
 end
+-- c/c++ makeprg, work with :make command
+vim.opt_local.makeprg =
+"cd build && cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -G Ninja .. && ninja"
