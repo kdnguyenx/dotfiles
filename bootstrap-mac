@@ -1,6 +1,7 @@
 #!/bin/bash
-## install essential tools for my mac development environment
-## -----
+# install essential tools for my mac development environment
+# vim: ft=bash
+# -----
 set -e
 
 echo '[-] installing xcode command line tools [-]'
@@ -40,8 +41,11 @@ echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
 
-echo '[-] cloning zsh-autosuggestions [-]'
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+target_dir=~/.zsh/zsh-autosuggestions
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] cloning zsh-autosuggestions [-]'
+  git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
+fi
 
 echo '[-] creating essential directories [-]'
 mkdir -p ~/personal
@@ -52,10 +56,21 @@ mkdir -p ~/notes
 echo '[-] installing alacritty [-]'
 brew install alacritty
 
-echo '[-] installing neovim [-]'
-git clone https://github.com/neovim/neovim ~/opensource/neovim
-cd ~/opensource/neovim
-make CMAKE_BUILD_TYPE=Release
-sudo make install
+target_dir=~/opensource/neovim
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building neovim [-]'
+  git clone https://github.com/neovim/neovim $target_dir
+  cd $target_dir
+  git checkout nightly
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+fi
+
+target_dir=~/.fzf
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] installing fzf [-]'
+  git clone --depth 1 https://github.com/junegunn/fzf.git $target_dir
+  $target_dir/install
+fi
 
 echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'

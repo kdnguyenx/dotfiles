@@ -18,9 +18,6 @@ sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
 sudo apt install -y xautolock xbacklight xclip maim xfce4-clipman gnupg2
 
 function linking() {
-  ln -sfn $(pwd)/.Xresources ~/.Xresources
-  ln -sfn $(pwd)/.xinitrc ~/.xinitrc
-
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.gitignore ~/.gitignore
@@ -37,6 +34,7 @@ function linking() {
 
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
+  ln -sfn $(pwd)/.Xresources ~/.Xresources
 }
 echo '[-] linking dotfiles [-]'
 linking
@@ -118,6 +116,13 @@ if ! command -v -- ibus > /dev/null 2>&1; then
   echo '[-] installing ibus-bamboo [-]'
   sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo -y
   sudo apt update -y && sudo apt install -y ibus ibus-bamboo --install-recommends
+fi
+
+target_dir=~/.fzf
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] installing fzf [-]'
+  git clone --depth 1 https://github.com/junegunn/fzf.git $target_dir
+  $target_dir/install
 fi
 
 current_shell=$(echo $SHELL)
