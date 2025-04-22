@@ -6,7 +6,7 @@ return {
     },
     config = function ()
         vim.g.fzf_layout = { down = "41%" }
-        vim.g.fzf_vim = { preview_window = {} }
+        vim.g.fzf_vim = { preview_window = { "right,41%,<70(up,41%)" } }
         vim.api.nvim_create_autocmd("filetype", {
             pattern = "fzf",
             group = vim.api.nvim_create_augroup("khoanfzf", { clear = true }),

@@ -30,6 +30,8 @@ NL=$'\n'
 PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F{red})%(!.#.$)%f%b '
 # activate autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf binaries
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # aliases
 alias vgit='nvim -c ":Git"'
 alias vwiki='nvim -c ":VimwikiIndex"'
