@@ -73,10 +73,10 @@ nnoremap <leader>e :e %:h<C-z>
 nnoremap <leader>b :b <C-z>
 nnoremap <leader>ma :marks<CR>
 nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
-vnoremap <leader>g "0y:vimgrep /<C-r>0/f **<S-Left><Left><Left><Left>
+vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
 nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
 " search current marked text
-vnoremap // y/\v<C-r>=escape(@",'/\')<CR><CR>
+vnoremap // "0y/\v<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
 " copy marked text/paste to/from global register
 nnoremap <leader>Y "*Y
 vnoremap <leader>y "*y
@@ -85,7 +85,7 @@ nnoremap <leader>P "*P
 vnoremap <leader>p "*p
 " find and replace
 nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <leader>r "0y:%s/<C-r>0//gI<Left><Left><Left>
+vnoremap <leader>r "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
 " unix command
 nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
 nnoremap <leader>mv :!mv %<C-z> %:h<C-z>

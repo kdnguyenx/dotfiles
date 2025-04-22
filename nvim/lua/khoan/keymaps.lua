@@ -21,7 +21,7 @@ vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
 vim.keymap.set("n", "<C-l>", vim.cmd.bnext)
 vim.keymap.set("n", "<C-h>", vim.cmd.bprevious)
 -- search current marked text
-vim.keymap.set("v", "//", [[y/\v<C-r>=escape(@",'/\')<CR><CR>]])
+vim.keymap.set("v", "//", [["0y/\v<C-r>='<'.escape(@0,'/\').'>'<CR><CR>]])
 -- yank marked text/paste to/from global register
 vim.keymap.set("v", "<leader>y", [["*y]])
 vim.keymap.set("n", "<leader>p", [["*p]])
@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader>P", [["*P]])
 vim.keymap.set("v", "<leader>p", [["*p]])
 -- search and replace
 vim.keymap.set("n", "<leader>r", [[:%s/<C-r><C-w>//gI<Left><Left><Left>]])
-vim.keymap.set("v", "<leader>r", [["0y:%s/<C-r>0//gI<Left><Left><Left>]])
+vim.keymap.set("v", "<leader>r", [["0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>]])
 -- unix commands
 vim.keymap.set("n", "<leader>cp", [[:!cp -r %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>mv", [[:!mv %<C-z> %:h<C-z>]])
