@@ -35,7 +35,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux ripgrep jq httpie universal-ctags
+brew install parallel tmux fzf ripgrep jq httpie universal-ctags
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -64,13 +64,6 @@ if [ ! -d "$target_dir" ] ; then
   git checkout nightly
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
-fi
-
-target_dir=~/.fzf
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing fzf [-]'
-  git clone --depth 1 https://github.com/junegunn/fzf.git $target_dir
-  $target_dir/install
 fi
 
 echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'

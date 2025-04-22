@@ -40,7 +40,7 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel vim vim-gtk3 tmux golang npm ripgrep jq httpie universal-ctags
+sudo apt install -y parallel vim tmux fzf ripgrep jq httpie universal-ctags golang npm 
 mkdir -p ~/.local/bin
 
 echo '[-] downloading git-prompt.sh script [-]'
@@ -116,13 +116,6 @@ if ! command -v -- ibus > /dev/null 2>&1; then
   echo '[-] installing ibus-bamboo [-]'
   sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo -y
   sudo apt update -y && sudo apt install -y ibus ibus-bamboo --install-recommends
-fi
-
-target_dir=~/.fzf
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing fzf [-]'
-  git clone --depth 1 https://github.com/junegunn/fzf.git $target_dir
-  $target_dir/install
 fi
 
 current_shell=$(echo $SHELL)

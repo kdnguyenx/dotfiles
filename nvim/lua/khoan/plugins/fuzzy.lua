@@ -2,7 +2,7 @@ return {
     "junegunn/fzf.vim",
     dependencies = {
         "junegunn/fzf",
-        -- build = ":call fzf#install()",
+        build = ":call fzf#install()",
     },
     config = function ()
         vim.g.fzf_layout = { down = "41%" }
