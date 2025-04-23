@@ -17,7 +17,10 @@ italic.family = "Ubuntu Sans Mono"
 italic.style = "MediumItalic"
 bold_italic.family = "Ubuntu Sans Mono"
 bold_italic.style = "BoldItalic"
-size = 13.5
+size = 13
+
+[selection]
+save_to_clipboard = true
 
 [cursor]
 style.shape = "Block"

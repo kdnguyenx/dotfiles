@@ -15,7 +15,7 @@ sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing window manager [-]'
 sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
-sudo apt install -y xautolock xbacklight xclip maim xfce4-clipman gnupg2
+sudo apt install -y xautolock xbacklight xdotool xclip maim xfce4-clipman gnupg2
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc

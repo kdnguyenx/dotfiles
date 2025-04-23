@@ -23,7 +23,10 @@ exec --no-startup-id picom --daemon
 
 # Use xfce4-appearance-settings to change theme
 exec --no-startup-id xfsettingsd
-exec --no-startup-id xfce4-clipman
+exec --no-startup-id xfce4-clipman --daemon
+
+# Paste with xfce4-clipman
+bindsym $mod+v exec --no-startup-id xfce4-clipman-history
 
 # Toggle redshift
 bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
@@ -122,13 +125,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 # Screenshots
 bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --select > ~/Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Screenshots/screenshot_$NOW.png
 
-# Clipman
-bindsym $mod+v exec xfce4-clipman-history
-
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b splith
+# bindsym $mod+b splith
 # bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
