@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# install essential tools for my xubuntu development environment
+# install essential tools for my ubuntu development environment
 # vim: ft=bash
 # -----
 set -e
@@ -15,7 +15,7 @@ sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing window manager [-]'
 sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
-sudo apt install -y xautolock xbacklight xdotool xclip maim xfce4-clipman gnupg2
+sudo apt install -y xautolock xbacklight xdotool xclip maim gnupg2
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -59,18 +59,20 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 mkdir -p ~/notes
 
-echo '[-] purging snapd [-]'
-snaps=$(snap list | awk 'NR>1 {print $1}')
-for pkg in $snaps; do
-  echo "removing snap package: $pkg"
-  sudo snap remove --purge "$pkg"
-done
-sudo systemctl stop snapd
-sudo systemctl disable snapd
-sudo apt purge --autoremove -y snapd
-sudo apt autoremove -y
-sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd
-sudo apt-mark hold snapd
+if command -v -- snapd > /dev/null 2>&1; then
+  echo '[-] purging snapd [-]'
+  snaps=$(snap list | awk 'NR>1 {print $1}')
+  for pkg in $snaps; do
+    echo "removing snap package: $pkg"
+    sudo snap remove --purge "$pkg"
+  done
+  sudo systemctl stop snapd
+  sudo systemctl disable snapd
+  sudo apt purge --autoremove -y snapd
+  sudo apt autoremove -y
+  sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd
+  sudo apt-mark hold snapd
+fi
 
 if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
   echo '[-] installing firefox [-]'

@@ -23,10 +23,6 @@ exec --no-startup-id picom --daemon
 
 # Use xfce4-appearance-settings to change theme
 exec --no-startup-id xfsettingsd
-exec --no-startup-id xfce4-clipman --daemon
-
-# Paste with xfce4-clipman
-bindsym $mod+v exec --no-startup-id xfce4-clipman-history
 
 # Toggle redshift
 bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
@@ -35,7 +31,7 @@ bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
 bindsym $mod+Return exec $term
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
