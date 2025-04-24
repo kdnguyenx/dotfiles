@@ -72,6 +72,7 @@ if command -v -- snapd > /dev/null 2>&1; then
   sudo apt autoremove -y
   sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd
   sudo apt-mark hold snapd
+  sudo systemctl mask snapd.service snapd.socket snapd.seeded.service
 fi
 
 if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
@@ -83,7 +84,7 @@ if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
   echo '
 Package: *
 Pin: origin packages.mozilla.org
-Pin-Priority: 1000
+Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/mozilla
   sudo apt update -y && sudo apt install -y firefox
 fi
@@ -99,15 +100,6 @@ if [ ! -d "$target_dir" ] ; then
 fi
 
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
-  if ! command -v -- amdgpu-install > /dev/null 2>&1; then
-    echo '[-] installing amdgpu drivers [-]'
-    wget https://repo.radeon.com/amdgpu-install/6.3.4/ubuntu/noble/amdgpu-install_6.3.60304-1_all.deb
-    sudo dpkg -i amdgpu-install_6.3.60304-1_all.deb
-    sudo amdgpu-install --usecase=graphics,rocm -y --vulkan=amdvlk --opencl=rocr
-    sudo usermod -a -G render,video $LOGNAME
-    rm -f amdgpu-install_6.3.60304-1_all.deb
-  fi
-
   echo '[-] installing steam essential packages [-]'
   sudo dpkg --add-architecture i386
   sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
