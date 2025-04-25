@@ -26,8 +26,8 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing window manager [-]'
-sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
-sudo apt install -y xautolock xbacklight xdotool xclip maim mangohud gnupg2
+sudo apt install -y i3 feh picom alacritty network-manager pulseaudio pavucontrol redshift
+sudo apt install -y xautolock xbacklight xdotool xclip maim slop mangohud gnupg2
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
