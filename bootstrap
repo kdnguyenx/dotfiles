@@ -9,6 +9,18 @@ if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
   exit 1
 fi
 
+if command -v -- snap > /dev/null 2>&1; then
+  echo '[-] please remove snapd using these following commands: [-]'
+  echo 'snap list'
+  echo 'sudo snap remove --purge [package_names]'
+  echo 'sudo apt purge --autoremove -y snapd'
+  echo 'sudo apt autoremove -y'
+  echo 'sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd'
+  echo 'sudo apt-mark hold snapd'
+  echo 'sudo systemctl mask snapd.service snapd.socket snapd.seeded.service'
+  exit 1
+fi
+
 echo '[-] installing prerequisite packages [-]'
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
@@ -59,22 +71,6 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 mkdir -p ~/notes
 
-if command -v -- snapd > /dev/null 2>&1; then
-  echo '[-] purging snapd [-]'
-  snaps=$(snap list | awk 'NR>1 {print $1}')
-  for pkg in $snaps; do
-    echo "removing snap package: $pkg"
-    sudo snap remove --purge "$pkg"
-  done
-  sudo systemctl stop snapd
-  sudo systemctl disable snapd
-  sudo apt purge --autoremove -y snapd
-  sudo apt autoremove -y
-  sudo rm -rf ~/snap /snap /var/snap /var/lib/snapd /var/cache/snapd
-  sudo apt-mark hold snapd
-  sudo systemctl mask snapd.service snapd.socket snapd.seeded.service
-fi
-
 if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
   echo '[-] installing firefox [-]'
   sudo install -d -m 0755 /etc/apt/keyrings
@@ -92,24 +88,26 @@ fi
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim $target_dir
+  git clone https://github.com/neovim/neovim.git $target_dir
   cd $target_dir
   git checkout nightly
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
 fi
 
+target_dir=~/opensource/ibus-bamboo
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building ibus-bamboo [-]'
+  sudo apt install ibus make golang libx11-dev libxtst-dev libgtk-3-dev
+  git clone https://github.com/BambooEngine/ibus-bamboo.git $target_dir
+  cd $target_dir
+  sudo make install PREFIX=/usr
+fi
+
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dpkg --add-architecture i386
   sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
-  sudo apt install -y policykit-desktop-privileges policykit-1-gnome
-fi
-
-if ! command -v -- ibus > /dev/null 2>&1; then
-  echo '[-] installing ibus-bamboo [-]'
-  sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo -y
-  sudo apt update -y && sudo apt install -y ibus ibus-bamboo --install-recommends
 fi
 
 current_shell=$(echo $SHELL)
