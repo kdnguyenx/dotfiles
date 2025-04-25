@@ -27,7 +27,7 @@ sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing window manager [-]'
 sudo apt install -y i3 feh picom alacritty network-manager pulseaudio redshift
-sudo apt install -y xautolock xbacklight xdotool xclip maim gnupg2
+sudo apt install -y xautolock xbacklight xdotool xclip maim mangohud gnupg2
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -47,6 +47,7 @@ function linking() {
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
   ln -sfn $(pwd)/.Xresources ~/.Xresources
+  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 }
 echo '[-] linking dotfiles [-]'
 linking
