@@ -60,6 +60,10 @@ echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
 
+echo '[-] downloading vim plugin manager [-]'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
   echo '[-] cloning zsh-autosuggestions [-]'
