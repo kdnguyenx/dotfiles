@@ -5,7 +5,6 @@ vim.opt.regexpengine = 2
 vim.opt.showmode = true
 vim.opt.showcmd = true
 vim.opt.showmatch = true
-vim.opt.wrap = false
 -- make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -18,8 +17,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.colorcolumn = "120"
 -- sets how neovim will display certain whitespace characters in the editor.
-vim.opt.listchars = { trail = "·", nbsp = "␣" }
-vim.opt.showbreak = "¬"
+vim.opt.listchars = { tab = "› ", trail = "·", nbsp = "␣", eol = "¬" }
+vim.opt.showbreak = "˾"
 vim.opt.list = true
 -- set default indentation
 vim.opt.expandtab = true
@@ -30,7 +29,7 @@ vim.opt.shiftround = true
 -- do not save temporary files.
 vim.opt.backup = false
 vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.undofile = true
 -- preview substitutions live, as you type
 vim.opt.inccommand = "split"
