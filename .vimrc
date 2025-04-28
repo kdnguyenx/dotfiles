@@ -3,12 +3,12 @@ set nocompatible
 " open the quickfix window whenever a quickfix command is executed
 autocmd QuickFixCmdPost [^l]* cwindow
 " quick exit some filetypes
-autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
+autocmd FileType help,qf,diff,fugitive,fugitiveblame nnoremap <silent> <buffer> q :quit<CR>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
 set list listchars=tab:›\ ,nbsp:␣,trail:· showbreak=¬
-set signcolumn=no sidescrolloff=10 title
+set sidescrolloff=10 title
 " set default regexp engine to nfa
 set regexpengine=2
 syntax enable
@@ -44,10 +44,33 @@ set ttyfast history=10000
 " re-map leader key
 nnoremap <space> <nop>
 let g:mapleader = ' '
+" plugins
+call plug#begin()
+" make sure you use single quotes
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'rose-pine/vim', { 'as': 'rose-pine' }
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'vimwiki/vimwiki'
+call plug#end()
 " basic theme
 set background=dark laststatus=2
+set termguicolors
+silent! colorscheme rosepine_moon
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
+" run ctags
+if executable('ctags')
+  function! s:generate_tags() abort
+    let l:cmd = ['ctags', '--tag-relative=never', '-G', '-R', '.']
+    let l:job = job_start(l:cmd, {'in_io': 'null', 'out_io': 'null', 'err_io': 'null'})
+    echo 'generate tags..., status: ' . job_status(l:job)
+  endfunction
+  nnoremap <leader>tg :call <SID>generate_tags()<CR>
+else
+  echo 'no ctags installation found'
+endif
 " re-size split windows using arrow keys
 nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
@@ -67,6 +90,7 @@ nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
+set wildoptions=pum,tagfile
 " fuzzy find
 nnoremap <leader>f :find **/*
 nnoremap <leader>F :find **/*<C-r><C-w><CR>
@@ -76,6 +100,15 @@ nnoremap <leader>ma :marks<CR>
 nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
 vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
 nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
+" ripgrep
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading\ --column
+  set grepformat^=%f:%l:%c:%m
+  nnoremap <leader>g :silent grep! '' \| redraw!<S-Left><S-Left><Left><Left>
+  vnoremap <leader>g "0y:silent grep! --case-sensitive '<C-r>0' \| redraw!<S-Left><S-Left><Left><Left>
+  nnoremap <leader>G :silent grep! --case-sensitive '<C-r><C-w>' \| redraw!<CR>
+  nnoremap <leader>/ :silent grep! --hidden --no-ignore '' \| redraw!<S-Left><S-Left><Left><Left>
+endif
 " search current marked text
 vnoremap // "0y/\v<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
 " copy marked text/paste to/from global register
@@ -94,9 +127,33 @@ nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
+" indentation by ft
+autocmd FileType c,cpp setl sw=4 ts=4 sts=4 et
+autocmd FileType python setl sw=4 ts=4 sts=4 et
+autocmd FileType go setl sw=4 ts=4 sts=4 noet
+autocmd FileType java setl sw=4 ts=4 sts=4 et
+autocmd FileType javascript,typescript setl sw=2 ts=2 sts=2 et
+autocmd FileType json setl sw=4 ts=4 sts=4 et formatprg=jq
+" gitgutter
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+" fzf
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
+let g:fzf_layout = { 'down': '41%' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>F :Files<CR>
+nnoremap <leader>ma :Marks<CR>
+" vimwiki
+let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': 'md'}]
+let g:vimwiki_global_ext = 0
+let g:vimwiki_ext2syntax = {}
 " basic highlights
 highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
 highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
 highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
 highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight! link SignColumn LineNr
