@@ -20,7 +20,7 @@ filetype indent on
 " set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
 " auto read file change
-set autoread autoindent colorcolumn=120
+set autoread autoindent
 " scan to put in completion
 set complete=.,w,b,u,t completeopt=menu,preview
 " sequence of letters which describes how automatic formatting is to be done
@@ -49,12 +49,11 @@ call plug#begin()
 " make sure you use single quotes
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 call plug#end()
 " basic theme
 set background=dark laststatus=2
 set termguicolors
-silent! colorscheme rosepine_moon
+colorscheme retrobox
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " re-size split windows using arrow keys
@@ -110,8 +109,8 @@ let g:fzf_layout = { 'down': '41%' }
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 " basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey guibg=#323232 guifg=grey
+highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=#323232 guifg=darkgrey
 highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
-highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guifg=#323232
