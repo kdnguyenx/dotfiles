@@ -53,16 +53,12 @@ echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel vim tmux fzf ripgrep jq httpie universal-ctags golang npm 
+sudo apt install -y parallel vim vim-gtk3 tmux fzf ripgrep jq httpie universal-ctags golang npm 
 mkdir -p ~/.local/bin
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
-
-echo '[-] downloading vim plugin manager [-]'
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then

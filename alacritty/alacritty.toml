@@ -17,7 +17,7 @@ italic.family = "Ubuntu Sans Mono"
 italic.style = "MediumItalic"
 bold_italic.family = "Ubuntu Sans Mono"
 bold_italic.style = "BoldItalic"
-size = 12
+size = 13
 
 [selection]
 save_to_clipboard = true
@@ -32,27 +32,57 @@ background = '#181818'
 foreground = '#d8d8d8'
 
 [colors.cursor]
-text = '#181818'
-cursor = '#d8d8d8'
+text = "#e0def4"
+cursor = "#56526e"
 
-# Normal colors
+[colors.vi_mode_cursor]
+text = "#e0def4"
+cursor = "#56526e"
+
+[colors.search.matches]
+foreground = "#908caa"
+background = "#393552"
+
+[colors.search.focused_match]
+foreground = "#232136"
+background = "#ea9a97"
+
+[colors.hints.start]
+foreground = "#908caa"
+background = "#2a273f"
+
+[colors.hints.end]
+foreground = "#6e6a86"
+background = "#2a273f"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#e0def4"
+background = "#2a273f"
+
+[colors.selection]
+text = "#e0def4"
+background = "#44415a"
+
 [colors.normal]
-black   = '#181818'
-red     = '#ab4642'
-green   = '#a1b56c'
-yellow  = '#f7ca88'
-blue    = '#7cafc2'
-magenta = '#ba8baf'
-cyan    = '#86c1b9'
-white   = '#d8d8d8'
+black = "#393552"
+red = "#eb6f92"
+green = "#3e8fb0"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ea9a97"
+white = "#e0def4"
 
-# Bright colors
 [colors.bright]
-black   = '#585858'
-red     = '#ab4642'
-green   = '#a1b56c'
-yellow  = '#f7ca88'
-blue    = '#7cafc2'
-magenta = '#ba8baf'
-cyan    = '#86c1b9'
-white   = '#f8f8f8'
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#3e8fb0"
+yellow = "#f6c177"
+blue = "#9ccfd8"
+magenta = "#c4a7e7"
+cyan = "#ea9a97"
+white = "#e0def4"

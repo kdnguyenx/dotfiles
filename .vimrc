@@ -44,16 +44,8 @@ set ttyfast history=10000
 " re-map leader key
 nnoremap <space> <nop>
 let g:mapleader = ' '
-" plugins
-call plug#begin()
-" make sure you use single quotes
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-call plug#end()
 " basic theme
 set background=dark laststatus=2
-set termguicolors
-colorscheme retrobox
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " re-size split windows using arrow keys
@@ -87,11 +79,11 @@ nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
 " search current marked text
 vnoremap // "0y/\v<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
 " copy marked text/paste to/from global register
-nnoremap <leader>Y "*Y
-vnoremap <leader>y "*y
-nnoremap <leader>p "*p
-nnoremap <leader>P "*P
-vnoremap <leader>p "*p
+nnoremap <leader>Y "+Y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
 " find and replace
 nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <leader>r "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
@@ -102,15 +94,9 @@ nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
-" fzf
-let g:fzf_vim = {}
-let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
-let g:fzf_layout = { 'down': '41%' }
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 " basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey guibg=#323232 guifg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=#323232 guifg=darkgrey
+highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
+highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
 highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
-highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guifg=#323232
+highlight VertSplit ctermbg=NONE ctermfg=darkgrey

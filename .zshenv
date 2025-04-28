@@ -13,8 +13,8 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 # default editor
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 # zsh history
 HISTFILE=$HOME/.zhistory
 SAVEHIST=10000
@@ -27,10 +27,11 @@ export TERMINAL=alacritty
 export GOPATH=$HOME/go
 # fzf
 export FZF_DEFAULT_OPTS='
-  --color=fg:#d8d8d8,bg:-1,hl:#a1b56c
-  --color=fg+:#d8d8d8,bg+:-1,hl+:#a1b56c
-  --color=info:#7cafc2,prompt:#ba8baf,pointer:#ab4642,gutter:-1
-  --color=marker:#f7ca88,spinner:#86c1b9,header:#a1b56c'
+  --color=fg:#908caa,bg:-1,hl:#ebbcba
+  --color=fg+:#e0def4,bg+:-1,hl+:#ebbcba
+  --color=border:#403d52,header:#31748f,gutter:-1
+  --color=spinner:#f6c177,info:#9ccfd8
+  --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa'
 # jdk
 export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
 export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn
