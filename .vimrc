@@ -33,6 +33,8 @@ set visualbell
 " add numbers to each line on the left-hand side.
 set number relativenumber ruler hidden
 set nopaste
+" undodir
+set undodir=~/.vim/undodir undofile
 " this option controls the behavior when switching between buffers
 set switchbuf=uselast
 " show several useful info
@@ -144,22 +146,33 @@ nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
 " indentation by ft
-autocmd FileType c,cpp setl sw=4 ts=4 sts=4 et
 autocmd FileType python setl sw=4 ts=4 sts=4 et fp=black\ --quiet\ -
 autocmd FileType go setl sw=4 ts=4 sts=4 noet fp=gofmt
-autocmd FileType java setl sw=4 ts=4 sts=4 et
 autocmd FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 autocmd FileType json setl sw=4 ts=4 sts=4 et fp=jq
 " c, c++
 augroup clang_opts
   au!
+  au FileType c,cpp setl sw=4 ts=4 sts=4 et
   " c/c++ makeprg, work with :make command
   au FileType c,cpp setl makeprg=cd\ build\ &&\ cmake\ -DCMAKE_BUILD_TYPE=debug\ -DCMAKE_EXPORT_COMPILE_COMMANDS=1\ -G\ Ninja\ ..\ &&\ ninja
   if has('mac') && executable('xcrun')
     let sdk_path = substitute(system('xcrun --show-sdk-path'), '\n', '', '')
-    execute 'setl path+=' . sdk_path . '/usr/include'
-    execute 'setl path+=' . sdk_path . '/usr/include/c++/v1'
+    au FileType c,cpp execute 'setl path+=' . sdk_path . '/usr/include'
+    au FileType c,cpp execute 'setl path+=' . sdk_path . '/usr/include/c++/v1'
   endif
+augroup END
+"java
+augroup java_opts
+  au!
+  au FileType java setl sw=4 ts=4 sts=4 et
+  au FileType java setl makeprg=mvn\ clean\ install\ -T\ 5
+  au FileType java setl includeexpr=substitute(v:fname,'\\.','/','g')
+  au FileType java setl errorformat=[ERROR]\ %f:[%l\\,%v]\ %m
+  au FileType java setl path+=src/main/java/**
+  au FileType java setl path+=src/main/test/**
+  au FileType java setl path+=**/src/main/java/**
+  au FileType java setl path+=**/src/main/test/**
 augroup END
 " highlighted yank -
 let g:highlightedyank_highlight_duration = 50
