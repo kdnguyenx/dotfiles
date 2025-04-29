@@ -12,9 +12,7 @@ set ideamarks
 set ideawrite=file
 set visualdelay=50
 " enable ideavim plugins https://jb.gg/ideavim-plugins
-set commentary
-set surround
-set highlightedyank
+"   plugins are specified via vim-plug in .vimrc
 " map ide actions to ideavim -- https://jb.gg/abva4t
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)
@@ -37,4 +35,3 @@ nmap - <action>(SelectInProjectView)
 nmap <leader>j <action>(GotoNextError)
 nmap <leader>k <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
-nnoremap <silent> <Esc> :noh<CR>

@@ -49,10 +49,11 @@ call plug#begin()
 " make sure you use single quotes
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'machakann/vim-highlightedyank'
 Plug 'vimwiki/vimwiki'
+Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 call plug#end()
 " basic theme
 set background=dark laststatus=2
@@ -82,15 +83,30 @@ autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<CR>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
+" dismiss highlight -
+nnoremap <Esc> :nohlsearch<CR>
 " navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz
 nnoremap <C-k> :cprev<CR>zz
 " navigate through buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
+" move selection
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
+" wildoptions -
 set wildoptions=pum,tagfile
+" wildignore -
+set wildignore=*.o,*~,*.a,*.so,*.pyc,*.swp,*.class
+set wildignore+=*/target/*,*/build/*,*/generated-sources/*
+set wildignore+=*/__pycache__/*,*/node_modules/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.idea/*,*/.vscode/*
+if has('mac')
+  set wildignore+=*/Library/*
+  set wildignore+=*/.DS_Store
+endif
 " fuzzy find
 nnoremap <leader>f :find **/*
 nnoremap <leader>F :find **/*<C-r><C-w><CR>
@@ -100,7 +116,7 @@ nnoremap <leader>ma :marks<CR>
 nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
 vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
 nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
-" ripgrep
+" ripgrep -
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading\ --column
   set grepformat^=%f:%l:%c:%m
@@ -129,15 +145,25 @@ nnoremap <silent> # mM#
 nnoremap <silent> * mM*
 " indentation by ft
 autocmd FileType c,cpp setl sw=4 ts=4 sts=4 et
-autocmd FileType python setl sw=4 ts=4 sts=4 et
-autocmd FileType go setl sw=4 ts=4 sts=4 noet
+autocmd FileType python setl sw=4 ts=4 sts=4 et fp=black\ --quiet\ -
+autocmd FileType go setl sw=4 ts=4 sts=4 noet fp=gofmt
 autocmd FileType java setl sw=4 ts=4 sts=4 et
 autocmd FileType javascript,typescript setl sw=2 ts=2 sts=2 et
-autocmd FileType json setl sw=4 ts=4 sts=4 et formatprg=jq
-" gitgutter
-nmap ]c <Plug>(GitGutterNextHunk)
-nmap [c <Plug>(GitGutterPrevHunk)
-" fzf
+autocmd FileType json setl sw=4 ts=4 sts=4 et fp=jq
+" c, c++
+augroup clang_opts
+  au!
+  " c/c++ makeprg, work with :make command
+  au FileType c,cpp setl makeprg=cd\ build\ &&\ cmake\ -DCMAKE_BUILD_TYPE=debug\ -DCMAKE_EXPORT_COMPILE_COMMANDS=1\ -G\ Ninja\ ..\ &&\ ninja
+  if has('mac') && executable('xcrun')
+    let sdk_path = substitute(system('xcrun --show-sdk-path'), '\n', '', '')
+    execute 'setl path+=' . sdk_path . '/usr/include'
+    execute 'setl path+=' . sdk_path . '/usr/include/c++/v1'
+  endif
+augroup END
+" highlighted yank -
+let g:highlightedyank_highlight_duration = 50
+" fzf -
 let g:fzf_vim = {}
 let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
 let g:fzf_layout = { 'down': '41%' }
@@ -146,7 +172,7 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <bu
 nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>F :Files<CR>
 nnoremap <leader>ma :Marks<CR>
-" vimwiki
+" vimwiki -
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': 'md'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_ext2syntax = {}

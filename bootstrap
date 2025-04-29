@@ -42,7 +42,6 @@ function linking() {
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
   ln -sfn $(pwd)/i3status $XDG_CONFIG_HOME/i3status
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
@@ -59,6 +58,10 @@ mkdir -p ~/.local/bin
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
+
+echo '[-] downloading vim plugin manager [-]'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
@@ -84,16 +87,6 @@ Pin: origin packages.mozilla.org
 Pin-Priority: 1001
 ' | sudo tee /etc/apt/preferences.d/mozilla
   sudo apt update -y && sudo apt install -y firefox
-fi
-
-target_dir=~/opensource/neovim
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim.git $target_dir
-  cd $target_dir
-  git checkout nightly
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
 fi
 
 target_dir=~/opensource/ibus-bamboo

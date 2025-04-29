@@ -29,7 +29,6 @@ function linking() {
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 }
 echo '[-] linking dotfiles [-]'
 linking
@@ -40,6 +39,10 @@ brew install parallel tmux fzf ripgrep jq httpie universal-ctags
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
+
+echo '[-] downloading vim plugin manager [-]'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
@@ -55,15 +58,5 @@ mkdir -p ~/notes
 
 echo '[-] installing alacritty [-]'
 brew install alacritty
-
-target_dir=~/opensource/neovim
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim $target_dir
-  cd $target_dir
-  git checkout nightly
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-fi
 
 echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'
