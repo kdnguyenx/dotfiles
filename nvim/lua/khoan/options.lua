@@ -29,7 +29,7 @@ vim.opt.shiftround = true
 -- do not save temporary files.
 vim.opt.backup = false
 vim.opt.swapfile = false
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.undofile = true
 -- preview substitutions live, as you type
 vim.opt.inccommand = "split"

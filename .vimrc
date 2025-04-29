@@ -13,7 +13,7 @@ set sidescrolloff=10 title
 set regexpengine=2
 syntax enable
 " disable temporary files.
-set nobackup noswapfile wrap
+set nobackup noswapfile nowrap
 " detect filetype
 filetype on
 filetype indent on
@@ -109,6 +109,9 @@ if has('mac')
   set wildignore+=*/Library/*
   set wildignore+=*/.DS_Store
 endif
+" search current marked text
+vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
+vnoremap <leader>/ "0y/\V<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
 " fuzzy find
 nnoremap <leader>f :find **/*
 nnoremap <leader>F :find **/*<C-r><C-w><CR>
@@ -127,8 +130,6 @@ if executable('rg')
   nnoremap <leader>G :silent grep! --case-sensitive '<C-r><C-w>' \| redraw!<CR>
   nnoremap <leader>/ :silent grep! --hidden --no-ignore '' \| redraw!<S-Left><S-Left><Left><Left>
 endif
-" search current marked text
-vnoremap // "0y/\v<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
 " copy marked text/paste to/from global register
 nnoremap <leader>Y "+Y
 vnoremap <leader>y "+y
@@ -182,8 +183,8 @@ let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
 let g:fzf_layout = { 'down': '41%' }
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-nnoremap <leader>f :GFiles<CR>
-nnoremap <leader>F :Files<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>ma :Marks<CR>
 " vimwiki -
 let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': 'md'}]
