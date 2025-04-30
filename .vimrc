@@ -3,7 +3,7 @@ set nocompatible
 " open the quickfix window whenever a quickfix command is executed
 autocmd QuickFixCmdPost [^l]* cwindow
 " quick exit some filetypes
-autocmd FileType help,qf,diff,fugitive,fugitiveblame nnoremap <silent> <buffer> q :quit<CR>
+autocmd FileType help,qf,diff,fugitive,fugitiveblame,lspgfm nnoremap <silent> <buffer> q :quit<CR>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
@@ -34,7 +34,7 @@ set visualbell
 set number relativenumber ruler hidden
 set nopaste
 " undodir
-set undodir=~/.vim/undodir undofile
+set undofile undodir=~/.vim/undodir
 " this option controls the behavior when switching between buffers
 set switchbuf=uselast
 " show several useful info
@@ -52,15 +52,15 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
-Plug 'vimwiki/vimwiki'
-Plug 'rose-pine/vim', { 'as': 'rose-pine' }
+Plug 'yegappan/lsp'
 call plug#end()
 " basic theme
 set background=dark laststatus=2
 set termguicolors
-silent! colorscheme rosepine_moon
+colorscheme retrobox
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " run ctags
@@ -85,7 +85,7 @@ autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<CR>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
-" dismiss highlight -
+" dismiss highlight
 nnoremap <Esc> :nohlsearch<CR>
 " navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz
@@ -98,9 +98,9 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
-" wildoptions -
+" wildoptions
 set wildoptions=pum,tagfile
-" wildignore -
+" wildignore
 set wildignore=*.o,*~,*.a,*.so,*.pyc,*.swp,*.class
 set wildignore+=*/target/*,*/build/*,*/generated-sources/*
 set wildignore+=*/__pycache__/*,*/node_modules/*
@@ -121,7 +121,7 @@ nnoremap <leader>ma :marks<CR>
 nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
 vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
 nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
-" ripgrep -
+" ripgrep
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading\ --column
   set grepformat^=%f:%l:%c:%m
@@ -142,12 +142,11 @@ vnoremap <leader>r "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
 " unix command
 nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
 nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
-" set mark before gd/#/*
-nnoremap <silent> gd mMgd
+" set mark before #/*
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
 " indentation by ft
-autocmd FileType python setl sw=4 ts=4 sts=4 et fp=black\ --quiet\ -
+autocmd FileType python setl sw=4 ts=4 sts=4 et
 autocmd FileType go setl sw=4 ts=4 sts=4 noet fp=gofmt
 autocmd FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 autocmd FileType json setl sw=4 ts=4 sts=4 et fp=jq
@@ -175,25 +174,65 @@ augroup java_opts
   au FileType java setl path+=**/src/main/java/**
   au FileType java setl path+=**/src/main/test/**
 augroup END
-" highlighted yank -
+" highlighted yank
 let g:highlightedyank_highlight_duration = 50
-" fzf -
+" fzf
 let g:fzf_vim = {}
 let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
 let g:fzf_layout = { 'down': '41%' }
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>ma :Marks<CR>
-" vimwiki -
-let g:vimwiki_list = [{'path': '~/notes/', 'syntax': 'markdown', 'ext': 'md'}]
-let g:vimwiki_global_ext = 0
-let g:vimwiki_ext2syntax = {}
+highlight fzf1 ctermbg=NONE ctermfg=grey guibg=#323232
+highlight fzf2 ctermbg=NONE ctermfg=grey guibg=#323232
+highlight fzf3 ctermbg=NONE ctermfg=grey guibg=#323232
+" lsp
+let lspOpts = #{
+      \ autoHighlightDiags: v:true,
+      \ showInlayHints: v:true,
+      \ diagSignErrorText: 'E',
+      \ diagSignHintText: 'H',
+      \ diagSignInfoText: 'I',
+      \ diagSignWarningText: 'W',
+      \ hoverInPreview: v:true,
+      \ }
+autocmd User LspSetup call LspOptionsSet(lspOpts)
+let lspServers = [#{
+      \   name: 'clangd',
+      \   filetype: ['c', 'cpp'],
+      \   path: 'clangd',
+      \   args: ['--background-index']
+      \ }, #{
+      \    name: 'gopls',
+      \    filetype: ['go', 'gomod'],
+      \    path: 'gopls',
+      \    args: ['serve'],
+      \    syncInit: v:true
+      \  }, #{
+      \    name: 'tsserver',
+      \    filetype: ['javascript', 'typescript'],
+      \    path: 'typescript-language-server',
+      \    args: ['--stdio'],
+      \  }]
+autocmd User LspSetup call LspAddServer(lspServers)
+augroup lsp_keymaps
+  au!
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gd :LspGotoDefinition<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gD :LspGotoDeclaration<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gi :LspGotoImpl<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gr :LspShowReferences<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gR :LspRename<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> ga :LspCodeAction<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> K :LspHover<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <C-w>d :LspDiag current<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <leader>j :LspDiag next<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <leader>k :LspDiag prev<CR>
+  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gq :LspFormat<CR>
+augroup END
 " basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey guibg=#323232 guifg=grey
+highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=#323232 guifg=darkgrey
+highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guifg=#323232
 highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
-highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
-highlight! link SignColumn LineNr
+highlight ColorColumn ctermbg=darkgrey guibg=#323232

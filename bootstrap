@@ -32,7 +32,6 @@ sudo apt install -y xautolock xbacklight xdotool xclip maim slop mangohud gnupg2
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
-  ln -sfn $(pwd)/.gitignore ~/.gitignore
   ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
@@ -47,6 +46,9 @@ function linking() {
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
   ln -sfn $(pwd)/.Xresources ~/.Xresources
   ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
+
+  ln -sfn $(pwd)/.gitignore ~/.gitignore
+  git config --global core.excludesFile '~/.gitignore'
 }
 echo '[-] linking dotfiles [-]'
 linking
@@ -54,6 +56,7 @@ linking
 echo '[-] installing extended packages [-]'
 sudo apt install -y parallel vim vim-gtk3 tmux fzf ripgrep jq httpie universal-ctags golang npm 
 mkdir -p ~/.local/bin
+npm config set prefix ~/.npm
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

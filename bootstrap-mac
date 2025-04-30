@@ -21,7 +21,6 @@ brew install --cask font-ubuntu-mono
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
-  ln -sfn $(pwd)/.gitignore ~/.gitignore
   ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
@@ -29,12 +28,16 @@ function linking() {
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
+
+  ln -sfn $(pwd)/.gitignore ~/.gitignore
+  git config --global core.excludesFile '~/.gitignore'
 }
 echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fzf ripgrep jq httpie universal-ctags
+brew install parallel tmux fzf ripgrep jq httpie universal-ctags golang npm
+npm config set prefix ~/.npm
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

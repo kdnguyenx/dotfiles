@@ -30,8 +30,5 @@ NL=$'\n'
 PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F{red})%(!.#.$)%f%b '
 # activate autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# aliases
-alias vgit='vim -c ":Git"'
-alias vwiki='vim -c ":VimwikiIndex"'
 # source .profile
 source $HOME/.profile
