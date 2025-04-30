@@ -28,6 +28,7 @@ bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
 
 # Display recovery
 bindsym $mod+Shift+d exec --no-startup-id "xrandr --auto && xrandr --output DisplayPort-2 --auto"
+exec --no-startup-id xset s off -dpms s noblank
 
 # Start a terminal
 bindsym $mod+Return exec $term
