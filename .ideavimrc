@@ -2,9 +2,17 @@
 "   the same commands as the original .vimrc configuration.
 " you can find a list of commands here: https://jb.gg/h38q75
 " find more examples here: https://jb.gg/share-ideavimrc
-source ~/.vimrc
 set colorcolumn=120
 set breakindent
+set history=10000
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set matchpairs+=<:>
+set sidescrolloff=10
+set list listchars=tab:›\ ,nbsp:␣,trail:·
+set showbreak=¬
 " ide specific options
 set ideastatusicon=gray
 set ideajoin
@@ -12,7 +20,6 @@ set ideamarks
 set ideawrite=file
 set visualdelay=50
 " enable ideavim plugins https://jb.gg/ideavim-plugins
-"   plugins are specified via vim-plug in .vimrc
 " map ide actions to ideavim -- https://jb.gg/abva4t
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)
@@ -23,7 +30,7 @@ vmap <leader>g <action>(FindInPath)
 nmap <leader>/ <action>(SearchEverywhere)
 nmap gq <action>(ReformatCode)
 vmap gq <action>(ReformatCode)
-nmap <C-]> <action>(GotoDeclaration)
+nmap gd <action>(GotoDeclaration)
 nmap gi <action>(GotoImplementation)
 nmap gr <action>(FindUsages)
 nmap ga <action>(GotoAction)
@@ -35,3 +42,6 @@ nmap - <action>(SelectInProjectView)
 nmap <leader>j <action>(GotoNextError)
 nmap <leader>k <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
+" set mark before #/*
+nnoremap <silent> # mM#
+nnoremap <silent> * mM*
