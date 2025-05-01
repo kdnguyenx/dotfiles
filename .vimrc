@@ -55,7 +55,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'machakann/vim-highlightedyank'
 Plug 'yegappan/lsp'
 call plug#end()
 # basic theme
@@ -175,8 +174,6 @@ augroup java_opts
   au FileType java setl path+=**/src/main/java/**
   au FileType java setl path+=**/src/main/test/**
 augroup END
-# highlighted yank
-g:highlightedyank_highlight_duration = 50
 # fzf
 g:fzf_vim = {}
 g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
