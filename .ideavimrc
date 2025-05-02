@@ -22,6 +22,7 @@ set visualdelay=50
 " enable ideavim plugins https://jb.gg/ideavim-plugins
 set commentary
 set surround
+set highlightedyank
 " map ide actions to ideavim -- https://jb.gg/abva4t
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)

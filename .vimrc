@@ -52,14 +52,16 @@ call plug#begin()
 # make sure you use single quotes
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'yegappan/lsp'
+Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 call plug#end()
 # basic theme
 set background=dark laststatus=2
-set notermguicolors
+set termguicolors
+silent! colorscheme rosepine_moon
 # searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 # run ctags
@@ -180,114 +182,11 @@ g:fzf_layout = { 'down': '41%' }
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>ma :Marks<CR>
-highlight fzf1 ctermbg=NONE ctermfg=darkgrey
-highlight fzf2 ctermbg=NONE ctermfg=darkgrey
-highlight fzf3 ctermbg=NONE ctermfg=darkgrey
-# lsp
-var lsp_opts = {
-  autoHighlightDiags: v:true,
-  showInlayHints: v:true,
-  diagSignErrorText: 'E',
-  diagSignHintText: 'H',
-  diagSignInfoText: 'I',
-  diagSignWarningText: 'W',
-  hoverInPreview: v:true,
-}
-autocmd User LspSetup call LspOptionsSet(lsp_opts)
-var lsp_servers = [
-  {
-    name: 'clangd',
-    filetype: ['c', 'cpp'],
-    path: 'clangd',
-    args: ['--background-index']
-  },
-  {
-    name: 'gopls',
-    filetype: ['go', 'gomod'],
-    path: 'gopls',
-    args: ['serve'],
-    syncInit: v:true
-  },
-  {
-    name: 'jdtls',
-    filetype: 'java',
-    path: $JDK21 .. '/bin/java',
-    args: [
-      '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-      '-Dosgi.bundles.defaultStartLevel=4',
-      '-Declipse.product=org.eclipse.jdt.ls.core.product',
-      '-Dlog.protocol=true',
-      '-Dlog.level=ALL',
-      '-Xmx2g',
-      '--add-modules=ALL-SYSTEM',
-      '--add-opens',
-      'java.base/java.util=ALL-UNNAMED',
-      '--add-opens',
-      'java.base/java.lang=ALL-UNNAMED',
-      '-jar',
-      glob($XDG_DATA_HOME .. '/jdtls/plugins/org.eclipse.equinox.launcher_*.jar'),
-      '-configuration',
-      $XDG_DATA_HOME .. '/jdtls/config_mac_arm',
-      '-data',
-      $XDG_CACHE_HOME .. '/jdtls/workspace/' .. fnamemodify(getcwd(), ':p:h:t')
-    ],
-    settings: {
-      java: {
-          references: { includeDecompiledSources: v:true },
-          eclipse: { downloadSources: v:true },
-          maven: { downloadSources: v:true },
-          signatureHelp: { enabled: v:true },
-          contentProvider: { preferred: 'fernflower' },
-          completion: {
-            importOrder: [ 'java', 'javax', 'com', 'org' ]
-          },
-          sources: {
-              organizeImports: {
-                  starThreshold: 9999,
-                  staticStarThreshold: 9999,
-              },
-          },
-          codeGeneration: {
-              toString: { template: '${object.className}{${member.name()}=${member.value}, ${otherMembers}}' },
-              hashCodeEquals: {
-                  useJava7Objects: v:false,
-                  useInstanceOf: v:true,
-              },
-              useBlocks: v:true,
-              addFinalForNewDeclaration: 'fields',
-          },
-          configuration: {
-              runtimes: [
-                { name: 'JavaSE-11', path: $JDK11, default: v:true },
-                { name: 'JavaSE-17', path: $JDK17 },
-                { name: 'JavaSE-21', path: $JDK21 }
-              ]
-          }
-      }
-    }
-  },
-  {
-    name: 'tsserver',
-    filetype: ['javascript', 'typescript'],
-    path: 'typescript-language-server',
-    args: ['--stdio'],
-  }
-]
-autocmd User LspSetup call LspAddServer(lsp_servers)
-augroup lsp_keymaps
-  au!
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gd :LspGotoDefinition<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gD :LspGotoDeclaration<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gi :LspGotoImpl<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gr :LspShowReferences<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gR :LspRename<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> ga :LspCodeAction<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> K :LspHover<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <C-w>d :LspDiag current<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <leader>j :LspDiag next<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> <leader>k :LspDiag prev<CR>
-  au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gq :LspFormat<CR>
-augroup END
+highlight fzf1 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+highlight fzf2 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+highlight fzf3 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+# highlighted yank
+g:highlightedyank_highlight_duration = 100
 # basic highlights
 highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
 highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
