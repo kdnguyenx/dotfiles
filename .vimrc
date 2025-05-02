@@ -211,6 +211,64 @@ var lsp_servers = [
     syncInit: v:true
   },
   {
+    name: 'jdtls',
+    filetype: 'java',
+    path: $JDK21 .. '/bin/java',
+    args: [
+      '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+      '-Dosgi.bundles.defaultStartLevel=4',
+      '-Declipse.product=org.eclipse.jdt.ls.core.product',
+      '-Dlog.protocol=true',
+      '-Dlog.level=ALL',
+      '-Xmx2g',
+      '--add-modules=ALL-SYSTEM',
+      '--add-opens',
+      'java.base/java.util=ALL-UNNAMED',
+      '--add-opens',
+      'java.base/java.lang=ALL-UNNAMED',
+      '-jar',
+      glob($XDG_DATA_HOME .. '/jdtls/plugins/org.eclipse.equinox.launcher_*.jar'),
+      '-configuration',
+      $XDG_DATA_HOME .. '/jdtls/config_mac_arm',
+      '-data',
+      $XDG_CACHE_HOME .. '/jdtls/workspace/' .. fnamemodify(getcwd(), ':p:h:t')
+    ],
+    settings: {
+      java: {
+          references: { includeDecompiledSources: v:true },
+          eclipse: { downloadSources: v:true },
+          maven: { downloadSources: v:true },
+          signatureHelp: { enabled: v:true },
+          contentProvider: { preferred: 'fernflower' },
+          completion: {
+            importOrder: [ 'java', 'javax', 'com', 'org' ]
+          },
+          sources: {
+              organizeImports: {
+                  starThreshold: 9999,
+                  staticStarThreshold: 9999,
+              },
+          },
+          codeGeneration: {
+              toString: { template: '${object.className}{${member.name()}=${member.value}, ${otherMembers}}' },
+              hashCodeEquals: {
+                  useJava7Objects: v:false,
+                  useInstanceOf: v:true,
+              },
+              useBlocks: v:true,
+              addFinalForNewDeclaration: 'fields',
+          },
+          configuration: {
+              runtimes: [
+                { name: 'JavaSE-11', path: $JDK11, default: v:true },
+                { name: 'JavaSE-17', path: $JDK17 },
+                { name: 'JavaSE-21', path: $JDK21 }
+              ]
+          }
+      }
+    }
+  },
+  {
     name: 'tsserver',
     filetype: ['javascript', 'typescript'],
     path: 'typescript-language-server',
