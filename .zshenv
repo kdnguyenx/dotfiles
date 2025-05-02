@@ -22,11 +22,8 @@ HISTSIZE=10000
 # use 256 color term
 export TERM=screen-256color
 export CLICOLOR=1
-export TERMINAL=alacritty
-# golang
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$HOME/.npm/bin
+export COLORTERM=truecolor
+export LSCOLORS=GxFxCxDxBxegedabagaced
 # fzf
 export FZF_DEFAULT_OPTS='
 --color=fg:#908caa,bg:-1,hl:#ebbcba
@@ -34,7 +31,7 @@ export FZF_DEFAULT_OPTS='
 --color=border:#403d52,header:#31748f,gutter:-1
 --color=spinner:#f6c177,info:#9ccfd8
 --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa'
-# jdk
-export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
-export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn
-export JDK21=$HOME/.sdkman/candidates/java/21.0.4-amzn
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.npm/bin
