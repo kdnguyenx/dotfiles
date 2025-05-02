@@ -55,12 +55,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 Plug 'yegappan/lsp'
 call plug#end()
 # basic theme
 set background=dark laststatus=2
 set termguicolors
-colorscheme retrobox
+colorscheme rosepine_moon
 # searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 # run ctags
@@ -181,9 +182,9 @@ g:fzf_layout = { 'down': '41%' }
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>ma :Marks<CR>
-highlight fzf1 ctermbg=NONE ctermfg=grey guibg=#323232
-highlight fzf2 ctermbg=NONE ctermfg=grey guibg=#323232
-highlight fzf3 ctermbg=NONE ctermfg=grey guibg=#323232
+highlight fzf1 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+highlight fzf2 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+highlight fzf3 ctermbg=NONE ctermfg=darkgrey guibg=#323232
 # lsp
 var lsp_opts = {
   autoHighlightDiags: v:true,
@@ -201,14 +202,14 @@ var lsp_servers = [
     filetype: ['c', 'cpp'],
     path: 'clangd',
     args: ['--background-index']
-  }, 
+  },
   {
     name: 'gopls',
     filetype: ['go', 'gomod'],
     path: 'gopls',
     args: ['serve'],
     syncInit: v:true
-  }, 
+  },
   {
     name: 'tsserver',
     filetype: ['javascript', 'typescript'],
@@ -232,11 +233,11 @@ augroup lsp_keymaps
   au FileType c,cpp,java,go,javascript,typescript nnoremap <buffer> gq :LspFormat<CR>
 augroup END
 # basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey guibg=#323232 guifg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey guibg=#323232 guifg=darkgrey
-highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey guifg=#323232
+highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
+highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight VertSplit cterm=NONE ctermbg=NONE ctermfg=darkgrey
+highlight SignColumn ctermbg=NONE guibg=NONE
 highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
 highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
-highlight ColorColumn ctermbg=darkgrey guibg=#323232
 # compile
 defcompile
