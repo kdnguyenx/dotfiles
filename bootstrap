@@ -101,6 +101,16 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install PREFIX=/usr
 fi
 
+target_dir=~/.local/share/fonts
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] installing favourite font [-]'
+  wget 'https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip'
+  mkdir -p $target_dir
+  unzip JetBrainsMono-2.304.zip -d $target_dir
+  rm -f JetBrainsMono-2.304.zip
+  fc-cache -f -v
+fi
+
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dpkg --add-architecture i386
