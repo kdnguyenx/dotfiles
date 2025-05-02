@@ -55,13 +55,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 Plug 'yegappan/lsp'
 call plug#end()
 # basic theme
 set background=dark laststatus=2
-set termguicolors
-colorscheme rosepine_moon
+set notermguicolors
 # searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 # run ctags
@@ -182,9 +180,9 @@ g:fzf_layout = { 'down': '41%' }
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>F :GFiles<CR>
 nnoremap <leader>ma :Marks<CR>
-highlight fzf1 ctermbg=NONE ctermfg=darkgrey guibg=#323232
-highlight fzf2 ctermbg=NONE ctermfg=darkgrey guibg=#323232
-highlight fzf3 ctermbg=NONE ctermfg=darkgrey guibg=#323232
+highlight fzf1 ctermbg=NONE ctermfg=darkgrey
+highlight fzf2 ctermbg=NONE ctermfg=darkgrey
+highlight fzf3 ctermbg=NONE ctermfg=darkgrey
 # lsp
 var lsp_opts = {
   autoHighlightDiags: v:true,
