@@ -9,15 +9,15 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "Ubuntu Sans Mono"
+normal.family = "Ubuntu Mono"
 normal.style = "Medium"
-bold.family = "Ubuntu Sans Mono"
+bold.family = "Ubuntu Mono"
 bold.style = "Bold"
-italic.family = "Ubuntu Sans Mono"
+italic.family = "Ubuntu Mono"
 italic.style = "MediumItalic"
-bold_italic.family = "Ubuntu Sans Mono"
+bold_italic.family = "Ubuntu Mono"
 bold_italic.style = "BoldItalic"
-size = 13
+size = 13.5
 
 [selection]
 save_to_clipboard = true
