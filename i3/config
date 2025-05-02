@@ -17,22 +17,17 @@ set $term alacritty
 # is used in the bar {} block below.
 font pango:Ubuntu 10
 
-# Background
-exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
-
 # Window compositor
 exec --no-startup-id picom --backend glx --vsync --daemon
-
-# Toggle redshift
-bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
+exec_always --no-startup-id xrdb -merge ~/.Xresources
+exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
 
 # Display recovery
 bindsym $mod+Shift+d exec --no-startup-id "xrandr --auto && xrandr --output DisplayPort-2 --auto"
-exec --no-startup-id xset s off -dpms s noblank
+bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
 
 # Start a terminal
 bindsym $mod+Return exec $term
-
 # Kill focused window
 bindsym $mod+q kill
 
@@ -56,10 +51,8 @@ floating_modifier $mod
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
-
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -101,7 +94,6 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
-
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
@@ -116,11 +108,9 @@ assign [class="^steam"] number 5
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20
-
 # Screenshots
 bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --select > ~/Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Screenshots/screenshot_$NOW.png
 
@@ -169,6 +159,3 @@ bindsym $mod+r mode "resize"
 bar {
     status_command i3status
 }
-
-# Merge Xresources
-exec_always --no-startup-id xrdb -merge ~/.Xresources
