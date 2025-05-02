@@ -18,12 +18,12 @@ set $term alacritty
 font pango:Ubuntu 10
 
 # Window compositor
-exec --no-startup-id picom --backend glx --vsync --daemon
-exec_always --no-startup-id xrdb -merge ~/.Xresources
+exec --no-startup-id picom --backend glx --daemon
+exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
 
 # Display recovery
-bindsym $mod+Shift+d exec --no-startup-id "xrandr --auto && xrandr --output DisplayPort-2 --auto"
+bindsym $mod+Shift+d exec --no-startup-id "xrandr --auto"
 bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/redshift.sh
 
 # Start a terminal
@@ -41,6 +41,10 @@ bindsym $mod+d exec dmenu_run
 # Lock screen
 exec --no-startup-id "xautolock -detectsleep -time 15 -locker 'i3lock --nofork -c 000000' &"
 bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
+
+# Screensaver
+exec --no-startup-id xset s off
+exec --no-startup-id xset dpms 0 0 1200
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
