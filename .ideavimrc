@@ -24,6 +24,7 @@ set commentary
 set surround
 set highlightedyank
 " map ide actions to ideavim -- https://jb.gg/abva4t
+let g:mapleader = ' '
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)
 nmap <leader>e <action>(ShowNavBar)
