@@ -15,7 +15,7 @@ sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing window manager [-]'
 sudo dnf install -y i3 feh picom alacritty network-manager-applet pavucontrol redshift
-sudo dnf install -y xautolock xbacklight xdotool xclip maim slop mangohud gnupg2
+sudo dnf install -y xautolock xbacklight xdotool xclip maim slop gnupg2
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -33,7 +33,6 @@ function linking() {
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
   ln -sfn $(pwd)/.Xresources ~/.Xresources
-  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
@@ -70,10 +69,11 @@ if [ ! -d "$target_dir" ] ; then
   wget https://github.com/canonical/Ubuntu-Sans-fonts/releases/download/v1.006/UbuntuSans-fonts-1.006.zip
   wget https://github.com/canonical/Ubuntu-Sans-Mono-fonts/releases/download/v1.006/UbuntuSansMono-fonts-1.006.zip
   mkdir -p $target_dir
-  unzip UbuntuSans-fonts-1.006.zip -d $target_dir
-  unzip UbuntuSansMono-fonts-1.006.zip -d $target_dir
-  rm -f UbuntuSans-fonts-1.006.zip
-  rm -f UbuntuSansMono-fonts-1.006.zip
+  unzip UbuntuSans-fonts-1.006.zip -d UbuntuSans
+  unzip UbuntuSansMono-fonts-1.006.zip -d UbuntuSans
+  mv UbuntuSans/UbuntuSans-fonts-1.006/ttf/* $target_dir
+  mv UbuntuSans/UbuntuSansMono-fonts-1.006/ttf/* $target_dir
+  rm -rf UbuntuSans*
   fc-cache -f -v
 fi
 
@@ -86,14 +86,28 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install PREFIX=/usr
 fi
 
+target_dir=~/opensource/ctags
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building ctags [-]'
+  sudo dnf install -y autoconf automake
+  git clone https://github.com/universal-ctags/ctags.git $target_dir
+  cd $target_dir
+  ./autogen.sh
+  ./configure
+  make
+  sudo make install
+fi
+
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
+  sudo dnf install -y rocm-smi mangohud
+  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
+  echo 'remember to add `mangohud %command%` to steam launch options'
 fi
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
   echo '[-] change default shell to zsh [-]'
   chsh -s $(which zsh)
+  echo '[-] device ready, restart your computer. [-]'
 fi
-
-echo '[-] device ready, restart your computer. [-]'

@@ -61,4 +61,4 @@ mkdir -p ~/opensource
 echo '[-] installing alacritty [-]'
 brew install alacritty
 
-echo '[-] Setup done. Run `source ~/.zshrc` to refresh shell config [-]'
+echo '[-] device ready, restart your computer. [-]'

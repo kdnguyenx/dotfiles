@@ -10,11 +10,11 @@ option_as_alt = "Both"
 
 [font]
 normal.family = "Ubuntu Sans Mono"
-normal.style = "Regular"
+normal.style = "Medium"
 bold.family = "Ubuntu Sans Mono"
 bold.style = "Bold"
 italic.family = "Ubuntu Sans Mono"
-italic.style = "Italic"
+italic.style = "MediumItalic"
 bold_italic.family = "Ubuntu Sans Mono"
 bold_italic.style = "BoldItalic"
 size = 13
