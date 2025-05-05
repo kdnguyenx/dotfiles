@@ -1,5 +1,5 @@
 [window]
-opacity = 0.91
+opacity = 0.85
 padding.x = 5
 padding.y = 5
 decorations = "Full"
@@ -9,15 +9,15 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "Ubuntu Sans Mono"
-normal.style = "Medium"
-bold.family = "Ubuntu Sans Mono"
+normal.family = "FantasqueSansM Nerd Font Mono"
+normal.style = "Regular"
+bold.family = "FantasqueSansM Nerd Font Mono"
 bold.style = "Bold"
-italic.family = "Ubuntu Sans Mono"
-italic.style = "MediumItalic"
-bold_italic.family = "Ubuntu Sans Mono"
+italic.family = "FantasqueSansM Nerd Font Mono"
+italic.style = "Italic"
+bold_italic.family = "FantasqueSansM Nerd Font Mono"
 bold_italic.style = "BoldItalic"
-size = 13
+size = 14
 
 [selection]
 save_to_clipboard = true
