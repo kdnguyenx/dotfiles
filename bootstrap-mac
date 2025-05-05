@@ -15,8 +15,8 @@ fi
 brew update
 brew install curl wget git coreutils watch ncdu cmake ninja
 
-echo '[-] installing favourite font [-]'
-brew install --cask font-jetbrains-mono
+echo '[-] installing favourite fonts [-]'
+brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc

@@ -9,15 +9,15 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "FantasqueSansM Nerd Font Mono"
+normal.family = "Ubuntu Sans Mono"
 normal.style = "Regular"
-bold.family = "FantasqueSansM Nerd Font Mono"
+bold.family = "Ubuntu Sans Mono"
 bold.style = "Bold"
-italic.family = "FantasqueSansM Nerd Font Mono"
+italic.family = "Ubuntu Sans Mono"
 italic.style = "Italic"
-bold_italic.family = "FantasqueSansM Nerd Font Mono"
+bold_italic.family = "Ubuntu Sans Mono"
 bold_italic.style = "BoldItalic"
-size = 14
+size = 13
 
 [selection]
 save_to_clipboard = true

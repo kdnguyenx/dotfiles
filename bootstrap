@@ -66,11 +66,14 @@ mkdir -p ~/opensource
 
 target_dir=~/.local/share/fonts
 if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing favourite font [-]'
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FantasqueSansMono.zip
+  echo '[-] installing favourite fonts [-]'
+  wget https://github.com/canonical/Ubuntu-Sans-fonts/releases/download/v1.006/UbuntuSans-fonts-1.006.zip
+  wget https://github.com/canonical/Ubuntu-Sans-Mono-fonts/releases/download/v1.006/UbuntuSansMono-fonts-1.006.zip
   mkdir -p $target_dir
-  unzip FantasqueSansMono.zip -d $target_dir
-  rm -f FantasqueSansMono.zip
+  unzip UbuntuSans-fonts-1.006.zip -d $target_dir
+  unzip UbuntuSansMono-fonts-1.006.zip -d $target_dir
+  rm -f UbuntuSans-fonts-1.006.zip
+  rm -f UbuntuSansMono-fonts-1.006.zip
   fc-cache -f -v
 fi
 
