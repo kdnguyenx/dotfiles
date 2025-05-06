@@ -33,3 +33,4 @@ export FZF_DEFAULT_OPTS='
 # golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.npm/bin
