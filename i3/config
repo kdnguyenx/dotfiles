@@ -45,7 +45,7 @@ bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
 # Screensaver
 exec --no-startup-id xset s off
 exec --no-startup-id xset dpms 0 0 1200
-exec --no-startup-id ibus-daemon -d -r -x
+# exec --no-startup-id ibus-daemon -d -r -x
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -103,7 +103,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Always open some programs on specified workspace
-assign [class="firefox"] number 1
+assign [class="^firefox"] number 1
 assign [class="^Alacritty"] number 2
 assign [class="^discord"] number 3
 assign [class="^thunderbird"] number 4
