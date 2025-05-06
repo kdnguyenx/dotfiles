@@ -17,7 +17,9 @@ syntax enable
 set nobackup noswapfile nowrap
 # detect filetype
 filetype on
+filetype plugin on
 filetype indent on
+filetype plugin indent on
 # set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
 # auto read file change
@@ -91,6 +93,9 @@ nnoremap <silent> <Esc> :nohlsearch<CR>
 # navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz
 nnoremap <C-k> :cprev<CR>zz
+# navigate through loclist
+nnoremap <C-n> :lnext<CR>zz
+nnoremap <C-p> :lprev<CR>zz
 # navigate through buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
@@ -152,29 +157,29 @@ autocmd FileType go setl sw=4 ts=4 sts=4 noet fp=gofmt
 autocmd FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 autocmd FileType json setl sw=4 ts=4 sts=4 et fp=jq
 # c, c++
-augroup clang_opts
-  au!
-  au FileType c,cpp setl sw=4 ts=4 sts=4 et
+def SetClangOpts(): void
+  setl sw=4 ts=4 sts=4 et cindent
   # c/c++ makeprg, work with :make command
-  au FileType c,cpp setl makeprg=cd\ build\ &&\ cmake\ -DCMAKE_BUILD_TYPE=debug\ -DCMAKE_EXPORT_COMPILE_COMMANDS=1\ -G\ Ninja\ ..\ &&\ ninja
+  setl makeprg=cd\ build\ &&\ cmake\ -DCMAKE_BUILD_TYPE=debug\ -DCMAKE_EXPORT_COMPILE_COMMANDS=1\ -G\ Ninja\ ..\ &&\ ninja
   if has('mac') && executable('xcrun')
     var sdk_path = substitute(system('xcrun --show-sdk-path'), '\n', '', '')
-    au FileType c,cpp execute 'setl path+=' . sdk_path . '/usr/include'
-    au FileType c,cpp execute 'setl path+=' . sdk_path . '/usr/include/c++/v1'
+    execute 'setl path+=' .. sdk_path .. '/usr/include'
+    execute 'setl path+=' .. sdk_path .. '/usr/include/c++/v1'
   endif
-augroup END
+enddef
+autocmd FileType c,cpp SetClangOpts()
 # java
-augroup java_opts
-  au!
-  au FileType java setl sw=4 ts=4 sts=4 et
-  au FileType java setl makeprg=mvn\ clean\ install\ -T\ 5
-  au FileType java setl includeexpr=substitute(v:fname,'\\.','/','g')
-  au FileType java setl errorformat=[ERROR]\ %f:[%l\\,%v]\ %m
-  au FileType java setl path+=src/main/java/**
-  au FileType java setl path+=src/main/test/**
-  au FileType java setl path+=**/src/main/java/**
-  au FileType java setl path+=**/src/main/test/**
-augroup END
+def SetJavaOpts(): void
+  setl sw=4 ts=4 sts=4 et
+  setl makeprg=mvn\ clean\ install\ -T\ 5
+  setl includeexpr=substitute(v:fname,'\\.','/','g')
+  setl errorformat=[ERROR]\ %f:[%l\\,%v]\ %m
+  setl path+=src/main/java/**
+  setl path+=src/main/test/**
+  setl path+=**/src/main/java/**
+  setl path+=**/src/main/test/**
+enddef
+autocmd FileType java SetJavaOpts()
 # fzf
 g:fzf_vim = {}
 g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
