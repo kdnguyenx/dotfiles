@@ -43,9 +43,30 @@ nmap gt <action>(GotoTest)
 nmap gx <action>(RunClass)
 nmap gX <action>(RunMenu)
 nmap - <action>(SelectInProjectView)
-nmap <leader>j <action>(GotoNextError)
-nmap <leader>k <action>(GotoPreviousError)
+nmap <C-j> <action>(GotoNextError)
+nmap <C-k> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
+" dismiss highlight
+nnoremap <silent> <Esc> :nohlsearch<CR>
+nnoremap <leader>ma :marks<CR>
+" search current marked text
+vnoremap // "0y/\V<C-r>0<CR>
+vnoremap <leader>s "0y/\V\<<C-r>0\><CR>
+" copy marked text/paste to/from global register
+nnoremap <leader>Y "+Y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+" find and replace
+nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <leader>r "0y:%s/<C-r>0//gI<Left><Left><Left>
 " set mark before #/*
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
+" navigate through buffers
+nnoremap <C-l> :bnext<CR>
+nnoremap <C-h> :bprev<CR>
+" move selection
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv

@@ -112,7 +112,7 @@ if has('mac')
 endif
 # search current marked text
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
-vnoremap <leader>/ "0y/\V<C-r>='<'.escape(@0,'/\').'>'<CR><CR>
+vnoremap <leader>s "0y/\V<C-r>='\<'.escape(@0,'/\').'\>'<CR><CR>
 # fuzzy find
 nnoremap <leader>f :find **/*
 nnoremap <leader>F :find **/*<C-r><C-w><CR>
