@@ -15,9 +15,6 @@ fi
 brew update
 brew install curl wget git coreutils watch ncdu cmake ninja
 
-echo '[-] installing favourite fonts [-]'
-brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
-
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
@@ -35,8 +32,13 @@ function linking() {
 echo '[-] linking dotfiles [-]'
 linking
 
+echo '[-] creating essential directories [-]'
+mkdir -p ~/personal
+mkdir -p ~/repos
+mkdir -p ~/opensource
+
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fzf ripgrep jq httpie universal-ctags golang npm
+brew install parallel tmux fzf ripgrep jq universal-ctags golang
 npm config set prefix ~/.npm
 
 echo '[-] downloading git-prompt.sh script [-]'
@@ -53,10 +55,8 @@ if [ ! -d "$target_dir" ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
 fi
 
-echo '[-] creating essential directories [-]'
-mkdir -p ~/personal
-mkdir -p ~/repos
-mkdir -p ~/opensource
+echo '[-] installing favourite fonts [-]'
+brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
 
 echo '[-] installing alacritty [-]'
 brew install alacritty
