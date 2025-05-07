@@ -9,9 +9,8 @@ autocmd FileType help,qf,diff,fugitive,fugitiveblame,lspgfm nnoremap <silent> <b
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 # set the characters for the invisibles
 set list listchars=tab:›\ ,nbsp:␣,trail:· showbreak=¬
-set sidescrolloff=10 title
 # set default regexp engine to nfa
-set regexpengine=2
+set regexpengine=2 title
 syntax enable
 # disable temporary files.
 set nobackup noswapfile nowrap
@@ -94,9 +93,6 @@ nnoremap <silent> <Esc> :nohlsearch<CR>
 # navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz
 nnoremap <C-k> :cprev<CR>zz
-# navigate through loclist
-nnoremap <C-n> :lnext<CR>zz
-nnoremap <C-p> :lprev<CR>zz
 # navigate through buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
@@ -236,8 +232,8 @@ augroup lsp_keymaps
   au FileType c,cpp,go,javascript,typescript nnoremap <buffer> ga :LspCodeAction<CR>
   au FileType c,cpp,go,javascript,typescript nnoremap <buffer> K :LspHover<CR>
   au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <C-w>d :LspDiag current<CR>
-  au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <leader>j :LspDiag next<CR>
-  au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <leader>k :LspDiag prev<CR>
+  au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <C-n> :LspDiag next<CR>
+  au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <C-p> :LspDiag prev<CR>
   au FileType c,cpp,go,javascript,typescript nnoremap <buffer> <leader>xx :LspDiag show<CR>
   au FileType c,cpp,go,javascript,typescript nnoremap <buffer> gq :LspFormat<CR>
 augroup END

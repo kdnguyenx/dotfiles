@@ -10,7 +10,6 @@ set hlsearch
 set ignorecase
 set smartcase
 set matchpairs+=<:>
-set sidescrolloff=10
 set list listchars=tab:›\ ,nbsp:␣,trail:·
 set showbreak=¬
 " ide specific options
@@ -43,8 +42,8 @@ nmap gt <action>(GotoTest)
 nmap gx <action>(RunClass)
 nmap gX <action>(RunMenu)
 nmap - <action>(SelectInProjectView)
-nmap <C-j> <action>(GotoNextError)
-nmap <C-k> <action>(GotoPreviousError)
+nmap <C-n> <action>(GotoNextError)
+nmap <C-p> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
 " dismiss highlight
 nnoremap <silent> <Esc> :nohlsearch<CR>
