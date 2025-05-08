@@ -1,7 +1,7 @@
 -- lua module loader
 vim.loader.enable()
 -- load essential modules
-require("khoan.options")
-require("khoan.keymaps")
-require("khoan.autocmds")
-require("khoan.plugs")
+require("me.options")
+require("me.keymaps")
+require("me.autocmds")
+require("me.plugs")

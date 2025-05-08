@@ -31,5 +31,7 @@ NL=$'\n'
 PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F{red})%(!.#.$)%f%b '
 # activate autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# neovim as vim locally
+alias vim=nvim
 # source .profile
 source $HOME/.profile

@@ -34,7 +34,6 @@ vim.opt.undofile = true
 -- preview substitutions live, as you type
 vim.opt.inccommand = "split"
 vim.opt.startofline = false
-vim.opt.sidescrolloff = 10
 vim.opt.diffopt:append("vertical")
 -- enable auto completion menu after pressing tab
 vim.opt.wildmenu = true

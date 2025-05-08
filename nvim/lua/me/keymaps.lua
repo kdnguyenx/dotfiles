@@ -22,7 +22,7 @@ vim.keymap.set("n", "<C-l>", vim.cmd.bnext)
 vim.keymap.set("n", "<C-h>", vim.cmd.bprevious)
 -- search current marked text
 vim.keymap.set("v", "//", [["0y/\V<C-r>=escape(@0,'/\')<CR><CR>]])
-vim.keymap.set("v", "<leader>/", [["0y/\V<C-r>='<'.escape(@0,'/\').'>'<CR><CR>]])
+vim.keymap.set("v", "<leader>s", [["0y/\V<C-r>='\<'.escape(@0,'/\').'\>'<CR><CR>]])
 -- yank marked text/paste to/from global register
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("v", "<leader>y", [["+y]])

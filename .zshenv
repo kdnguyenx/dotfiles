@@ -13,8 +13,8 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 # default editor
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 # zsh history
 HISTFILE=$HOME/.zhistory
 SAVEHIST=10000
@@ -33,4 +33,9 @@ export FZF_DEFAULT_OPTS='
 # golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+# jdk
+export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
+export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn
+export JDK21=$HOME/.sdkman/candidates/java/21.0.4-amzn
+# npm
 export PATH=$PATH:$HOME/.npm/bin

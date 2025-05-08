@@ -2,16 +2,9 @@
 "   the same commands as the original .vimrc configuration.
 " you can find a list of commands here: https://jb.gg/h38q75
 " find more examples here: https://jb.gg/share-ideavimrc
+source ~/.vimrc
 set colorcolumn=120
 set breakindent
-set history=10000
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-set matchpairs+=<:>
-set list listchars=tab:›\ ,nbsp:␣,trail:·
-set showbreak=¬
 " ide specific options
 set ideastatusicon=gray
 set ideajoin
@@ -23,7 +16,6 @@ set commentary
 set surround
 set highlightedyank
 " map ide actions to ideavim -- https://jb.gg/abva4t
-let g:mapleader = ' '
 nmap <leader>f <action>(GotoFile)
 nmap <leader>F <action>(GotoClass)
 nmap <leader>e <action>(ShowNavBar)
@@ -33,7 +25,7 @@ vmap <leader>g <action>(FindInPath)
 nmap <leader>/ <action>(SearchEverywhere)
 nmap gq <action>(ReformatCode)
 vmap gq <action>(ReformatCode)
-nmap gd <action>(GotoDeclaration)
+nmap <C-]> <action>(GotoDeclaration)
 nmap gi <action>(GotoImplementation)
 nmap gr <action>(FindUsages)
 nmap ga <action>(GotoAction)
@@ -45,27 +37,7 @@ nmap - <action>(SelectInProjectView)
 nmap <C-n> <action>(GotoNextError)
 nmap <C-p> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
-" dismiss highlight
-nnoremap <silent> <Esc> :nohlsearch<CR>
-nnoremap <leader>ma :marks<CR>
+nnoremap <silent> <Esc> :noh<CR>
 " search current marked text
 vnoremap // "0y/\V<C-r>0<CR>
 vnoremap <leader>s "0y/\V\<<C-r>0\><CR>
-" copy marked text/paste to/from global register
-nnoremap <leader>Y "+Y
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-" find and replace
-nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <leader>r "0y:%s/<C-r>0//gI<Left><Left><Left>
-" set mark before #/*
-nnoremap <silent> # mM#
-nnoremap <silent> * mM*
-" navigate through buffers
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprev<CR>
-" move selection
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
