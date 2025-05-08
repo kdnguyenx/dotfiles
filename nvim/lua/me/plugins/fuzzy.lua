@@ -9,7 +9,7 @@ return {
         vim.g.fzf_vim = { preview_window = { "right,41%,<70(up,41%)" } }
         vim.api.nvim_create_autocmd("filetype", {
             pattern = "fzf",
-            group = vim.api.nvim_create_augroup("khoanfzf", { clear = true }),
+            group = vim.api.nvim_create_augroup("fzfcfg", { clear = true }),
             callback = function()
                 vim.opt_local.laststatus = 0
                 vim.opt_local.showmode = false

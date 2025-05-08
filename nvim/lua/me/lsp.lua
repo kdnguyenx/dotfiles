@@ -27,9 +27,8 @@ function M.make_cfg()
             -- diagnostic signs
             vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
             -- completion
-            -- vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+            vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
         end,
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
         detached = true,
     }
 end

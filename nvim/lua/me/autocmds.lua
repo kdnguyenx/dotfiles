@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- quick exit some filetypes
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "help", "qf", "diff", "checkhealth", "fugitive", "fugitiveblame" },
-    group = vim.api.nvim_create_augroup("quickexitft", { clear = true }),
+    group = vim.api.nvim_create_augroup("qexitft", { clear = true }),
     callback = function()
         vim.opt_local.colorcolumn = ""
         vim.opt_local.cursorline = true
@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- netrw
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "netrw",
-    group = vim.api.nvim_create_augroup("nnetrw", { clear = true }),
+    group = vim.api.nvim_create_augroup("netrwcfg", { clear = true }),
     callback = function()
         vim.opt_local.colorcolumn = ""
         vim.keymap.set("n", "<C-c>", vim.cmd.Rexplore, { buffer = true });

@@ -1,11 +1,11 @@
 -- remap leader
 vim.g.mapleader = " "
 -- clear highlights on search when pressing <esc> in normal mode and exit terminal
-vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
-vim.keymap.set("n", "-", vim.cmd.Explore)
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+vim.keymap.set("n", "-", "<Cmd>Explore<CR>")
 -- move selection
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", "<Cmd>m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", "<Cmd>m '<-2<CR>gv=gv")
 -- use arrow keys for resize
 vim.keymap.set("n", "<Up>", "<Cmd>resize +5<CR>")
 vim.keymap.set("n", "<Down>", "<Cmd>resize -5<CR>")
@@ -18,8 +18,8 @@ vim.keymap.set("c", "<C-e>", "<End>")
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
 -- navigate through buffer
-vim.keymap.set("n", "<C-l>", vim.cmd.bnext)
-vim.keymap.set("n", "<C-h>", vim.cmd.bprevious)
+vim.keymap.set("n", "<C-l>", ":bnext<CR>")
+vim.keymap.set("n", "<C-h>", ":bprev<CR>")
 -- search current marked text
 vim.keymap.set("v", "//", [["0y/\V<C-r>=escape(@0,'/\')<CR><CR>]])
 vim.keymap.set("v", "<leader>s", [["0y/\V<C-r>='\<'.escape(@0,'/\').'\>'<CR><CR>]])
@@ -39,8 +39,8 @@ vim.keymap.set("n", "<leader>mv", [[:!mv %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>f", [[:find **/*]])
 vim.keymap.set("n", "<leader>F", [[:find **/*<C-r><C-w><CR>]])
 vim.keymap.set("n", "<leader>e", [[:e %:h<C-z>]])
-vim.keymap.set("n", "<leader>b", [[:b <C-z>]])
-vim.keymap.set("n", "<leader>ma", vim.cmd.marks)
+vim.keymap.set("n", "<leader>b", [[:b ]])
+vim.keymap.set("n", "<leader>ma", [[:marks<CR>]])
 -- ripgrep
 if vim.fn.executable("rg") > 0 then
     vim.keymap.set("n", "<leader>g", [[:silent grep! ''<Left>]])
