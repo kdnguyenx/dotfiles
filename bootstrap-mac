@@ -25,6 +25,7 @@ function linking() {
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
+  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
@@ -60,5 +61,15 @@ brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
 
 echo '[-] installing alacritty [-]'
 brew install alacritty
+
+target_dir=~/opensource/neovim
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building neovim [-]'
+  git clone https://github.com/neovim/neovim.git $target_dir
+  cd $target_dir
+  git checkout nightly
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+fi
 
 echo '[-] device ready, restart your computer. [-]'
