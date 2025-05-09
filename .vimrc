@@ -67,21 +67,14 @@ nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
-" fuzzy find
-nnoremap <leader>f :find **/*
-nnoremap <leader>F :find **/*<C-r><C-w><CR>
-nnoremap <leader>e :e %:h<C-z>
-nnoremap <leader>b :b <C-z>
+" find files
+nnoremap <leader>ee :e %:h<C-z>
 nnoremap <leader>ma :marks<CR>
-nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
-vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
-nnoremap <leader>G :vimgrep /<C-r><C-w>/f **
-" move selection
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>gg :vimgrep //f **<S-Left><S-Left><Right>
+vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
+nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
 " search current marked text
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
-vnoremap // "0y/\V<C-r>='\<'.escape(@0,'/\').'\>'<CR><CR>
 " copy marked text/paste to/from global register
 nnoremap <leader>Y "+Y
 vnoremap <leader>y "+y
@@ -89,11 +82,12 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 " find and replace
-nnoremap <leader>r :%s/<C-r><C-w>//gI<Left><Left><Left>
-vnoremap <leader>r "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
-" unix command
+nnoremap <leader>rr :%s/<C-r><C-w>//gI<Left><Left><Left>
+vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
+" unix commands
 nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
 nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
+nnoremap <leader>rm :!rm -rf %<C-z>
 " set mark before gd/#/*
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#

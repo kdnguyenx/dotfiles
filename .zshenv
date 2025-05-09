@@ -24,6 +24,7 @@ export TERM=screen-256color
 export CLICOLOR=1
 export COLORTERM=truecolor
 # fzf
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
 --color=fg:#908caa,bg:-1,hl:#ebbcba
 --color=fg+:#e0def4,bg+:-1,hl+:#ebbcba

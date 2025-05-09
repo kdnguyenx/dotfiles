@@ -16,13 +16,13 @@ set commentary
 set surround
 set highlightedyank
 " map ide actions to ideavim -- https://jb.gg/abva4t
-nmap <leader>f <action>(GotoFile)
-nmap <leader>F <action>(GotoClass)
-nmap <leader>e <action>(ShowNavBar)
-nmap <leader>b <action>(Switcher)
-nmap <leader>g <action>(FindInPath)
-vmap <leader>g <action>(FindInPath)
-nmap <leader>/ <action>(SearchEverywhere)
+nmap <leader>ff <action>(GotoFile)
+nmap <leader>fc <action>(GotoClass)
+nmap <leader>ee <action>(ShowNavBar)
+nmap <leader>bb <action>(Switcher)
+nmap <leader>gg <action>(FindInPath)
+vmap <leader>gg <action>(FindInPath)
+nmap <leader>ga <action>(SearchEverywhere)
 nmap gq <action>(ReformatCode)
 vmap gq <action>(ReformatCode)
 nmap <C-]> <action>(GotoDeclaration)
@@ -38,6 +38,4 @@ nmap <C-n> <action>(GotoNextError)
 nmap <C-p> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
 nnoremap <silent> <Esc> :noh<CR>
-" search current marked text
 vnoremap // "0y/\V<C-r>0<CR>
-vnoremap <leader>s "0y/\V\<<C-r>0\><CR>
