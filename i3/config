@@ -114,8 +114,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
 # Screenshots
 bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --select > ~/Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Screenshots/screenshot_$NOW.png
 
@@ -155,8 +155,33 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Colors
+set $base     #232136
+set $surface  #2a273f
+set $overlay  #393552
+set $muted    #6e6a86
+set $subtle   #908caa
+set $text     #e0def4
+set $love     #eb6f92
+set $gold     #f6c177
+set $rose     #ea9a97
+set $pine     #3e8fb0
+set $foam     #9ccfd8
+set $iris     #c4a7e7
+set $grey     #323232
+set $darkgrey #181818
+set $white    #ffffff
+# target                title   bg      text  indicator border
+client.focused          $pine   $pine   $base $pine     $pine
+client.focused_inactive $subtle $subtle $base $subtle   $subtle
+client.urgent           $love   $love   $base $love     $love
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    colors {
+        focused_workspace $foam $pine $white
+        urgent_workspace $rose $love $base
+    }
     status_command i3status
 }
