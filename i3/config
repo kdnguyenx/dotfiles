@@ -39,7 +39,7 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Lock screen
-exec --no-startup-id "xautolock -detectsleep -time 15 -locker 'i3lock --nofork -c 000000' &"
+exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
 bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
 
 # Screensaver
