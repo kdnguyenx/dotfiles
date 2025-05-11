@@ -24,7 +24,6 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
@@ -60,8 +59,8 @@ fi
 echo '[-] installing favourite fonts [-]'
 brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
 
-echo '[-] installing ghostty [-]'
-brew install ghostty
+echo '[-] installing alacritty [-]'
+brew install alacritty
 
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then

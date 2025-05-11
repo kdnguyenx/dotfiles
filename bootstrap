@@ -14,7 +14,7 @@ sudo dnf upgrade -y
 sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing i3 window manager [-]'
-sudo dnf install -y i3 feh picom alacritty network-manager pulseaudio pavucontrol redshift
+sudo dnf install -y i3 feh picom alacritty network-manager-applet pavucontrol redshift
 sudo dnf install -y xautolock xbacklight xdotool xclip maim slop gnupg2
 
 function linking() {
@@ -28,7 +28,6 @@ function linking() {
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
   ln -sfn $(pwd)/i3status $XDG_CONFIG_HOME/i3status
-  ln -sfn $(pwd)/ghostty $XDG_CONFIG_HOME/ghostty
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
@@ -51,7 +50,7 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 
 echo '[-] installing extended packages [-]'
-sudo dnf install -y parallel vim tmux fzf ripgrep jq zig
+sudo dnf install -y parallel vim tmux fzf ripgrep jq zig npm
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -100,17 +99,10 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install PREFIX=/usr
 fi
 
-target_dir=~/opensource/ghostty
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building ghostty [-]'
-  git clone https://github.com/ghostty-org/ghostty $target_dir
-  cd $target_dir
-  zig build -Doptimize=ReleaseFast
-fi
-
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dnf install -y rocm-smi mangohud
+  sudo dnf install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   echo 'remember to add `mangohud %command%` to steam launch options'
 fi
 

@@ -103,11 +103,11 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Always open some programs on specified workspace
-assign [class="^firefox"] number 1
-assign [class="^Alacritty"] number 2
-assign [class="^discord"] number 3
-assign [class="^thunderbird"] number 4
-assign [class="^steam"] number 5
+assign [class="firefox"] number 1
+assign [class="Alacritty"] number 2
+assign [class="discord"] number 3
+assign [class="thunderbird"] number 4
+assign [class="steam"] number 5
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
