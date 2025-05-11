@@ -75,12 +75,6 @@ vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Le
 nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
 " search current marked text
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
-" copy marked text/paste to/from global register
-nnoremap <leader>Y "+Y
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
 " find and replace
 nnoremap <leader>rr :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
