@@ -5,7 +5,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
     },
     config = function()
-        local servers = { "clangd", "gopls", "jdtls", "lua_ls", "pyright", "ts_ls" }
+        local servers = { "zls", "gopls", "clangd", "jdtls", "lua_ls", "pyright", "ts_ls" }
         require("mason").setup()
         require("mason-lspconfig").setup({ ensure_installed = servers })
         for _, server in ipairs(servers) do

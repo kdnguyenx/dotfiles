@@ -39,8 +39,7 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fzf ripgrep jq universal-ctags golang
-npm config set prefix ~/.npm
+brew install parallel tmux fzf ripgrep jq universal-ctags golang zig
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
