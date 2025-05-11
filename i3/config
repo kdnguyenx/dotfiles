@@ -18,7 +18,7 @@ set $term alacritty
 font pango:Ubuntu Sans 10
 
 # Window compositor
-exec --no-startup-id picom --backend glx --daemon
+exec --no-startup-id picom --backend glx --daemon --vsync
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
 
