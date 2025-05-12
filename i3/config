@@ -31,20 +31,16 @@ bindsym $mod+Return exec $term
 # Kill focused window
 bindsym $mod+q kill
 
+# Lock screen
+exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
+bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-# Use xfce4-appearance-settings to change theme
-exec --no-startup-id xfsettingsd
-exec --no-startup-id xfce4-clipman
-
-# Lock screen
-exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
-bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
 
 # Screensaver
 exec --no-startup-id xset s off
