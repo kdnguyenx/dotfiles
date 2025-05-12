@@ -38,6 +38,10 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# Use xfce4-appearance-settings to change theme
+exec --no-startup-id xfsettingsd
+exec --no-startup-id xfce4-clipman
+
 # Lock screen
 exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
 bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
@@ -45,7 +49,7 @@ bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
 # Screensaver
 exec --no-startup-id xset s off
 exec --no-startup-id xset dpms 0 0 1200
-exec --no-startup-id ibus-daemon -d -r -x
+# exec --no-startup-id ibus-daemon -d -r -x
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -104,9 +108,9 @@ bindsym $mod+minus scratchpad show
 
 # Always open some programs on specified workspace
 assign [class="firefox"] number 1
+assign [class="thunderbird"] number 1
 assign [class="Alacritty"] number 2
-assign [class="discord"] number 3
-assign [class="thunderbird"] number 4
+assign [class="discord"] number 4
 assign [class="steam"] number 5
 
 # Volume controls
@@ -122,8 +126,8 @@ bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-# bindsym $mod+b splith
-# bindsym $mod+v splitv
+bindsym $mod+b splith
+bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
 bindsym $mod+s layout stacking
