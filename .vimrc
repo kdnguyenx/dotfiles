@@ -7,7 +7,7 @@ autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
-set list listchars=tab:›\ ,nbsp:␣,trail:· showbreak=¬
+set list listchars=tab:›\ ,nbsp:␣,eol:¬,trail:·
 set signcolumn=no title
 " set default regexp engine to nfa
 set regexpengine=2

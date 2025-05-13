@@ -1,6 +1,6 @@
 local M = {}
-
-function M.make_cfg()
+-- make default config
+function M.make_config()
     return {
         on_attach = function(client, bufnr)
             -- enable inlay hint
@@ -33,10 +33,9 @@ function M.make_cfg()
         detached = true,
     }
 end
-
+-- language server specific config
 function M.lsp_config()
-    local config = M.make_cfg()
-
+    local config = M.make_config()
     -- clangd
     config.cmd = { "clangd" }
     config.filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
@@ -44,13 +43,12 @@ function M.lsp_config()
         ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json",
         "compile_flags.txt", "configure.ac", ".git"
     }
-
+    vim.lsp.config("clangd", config)
     -- rust_analyzer
     config.cmd = { "rust-analyzer" }
     config.filetypes = { "rust" }
     config.root_markers = { "Cargo.toml", ".git" }
     vim.lsp.config("rust_analyzer", config)
-
     -- luals
     config.cmd = { "lua-language-server" }
     config.filetypes = { "lua" }
@@ -59,7 +57,6 @@ function M.lsp_config()
         "stylua.toml", "selene.toml", "selene.yml", ".git"
     }
     vim.lsp.config("luals", config)
-
     -- pyright
     config.cmd = { "pyright-langserver", "--stdio" }
     config.filetypes = { "python" }
@@ -77,8 +74,7 @@ function M.lsp_config()
         },
     }
     vim.lsp.config("pyright", config)
-
-    -- ts and js
+    -- tsserver
     config.cmd = { "typescript-language-server", "--stdio" }
     config.filetypes = {
         "javascript", "javascriptreact", "javascript.jsx",
@@ -88,7 +84,6 @@ function M.lsp_config()
     config.init_options = { hostInfo = "neovim" }
     config.settings = {}
     vim.lsp.config("tsserver", config)
-
     -- jdtls
     local jdtls = os.getenv("XDG_DATA_HOME") .. "/jdtls"
     local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -107,6 +102,7 @@ function M.lsp_config()
         "-configuration", jdtls .. "/config_mac_arm",
         "-data", workspace_dir,
     }
+    config.filetypes = { "java" }
     config.settings = {
         java = {
             references = {
@@ -121,12 +117,7 @@ function M.lsp_config()
             signatureHelp = { enabled = true },
             contentProvider = { preferred = "fernflower" },
             completion = {
-                importOrder = {
-                    "java",
-                    "javax",
-                    "com",
-                    "org",
-                },
+                importOrder = { "java", "javax", "com", "org" },
             },
             sources = {
                 organizeImports = {
@@ -147,29 +138,20 @@ function M.lsp_config()
             },
             configuration = {
                 runtimes = {
-                    {
-                        name = "JavaSE-11",
-                        path = os.getenv("JDK11"),
-                        default = true,
-                    },
-                    {
-                        name = "JavaSE-17",
-                        path = os.getenv("JDK17"),
-                    },
-                    {
-                        name = "JavaSE-21",
-                        path = os.getenv("JDK21"),
-                    },
+                    { name = "JavaSE-11", path = os.getenv("JDK11"), default = true },
+                    { name = "JavaSE-17", path = os.getenv("JDK17") },
+                    { name = "JavaSE-21", path = os.getenv("JDK21") },
                 }
             }
         }
     }
     config.root_markers = {}
     config.root_dir = vim.fn.getcwd()
-    config.init_options = {}
+    config.init_options = {
+        workspace = workspace_dir
+    }
     vim.lsp.config("jdtls", config)
-
+    -- enable
     vim.lsp.enable({ "clangd", "rust_analyzer", "jdtls", "luals", "pyright", "tsserver" })
 end
-
 return M

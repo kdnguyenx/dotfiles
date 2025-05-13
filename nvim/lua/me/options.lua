@@ -17,8 +17,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.colorcolumn = "120"
 -- sets how neovim will display certain whitespace characters in the editor.
-vim.opt.listchars = { tab = "› ", trail = "·", nbsp = "␣" }
-vim.opt.showbreak = "¬"
+vim.opt.listchars = { tab = "› ", trail = "·", nbsp = "␣", eol = "¬" }
 vim.opt.list = true
 -- set default indentation
 vim.opt.expandtab = true
