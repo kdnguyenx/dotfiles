@@ -90,7 +90,7 @@ function M.lsp_config()
     vim.lsp.config("tsserver", config)
 
     -- jdtls
-    local jdtls = os.getenv("HOME") .. "/jdtls"
+    local jdtls = os.getenv("XDG_DATA_HOME") .. "/jdtls"
     local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     config.cmd = {
         os.getenv("JDK21") .. "/bin/java",
