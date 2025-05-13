@@ -1,4 +1,5 @@
 local M = {}
+
 function M.make_cfg()
     return {
         on_attach = function(client, bufnr)
@@ -33,10 +34,65 @@ function M.make_cfg()
     }
 end
 
-function M.jdtls_cmd()
-    local jdtls = os.getenv("XDG_DATA_HOME") .. "/nvim/mason/packages/jdtls"
+function M.lsp_config()
+    local config = M.make_cfg()
+
+    -- clangd
+    config.cmd = { "clangd" }
+    config.filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
+    config.root_markers = {
+        ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json",
+        "compile_flags.txt", "configure.ac", ".git"
+    }
+
+    -- rust_analyzer
+    config.cmd = { "rust-analyzer" }
+    config.filetypes = { "rust" }
+    config.root_markers = { "Cargo.toml", ".git" }
+    vim.lsp.config("rust_analyzer", config)
+
+    -- luals
+    config.cmd = { "lua-language-server" }
+    config.filetypes = { "lua" }
+    config.root_markers = {
+        ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml",
+        "stylua.toml", "selene.toml", "selene.yml", ".git"
+    }
+    vim.lsp.config("luals", config)
+
+    -- pyright
+    config.cmd = { "pyright-langserver", "--stdio" }
+    config.filetypes = { "python" }
+    config.root_markers = {
+        "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt",
+        "Pipfile", "pyrightconfig.json", ".git"
+    }
+    config.settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "openFilesOnly",
+            },
+        },
+    }
+    vim.lsp.config("pyright", config)
+
+    -- ts and js
+    config.cmd = { "typescript-language-server", "--stdio" }
+    config.filetypes = {
+        "javascript", "javascriptreact", "javascript.jsx",
+        "typescript", "typescriptreact", "typescript.tsx"
+    }
+    config.root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" }
+    config.init_options = { hostInfo = "neovim" }
+    config.settings = {}
+    vim.lsp.config("tsserver", config)
+
+    -- jdtls
+    local jdtls = os.getenv("HOME") .. "/jdtls"
     local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    return {
+    config.cmd = {
         os.getenv("JDK21") .. "/bin/java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         "-Dosgi.bundles.defaultStartLevel=4",
@@ -51,10 +107,7 @@ function M.jdtls_cmd()
         "-configuration", jdtls .. "/config_mac_arm",
         "-data", workspace_dir,
     }
-end
-
-function M.jdtls_settings()
-    return {
+    config.settings = {
         java = {
             references = {
                 includeDecompiledSources = true,
@@ -111,6 +164,12 @@ function M.jdtls_settings()
             }
         }
     }
+    config.root_markers = {}
+    config.root_dir = vim.fn.getcwd()
+    config.init_options = {}
+    vim.lsp.config("jdtls", config)
+
+    vim.lsp.enable({ "clangd", "rust_analyzer", "jdtls", "luals", "pyright", "tsserver" })
 end
 
 return M

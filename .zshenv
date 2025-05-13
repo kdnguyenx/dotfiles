@@ -38,3 +38,6 @@ export PATH=$PATH:$GOPATH/bin
 export JDK11=$HOME/.sdkman/candidates/java/11.0.24-amzn
 export JDK17=$HOME/.sdkman/candidates/java/17.0.12-amzn
 export JDK21=$HOME/.sdkman/candidates/java/21.0.4-amzn
+# rust
+export PATH=$PATH:$HOME/.cargo/bin
+. "$HOME/.cargo/env"

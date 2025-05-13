@@ -39,7 +39,7 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 
 echo '[-] installing extended packages [-]'
-brew install parallel tmux fzf ripgrep jq universal-ctags golang zig
+brew install parallel tmux fzf ripgrep jq universal-ctags golang
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -66,7 +66,7 @@ if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
   git clone https://github.com/neovim/neovim.git $target_dir
   cd $target_dir
-  # git checkout nightly
+  git checkout nightly
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
 fi
