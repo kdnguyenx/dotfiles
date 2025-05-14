@@ -44,11 +44,6 @@ function M.lsp_config()
         "compile_flags.txt", "configure.ac", ".git"
     }
     vim.lsp.config("clangd", config)
-    -- rust_analyzer
-    config.cmd = { "rust-analyzer" }
-    config.filetypes = { "rust" }
-    config.root_markers = { "Cargo.toml", ".git" }
-    vim.lsp.config("rust_analyzer", config)
     -- luals
     config.cmd = { "lua-language-server" }
     config.filetypes = { "lua" }
@@ -152,6 +147,6 @@ function M.lsp_config()
     }
     vim.lsp.config("jdtls", config)
     -- enable
-    vim.lsp.enable({ "clangd", "rust_analyzer", "jdtls", "luals", "pyright", "tsserver" })
+    vim.lsp.enable({ "clangd", "jdtls", "luals", "pyright", "tsserver" })
 end
 return M
