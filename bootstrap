@@ -84,7 +84,7 @@ if [ ! -d "$target_dir" ] ; then
   echo '[-] building neovim [-]'
   git clone https://github.com/neovim/neovim.git $target_dir
   cd $target_dir
-  git checkout nightly
+  # git checkout nightly
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
 fi
