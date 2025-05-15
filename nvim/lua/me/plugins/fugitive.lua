@@ -1,15 +1,6 @@
 return {
     "tpope/vim-fugitive",
     config = function()
-        vim.keymap.set("n", "<leader>dt", "<cmd>Gvdiffsplit!<cr>")
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = "fugitive",
-            group = vim.api.nvim_create_augroup("fugitivecfg", { clear = true }),
-            callback = function()
-                vim.keymap.set("n", "<leader>p", function()
-                    vim.cmd.Git("pull --rebase")
-                end, { buffer = true });
-            end,
-        })
+        vim.keymap.set("n", "<leader>dt", "<Cmd>Gvdiffsplit!<CR>")
     end
 }

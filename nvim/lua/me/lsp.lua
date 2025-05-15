@@ -142,9 +142,7 @@ function M.lsp_config()
     }
     config.root_markers = {}
     config.root_dir = vim.fn.getcwd()
-    config.init_options = {
-        workspace = workspace_dir
-    }
+    config.init_options = {}
     vim.lsp.config("jdtls", config)
     -- enable
     vim.lsp.enable({ "clangd", "jdtls", "luals", "pyright", "tsserver" })
