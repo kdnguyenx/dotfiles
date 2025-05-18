@@ -17,8 +17,8 @@ set $term alacritty
 # is used in the bar {} block below.
 font pango:Ubuntu Sans 9
 
-# Window compositor
-exec --no-startup-id picom --backend glx --daemon --vsync
+# Window compositor, add --vsync to prevent screen tearing
+exec --no-startup-id picom --backend glx --daemon
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
 
