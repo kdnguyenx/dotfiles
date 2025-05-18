@@ -50,7 +50,7 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 
 echo '[-] installing extended packages [-]'
-sudo apt install -y parallel vim tmux fzf ripgrep jq universal-ctags npm
+sudo apt install -y parallel vim tmux fzf ripgrep jq universal-ctags
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
