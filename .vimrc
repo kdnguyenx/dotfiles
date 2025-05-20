@@ -68,11 +68,12 @@ nnoremap <C-h> :bprev<CR>
 " enable auto completion menu after pressing tab.
 set wildmenu wildmode=full wildcharm=<C-z> wildmenu
 " find files
-nnoremap <leader>ee :e %:h<C-z>
+nnoremap <leader>e :e %:h<C-z>
+nnoremap <leader>b :b <C-z>
+nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
+vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
+nnoremap <leader>/ :vimgrep /<C-r><C-w>/f **
 nnoremap <leader>ma :marks<CR>
-nnoremap <leader>gg :vimgrep //f **<S-Left><S-Left><Right>
-vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
-nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
 " search current marked text
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
 " find and replace

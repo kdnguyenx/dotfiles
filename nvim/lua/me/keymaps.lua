@@ -32,15 +32,16 @@ vim.keymap.set("v", "<leader>rr", [["0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><L
 vim.keymap.set("n", "<leader>cp", [[:!cp -r %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>mv", [[:!mv %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>rm", [[:!rm -rf %<C-z>]])
--- default fuzzy find
-vim.keymap.set("n", "<leader>ee", [[:e %:h<C-z>]])
+-- find files
+vim.keymap.set("n", "<leader>e", [[:e %:h<C-z>]])
+vim.keymap.set("n", "<leader>b", [[:b <C-z>]])
 vim.keymap.set("n", "<leader>ma", [[:marks<CR>]])
 -- ripgrep
 if vim.fn.executable("rg") > 0 then
-    vim.keymap.set("n", "<leader>gg", [[:silent grep! ''<Left>]])
-    vim.keymap.set("v", "<leader>gg", [["0y:silent grep! --case-sensitive '<C-r>0'<Left>]])
-    vim.keymap.set("n", "<leader>gw", [[:silent grep! --case-sensitive '<C-r><C-w>'<CR>]])
-    vim.keymap.set("n", "<leader>ga", [[:silent grep! --hidden --no-ignore ''<Left>]])
+    vim.keymap.set("n", "<leader>g", [[:silent grep! ''<Left>]])
+    vim.keymap.set("v", "<leader>g", [["0y:silent grep! --case-sensitive '<C-r>0'<Left>]])
+    vim.keymap.set("n", "<leader>G", [[:silent grep! --case-sensitive '<C-r><C-w>'<CR>]])
+    vim.keymap.set("n", "<leader>/", [[:silent grep! --hidden --no-ignore ''<Left>]])
 end
 -- diff mode
 vim.keymap.set("n", "<leader>du", function() vim.cmd.diffget("//3") end)
