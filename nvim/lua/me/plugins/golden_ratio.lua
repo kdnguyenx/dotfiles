@@ -1,1 +1,0 @@
-return { "roman/golden-ratio" }

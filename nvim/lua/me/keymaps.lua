@@ -33,7 +33,7 @@ vim.keymap.set("n", "<leader>cp", [[:!cp -r %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>mv", [[:!mv %<C-z> %:h<C-z>]])
 vim.keymap.set("n", "<leader>rm", [[:!rm -rf %<C-z>]])
 -- find files
-vim.keymap.set("n", "<leader>e", [[:e %:h<C-z>]])
+vim.keymap.set("n", "<leader>e", [[:e %:h<C-z><C-z>]])
 vim.keymap.set("n", "<leader>b", [[:b <C-z>]])
 vim.keymap.set("n", "<leader>ma", [[:marks<CR>]])
 -- ripgrep
