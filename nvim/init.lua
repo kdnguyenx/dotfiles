@@ -5,21 +5,25 @@ require("me.options")
 require("me.keymaps")
 require("me.autocmds")
 require("me.lsp")
--- bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+-- install plugins
+local plugins = {
+    rose_pine = "https://github.com/rose-pine/neovim.git",
+    fugitive = "https://github.com/tpope/vim-fugitive.git",
+    signify = "https://github.com/mhinz/vim-signify.git",
+    surround = "https://github.com/tpope/vim-surround.git",
+    treesitter = "https://github.com/nvim-treesitter/nvim-treesitter.git",
+    fzf = "https://github.com/junegunn/fzf.git",
+    fzf_vim = "https://github.com/junegunn/fzf.vim.git",
+}
+local packs = vim.fn.stdpath("data") .. "/site/pack"
+for name,repo in pairs(plugins) do
+    local plugin_path = packs .. "/" .. name .. "/start/" .. name
+    if not vim.uv.fs_stat(plugin_path) then
+        vim.fn.system({ "git", "clone", "--depth=1", repo, plugin_path })
+    end
+    -- load
+    local plugin_config = "me.plugins." .. name
+    pcall(require, plugin_config)
 end
-vim.opt.rtp:prepend(lazypath)
--- setup lazy.nvim
-require("lazy").setup({
-    spec = "me.plugins",
-    checker = { enabled = false },
-})
+-- fzf runtime path
+vim.opt.rtp:append(vim.fn.system("which fzf"):gsub("\n", ""))
