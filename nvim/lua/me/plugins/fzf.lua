@@ -20,3 +20,5 @@ vim.api.nvim_create_autocmd("filetype", {
 })
 vim.keymap.set("n", "<leader>f", vim.cmd.Files)
 vim.keymap.set("n", "<leader>F", vim.cmd.GFiles)
+-- fzf runtime path
+vim.opt.rtp:append(vim.fn.system("which fzf"):gsub("\n", ""))

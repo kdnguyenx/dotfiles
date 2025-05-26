@@ -1,0 +1,21 @@
+[submodule "pack/rose-pine/start/rose-pine"]
+	path = pack/rose-pine/start/rose-pine
+	url = https://github.com/rose-pine/neovim.git
+[submodule "pack/fugitive/start/fugitive"]
+	path = pack/fugitive/start/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "pack/signify/start/signify"]
+	path = pack/signify/start/signify
+	url = https://github.com/mhinz/vim-signify.git
+[submodule "pack/surround/start/surround"]
+	path = pack/surround/start/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "pack/treesitter/start/treesitter"]
+	path = pack/treesitter/start/treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git
+[submodule "pack/fzf/start/fzf"]
+	path = pack/fzf/start/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "pack/fzf-vim/start/fzf-vim"]
+	path = pack/fzf-vim/start/fzf-vim
+	url = https://github.com/junegunn/fzf.vim.git
