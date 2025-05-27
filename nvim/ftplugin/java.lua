@@ -40,6 +40,12 @@ if vim.fn.executable("mvn") > 0 then
         vim.fn.execute("terminal " .. cmd)
     end, { nargs = "?" })
 end
+-- workspace clean
+vim.api.nvim_create_user_command("LspClean", function(_)
+    local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/jdtls/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+    vim.fn.system("rm -rf " .. workspace_dir)
+    vim.notify_once(workspace_dir .. " cleaned", vim.log.levels.INFO)
+end, { nargs = 0 })
 -- set path and format
 vim.cmd([[
     setlocal includeexpr=substitute(v:fname,'\\.','/','g')
