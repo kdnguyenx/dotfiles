@@ -1,7 +1,7 @@
 require("rose-pine").setup({
     dark_variant = "moon",
     dim_inactive_windows = false,
-    styles = { italic = false, transparency = false, },
+    styles = { transparency = false, },
 })
 vim.cmd.colorscheme("rose-pine")
 -- remove background only

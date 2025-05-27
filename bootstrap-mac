@@ -55,8 +55,8 @@ if [ ! -d "$target_dir" ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
 fi
 
-echo '[-] installing favourite fonts [-]'
-brew install --cask font-ubuntu-sans font-ubuntu-sans-mono
+echo '[-] installing favourite font [-]'
+brew install --cask font-iosevka-nerd-font
 
 echo '[-] installing alacritty [-]'
 brew install alacritty

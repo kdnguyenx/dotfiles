@@ -9,14 +9,14 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "Ubuntu Sans Mono"
-normal.style = "Medium"
-bold.family = "Ubuntu Sans Mono"
+normal.family = "Iosevka Nerd Font"
+normal.style = "Regular"
+bold.family = "Iosevka Nerd Font"
 bold.style = "Bold"
-italic.family = "Ubuntu Sans Mono"
-italic.style = "MediumItalic"
-bold_italic.family = "Ubuntu Sans Mono"
-bold_italic.style = "BoldItalic"
+italic.family = "Iosevka Nerd Font"
+italic.style = "Oblique"
+bold_italic.family = "Iosevka Nerd Font"
+bold_italic.style = "Bold Oblique"
 size = 15
 
 [selection]
