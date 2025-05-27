@@ -105,11 +105,15 @@ fi
 
 target_dir=$XDG_DATA_HOME/fonts
 if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing favourite font [-]'
-  wget 'https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Iosevka.zip'
+  echo '[-] installing ubuntu fonts [-]'
+  wget https://github.com/canonical/Ubuntu-Sans-fonts/releases/download/v1.006/UbuntuSans-fonts-1.006.zip
+  wget https://github.com/canonical/Ubuntu-Sans-Mono-fonts/releases/download/v1.006/UbuntuSansMono-fonts-1.006.zip
   mkdir -p $target_dir
-  unzip Iosevka.zip -d $target_dir
-  rm -f Iosevka.zip
+  unzip UbuntuSans-fonts-1.006.zip -d UbuntuSans
+  unzip UbuntuSansMono-fonts-1.006.zip -d UbuntuSans
+  mv UbuntuSans/UbuntuSans-fonts-1.006/ttf/* $target_dir
+  mv UbuntuSans/UbuntuSansMono-fonts-1.006/ttf/* $target_dir
+  rm -rf UbuntuSans*
   fc-cache -f -v
 fi
 
