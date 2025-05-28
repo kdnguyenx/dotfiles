@@ -2,6 +2,69 @@ vim.opt_local.expandtab = true
 vim.opt_local.shiftwidth = 4
 vim.opt_local.tabstop = 4
 vim.opt_local.softtabstop = 4
+-- nvim-jdtls
+local jdtls = os.getenv("XDG_DATA_HOME") .. "/jdtls"
+local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/jdtls/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+local config = require("me.lsp").make_config()
+config["cmd"] = {
+    os.getenv("JDK21") .. "/bin/java",
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=ALL",
+    "-Xmx2g",
+    "--add-modules=ALL-SYSTEM",
+    "--add-opens", "java.base/java.util=ALL-UNNAMED",
+    "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+    "-jar", vim.fn.glob(jdtls .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+    "-configuration", jdtls .. "/config_mac_arm",
+    "-data", workspace_dir,
+}
+config["root_dir"] = vim.fn.getcwd()
+config["settings"] = {
+    java = {
+        references = {
+            includeDecompiledSources = true,
+        },
+        eclipse = {
+            downloadSources = true,
+        },
+        maven = {
+            downloadSources = true,
+        },
+        signatureHelp = { enabled = true },
+        contentProvider = { preferred = "fernflower" },
+        completion = {
+            importOrder = { "java", "javax", "com", "org" },
+        },
+        sources = {
+            organizeImports = {
+                starThreshold = 9999,
+                staticStarThreshold = 9999,
+            },
+        },
+        codeGeneration = {
+            toString = {
+                template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
+            },
+            hashCodeEquals = {
+                useJava7Objects = false,
+                useInstanceOf = true,
+            },
+            useBlocks = true,
+            addFinalForNewDeclaration = "fields",
+        },
+        configuration = {
+            runtimes = {
+                { name = "JavaSE-11", path = os.getenv("JDK11"), default = true },
+                { name = "JavaSE-17", path = os.getenv("JDK17") },
+                { name = "JavaSE-21", path = os.getenv("JDK21") },
+            }
+        }
+    }
+}
+require("jdtls").start_or_attach(config)
 -- maven test
 if vim.fn.executable("mvn") > 0 then
     vim.api.nvim_create_user_command("MvnTest", function(opts)
@@ -40,12 +103,6 @@ if vim.fn.executable("mvn") > 0 then
         vim.fn.execute("terminal " .. cmd)
     end, { nargs = "?" })
 end
--- workspace clean
-vim.api.nvim_create_user_command("LspClean", function(_)
-    local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/jdtls/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    vim.fn.system("rm -rf " .. workspace_dir)
-    vim.notify_once(workspace_dir .. " cleaned", vim.log.levels.INFO)
-end, { nargs = 0 })
 -- set path and format
 vim.cmd([[
     setlocal includeexpr=substitute(v:fname,'\\.','/','g')

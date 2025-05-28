@@ -17,7 +17,7 @@ italic.family = "Ubuntu Sans Mono"
 italic.style = "Medium Italic"
 bold_italic.family = "Ubuntu Sans Mono"
 bold_italic.style = "Bold Italic"
-size = 15
+size = 14
 
 [selection]
 save_to_clipboard = true

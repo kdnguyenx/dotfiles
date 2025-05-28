@@ -25,6 +25,7 @@ vim.keymap.set("v", "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
 vim.keymap.set("n", "<leader>P", [["+P]])
 vim.keymap.set("v", "<leader>p", [["+p]])
+vim.keymap.set("n", "<leader>cf", [[:let @+=expand('%')<CR>]])
 -- search and replace
 vim.keymap.set("n", "<leader>rr", [[:%s/<C-r><C-w>//gI<Left><Left><Left>]])
 vim.keymap.set("v", "<leader>rr", [["0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>]])
