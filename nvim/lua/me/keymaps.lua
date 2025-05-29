@@ -11,6 +11,13 @@ vim.keymap.set("n", "<Right>", "<Cmd>vertical resize +5<CR>")
 -- command mode navigation
 vim.keymap.set("c", "<C-a>", "<Home>")
 vim.keymap.set("c", "<C-e>", "<End>")
+vim.keymap.set("c", "<C-b>", "<Up>")
+vim.keymap.set("c", "<C-f>", "<Down>")
+vim.keymap.set("c", "<C-p>", "<Left>")
+vim.keymap.set("c", "<C-n>", "<Right>")
+vim.keymap.set("c", "<M-b>", "<S-Left>")
+vim.keymap.set("c", "<M-f>", "<S-Right>")
+vim.keymap.set("c", "<M-BS>", "<C-w>")
 -- navigate through quickfix list
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
