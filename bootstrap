@@ -28,6 +28,7 @@ function linking() {
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/i3 $XDG_CONFIG_HOME/i3
   ln -sfn $(pwd)/i3status $XDG_CONFIG_HOME/i3status
+  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
