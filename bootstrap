@@ -14,7 +14,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing i3 window manager [-]'
-sudo apt install -y i3 feh picom alacritty network-manager pulseaudio pavucontrol redshift
+sudo apt install -y i3 sway feh picom alacritty network-manager pulseaudio pavucontrol redshift
 sudo apt install -y xautolock xbacklight xdotool xclip maim slop gnupg2
 
 function linking() {
