@@ -18,7 +18,7 @@ set $term alacritty
 font pango:Ubuntu Sans 9
 
 # Window compositor, add --vsync to prevent screen tearing
-exec --no-startup-id picom --backend glx --daemon
+exec --no-startup-id picom --backend glx --daemon --vsync
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id "feh --bg-fill ~/dotfiles/images/bay.jpg &"
 
@@ -32,7 +32,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 # Lock screen
-exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
+# exec --no-startup-id "xautolock -detectsleep -time 30 -locker 'i3lock --nofork -c 000000' &"
 bindsym $mod+Ctrl+q exec --no-startup-id "i3lock --nofork -c 000000"
 
 # start dmenu (a program launcher)
