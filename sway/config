@@ -34,7 +34,7 @@ font pango:Ubuntu Sans 9
 #
 # Example configuration:
 #
-output DP-3 resolution 3840x2160 scale 2.0
+output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0 scale_filter nearest
 output * background ~/dotfiles/images/bay.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -44,13 +44,14 @@ output * background ~/dotfiles/images/bay.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
-      timeout 300 'swaylock -f -c 000000' \
+      timeout 300 'swaylock -f -l -c 000000' \
       timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-      before-sleep 'swaylock -f -c 000000'
+      before-sleep 'swaylock -f -l -c 000000'
 #
 # Lock screen
-bindsym $mod+Ctrl+q exec 'swaylock -f -c 000000'
+bindsym $mod+Ctrl+q exec swaylock -f -l -c 000000
 bindsym $mod+Shift+n exec ~/dotfiles/bin/redshift.sh
+# exec --no-startup-id ibus-daemon -d -r -x
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -136,14 +137,20 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/redshift.sh
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+    # Always open some programs on specified workspace
+    assign [app_id="[Ff]irefox"] number 1
+    assign [app_id="[Tt]hunderbird"] number 1
+    assign [app_id="[Aa]lacritty"] number 2
+    assign [class="[Dd]iscord"] number 4
+    assign [class="[Ss]team"] number 5
 #
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
+    # $mod+v or $mod+Shift+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+    bindsym $mod+v splith
+    bindsym $mod+Shift+v splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -199,7 +206,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym $mod+Shift+s exec grim
+    bindsym $mod+Shift+s exec --no-startup-id slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
 #
 # Status Bar:
