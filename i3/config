@@ -45,7 +45,7 @@ bindsym $mod+g exec --no-startup-id i3-dmenu-desktop
 # Screensaver
 exec --no-startup-id xset s off
 exec --no-startup-id xset dpms 0 0 1200
-# exec --no-startup-id ibus-daemon -d -r -x
+# exec --no-startup-id ibus-daemon -drx
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.

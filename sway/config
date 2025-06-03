@@ -51,7 +51,7 @@ exec swayidle -w \
 # Lock screen
 bindsym $mod+Ctrl+q exec swaylock -f -l -c 000000
 bindsym $mod+Shift+n exec ~/dotfiles/bin/redshift.sh
-# exec --no-startup-id ibus-daemon -d -r -x
+# exec --no-startup-id ibus-daemon -drx
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
