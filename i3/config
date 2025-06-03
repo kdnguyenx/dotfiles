@@ -103,11 +103,11 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Always open some programs on specified workspace
-assign [class="firefox"] number 1
-assign [class="thunderbird"] number 1
-assign [class="Alacritty"] number 2
-assign [class="discord"] number 4
-assign [class="steam"] number 5
+assign [class="[Ff]irefox"] number 1
+assign [class="[Tt]hunderbird"] number 1
+assign [class="[Aa]lacritty"] number 2
+assign [class="[Dd]iscord"] number 4
+assign [class="[Ss]team"] number 5
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -120,10 +120,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20
 bindsym $mod+Shift+s exec NOW=$(date +%Y-%m-%d_%H-%M-%S) && maim --format png --select > ~/Screenshots/screenshot_$NOW.png && xclip -selection clip -t image/png ~/Screenshots/screenshot_$NOW.png
 
 # You can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
+# $mod+v or $mod+Shift+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+v splith
+bindsym $mod+Shift+v splitv
 
 # Switch the current container between different layout styles
 bindsym $mod+s layout stacking
