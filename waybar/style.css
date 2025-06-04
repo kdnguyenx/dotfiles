@@ -1,0 +1,16 @@
+@import "./rose-pine.css";
+
+* {
+  /* reference the color by using @color-name */
+  background: @base;
+  font-family: 'Ubuntu Sans';
+  padding: 2px 2px;
+}
+
+#memory {
+  color: @foam;
+}
+
+#temperature {
+  color: @rose;
+}
