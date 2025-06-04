@@ -11,13 +11,22 @@ vim.keymap.set("n", "<Right>", "<Cmd>vertical resize +5<CR>")
 -- command mode navigation
 vim.keymap.set("c", "<C-a>", "<Home>")
 vim.keymap.set("c", "<C-e>", "<End>")
-vim.keymap.set("c", "<C-b>", "<Up>")
-vim.keymap.set("c", "<C-f>", "<Down>")
-vim.keymap.set("c", "<C-p>", "<Left>")
-vim.keymap.set("c", "<C-n>", "<Right>")
-vim.keymap.set("c", "<M-b>", "<S-Left>")
-vim.keymap.set("c", "<M-f>", "<S-Right>")
+vim.keymap.set("c", "<M-Left>", "<S-Left>")
+vim.keymap.set("c", "<M-Right>", "<S-Right>")
 vim.keymap.set("c", "<M-BS>", "<C-w>")
+-- wildmenu weird behaviours
+vim.keymap.set("c", "<Up>", function()
+    return vim.fn.pumvisible() == 1 and "<Left>" or "<Up>"
+end, { expr = true })
+vim.keymap.set("c", "<Down>", function()
+    return vim.fn.pumvisible() == 1 and "<Right>" or "<Down>"
+end, { expr = true })
+vim.keymap.set("c", "<Left>", function()
+    return vim.fn.pumvisible() == 1 and "<Up>" or "<Left>"
+end, { expr = true })
+vim.keymap.set("c", "<Right>", function()
+    return vim.fn.pumvisible() == 1 and "<Down>" or "<Right>"
+end, { expr = true })
 -- navigate through quickfix list
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")

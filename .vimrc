@@ -59,12 +59,8 @@ autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<CR>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <M-b> <S-Left>
-cnoremap <M-f> <S-Right>
+cnoremap <M-Left> <S-Left>
+cnoremap <M-Right> <S-Right>
 cnoremap <M-BS> <C-w>
 " navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz

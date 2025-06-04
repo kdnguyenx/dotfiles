@@ -27,9 +27,19 @@ style.shape = "Block"
 style.blinking = "Always"
 blink_interval = 500
 
+[[keyboard.bindings]]
+key = "Left"
+mods = "Alt"
+chars = "\u001BB"
+
+[[keyboard.bindings]]
+key = "Right"
+mods = "Alt"
+chars = "\u001BF"
+
 [colors.primary]
-background = '#181818'
-foreground = '#d8d8d8'
+background = "#181818"
+foreground = "#d8d8d8"
 
 [colors.cursor]
 text = "#e0def4"
