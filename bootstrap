@@ -15,6 +15,7 @@ sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja
 
 echo '[-] installing i3/sway window manager [-]'
 sudo apt install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
+sudo apt install -y ibus ibus-wayland waybar
 sudo apt install -y alacritty network-manager pulseaudio pavucontrol redshift gnupg2 wl-clipboard
 sudo apt install -y i3 feh picom
 sudo apt install -y xautolock xbacklight xdotool xclip maim slop
@@ -121,7 +122,7 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dpkg --add-architecture i386
   sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
-  sudo apt install -y rocm-smi mangohud
+  sudo apt install -y rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
 fi
 
