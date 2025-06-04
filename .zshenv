@@ -20,7 +20,7 @@ HISTFILE=$HOME/.zhistory
 SAVEHIST=10000
 HISTSIZE=10000
 # use 256 color term
-export TERM=xterm-256color
+export TERM=screen-256color
 export CLICOLOR=1
 export COLORTERM=truecolor
 # fzf
