@@ -13,9 +13,9 @@ window#waybar {
 
 #workspaces {
   margin-left: 3px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  border: 1px solid @foam;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border: 1px solid @pine;
 }
 
 #clock {
@@ -27,7 +27,7 @@ button {
 }
 
 #workspaces button {
-  padding: 0 5px;
+  padding: 0 3px;
   background-color: @base;
 }
 
@@ -37,9 +37,9 @@ button {
 
 #mode {
   margin-left: 3px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  padding: 2px 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 0px 5px;
   border: 1px solid @iris;
   background-color: @surface;
   color: @muted;
