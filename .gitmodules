@@ -19,6 +19,3 @@
 [submodule "pack/plugins/start/fzf-vim"]
 	path = pack/plugins/start/fzf-vim
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "pack/plugins/start/nvim-jdtls"]
-	path = pack/plugins/start/nvim-jdtls
-	url = https://github.com/mfussenegger/nvim-jdtls
