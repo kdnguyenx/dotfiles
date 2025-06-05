@@ -60,7 +60,6 @@ mkdir -p ~/.local/bin
 mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
-mkdir -p ~/Screenshots
 touch ~/.profile
 
 echo '[-] installing extended packages [-]'

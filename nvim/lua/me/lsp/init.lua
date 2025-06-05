@@ -37,11 +37,10 @@ end
 vim.lsp.config("*", M.make_config())
 -- language specific configs
 require("me.lsp.clangd")
-require("me.lsp.luals")
 require("me.lsp.pyright")
 require("me.lsp.tsserver")
 -- enabled servers
--- can be disabled by `:lua vim.lsp.enable("jdtls", false)` for example
-vim.lsp.enable({ "clangd", "luals", "pyright", "tsserver" })
+-- can be disabled by `:lua vim.lsp.enable("tsserver", false)` for example
+vim.lsp.enable({ "clangd", "pyright", "tsserver" })
 -- export
 return M
