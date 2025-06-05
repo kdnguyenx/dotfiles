@@ -3,7 +3,7 @@
 * {
   /* reference the color by using @color-name */
   background: @base;
-  font-family: 'Ubuntu Sans';
+  font-family: 'DejaVu Sans';
   padding: 2px 2px;
 }
 

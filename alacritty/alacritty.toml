@@ -9,13 +9,13 @@ dynamic_title = true
 option_as_alt = "Both"
 
 [font]
-normal.family = "Ubuntu Sans Mono"
-normal.style = "Medium"
-bold.family = "Ubuntu Sans Mono"
+normal.family = "Hack Nerd Font"
+normal.style = "Regular"
+bold.family = "Hack Nerd Font"
 bold.style = "Bold"
-italic.family = "Ubuntu Sans Mono"
+italic.family = "Hack Nerd Font"
 italic.style = "Italic"
-bold_italic.family = "Ubuntu Sans Mono"
+bold_italic.family = "Hack Nerd Font"
 bold_italic.style = "Bold Italic"
 size = 14
 

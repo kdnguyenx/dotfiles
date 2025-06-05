@@ -9,8 +9,14 @@ if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
   exit 1
 fi
 
+echo '[-] configuring debian sources list [-]'
+sudo cp -f etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources
+sudo cp -f etc/apt/sources.list /etc/apt/sources.list
+sudo cp -f etc/apt/preferences.d/security /etc/apt/preferences.d/security
+
 echo '[-] installing prerequisite packages [-]'
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
+sudo apt install -y apt-listbugs apt-listchanges
 sudo apt install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
 
 echo '[-] installing i3/sway window manager [-]'
@@ -69,8 +75,7 @@ if [ ! -d "$target_dir" ] ; then
 fi
 
 if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
-  sudo snap remove --purge firefox
-  sudo apt purge --autoremove -y firefox
+  sudo apt purge --autoremove -y firefox firefox-esr
   sudo apt autoremove -y
   echo '[-] installing firefox [-]'
   sudo install -d -m 0755 /etc/apt/keyrings
