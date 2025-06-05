@@ -9,10 +9,12 @@ if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
   exit 1
 fi
 
-echo '[-] configuring debian sources list [-]'
-sudo cp -f etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources
-sudo cp -f etc/apt/sources.list /etc/apt/sources.list
-sudo cp -f etc/apt/preferences.d/security /etc/apt/preferences.d/security
+if [ ! -f '/etc/apt/preferences.d/security' ]; then
+  echo '[-] configuring debian sources list [-]'
+  sudo cp -f etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/debian.sources
+  sudo cp -f etc/apt/sources.list /etc/apt/sources.list
+  sudo cp -f etc/apt/preferences.d/security /etc/apt/preferences.d/security
+fi
 
 echo '[-] installing prerequisite packages [-]'
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
