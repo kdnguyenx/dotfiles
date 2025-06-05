@@ -1,29 +1,48 @@
 @import "./rose-pine.css";
 
 * {
-  font-family: DejaVu Sans, monospace, sans-serif;
+  font-family: Hack Nerd Font, monospace, sans-serif;
   font-size: 12px;
 }
 
 window#waybar {
-  background-color: @base;
+  background-color: @black;
   color: @text;
-  transition-property: background-color;
-  transition-duration: .5s;
+  border: 3px solid @gray;
+}
+
+#workspaces {
+  margin-left: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 1px solid @foam;
+}
+
+#clock {
+  margin-right: 6px;
 }
 
 button {
-  border: 1px solid @muted;
   border-radius: 0;
 }
 
 #workspaces button {
   padding: 0 5px;
-  background-color: @overlay;
+  background-color: @base;
 }
 
 #workspaces button.focused {
   background-color: @pine;
+}
+
+#mode {
+  margin-left: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 2px 5px;
+  border: 1px solid @iris;
+  background-color: @surface;
+  color: @muted;
 }
 
 #language {
@@ -40,4 +59,8 @@ button {
 
 #temperature {
   color: @love;
+}
+
+#network {
+  color: @iris;
 }
