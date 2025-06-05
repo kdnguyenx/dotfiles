@@ -1,4 +1,0 @@
-Package: src:chromium src:firefox src:firefox-esr src:linux src:linux-signed-amd64
-Explanation: these packages are always security updates updated in unstable first
-Pin: release a=/^(unstable|unstable-debug|buildd-unstable|buildd-unstable-debug)$/
-Pin-Priority: 980
