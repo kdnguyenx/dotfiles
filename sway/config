@@ -117,16 +117,16 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/redshift
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    bindsym $mod+1 workspace number 1; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+2 workspace number 2; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+3 workspace number 3; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+4 workspace number 4; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+5 workspace number 5; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+6 workspace number 6; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+7 workspace number 7; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+8 workspace number 8; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 2.0
+    bindsym $mod+9 workspace number 9; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 1.0
+    bindsym $mod+0 workspace number 10; output 'Dell Inc. DELL U2723QE 306RWN3' resolution 3840x2160 scale 1.0
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -145,7 +145,7 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/redshift
     assign [app_id="[Tt]hunderbird"] number 1
     assign [app_id="[Aa]lacritty"] number 2
     assign [class="[Dd]iscord"] number 4
-    assign [class="[Ss]team"] number 5
+    assign [class="[Ss]team"] number 10
 #
 # Layout stuff:
 #
