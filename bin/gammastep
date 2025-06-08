@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+if pgrep -x 'gammastep' > /dev/null; then
+  pkill gammastep &
+  notify-send 'gammastep disabled'
+else
+  gammastep -l 10.8:106.6 &
+  notify-send 'gammastep enabled'
+fi
