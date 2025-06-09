@@ -23,7 +23,7 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 include /etc/sway/config-vars.d/*
 
 # No title bar
-font pango:monospace 0.001
+font pango:Adwaita Sans 0.001
 titlebar_padding 1
 titlebar_border_thickness 0
 
@@ -145,7 +145,7 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/gammastep
     assign [app_id="[Tt]hunderbird"] number 1
     assign [app_id="[Aa]lacritty"] number 2
     assign [class="[Dd]iscord"] number 4
-    assign [class="[Ss]team"] number 10
+    assign [class="[Ss]team"] number 5
 #
 # Layout stuff:
 #

@@ -4,7 +4,7 @@
     "spacing": 8, // Gaps between modules (px)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "sway/window"],
-    "modules-right": ["temperature", "pulseaudio", "network", "disk", "memory", "cpu", "tray", "idle_inhibitor", "clock"],
+    "modules-right": ["temperature", "pulseaudio", "network", "disk", "memory", "cpu", "tray", "clock", "idle_inhibitor"],
     // Modules configuration
     "sway/workspaces": {
          "disable-scroll": true,
@@ -16,18 +16,11 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
-        "format": "{icon} {count}",
+        "format": "| {icon} {count} |",
         "show-empty": false,
         "tooltip": true,
         "tooltip-format": "{app}: {title}",
-        "format-icons": ["", " "],
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+        "format-icons": ["", "  "],
     },
     "tray": {
         "icon-size": 15,
@@ -36,7 +29,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%a %d %b %H:%M}   "
+        "format": "{:%a %d %b %H:%M}"
     },
     "cpu": {
         "format": "  {avg_frequency}GHz",
@@ -44,7 +37,7 @@
         "tooltip": true
     },
     "memory": {
-        "format": "  {used:0.1f}/{swapUsed:0.1f}G",
+        "format": " {used:0.1f}[{swapUsed:0.1f}]G",
         "tooltip": false
     },
     "disk": {
@@ -56,7 +49,7 @@
         "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon",
         "input-filename": "temp2_input",
         "critical-threshold": 80,
-        "format": "󰏈   {temperatureC}°C"
+        "format": "󰏈  {temperatureC}°C"
     },
     "network": {
         "format-wifi": "󰤢  {essid} [{bandwidthTotalBits}]",
@@ -68,11 +61,11 @@
     },
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "{icon}{volume}% {format_source}",
-        "format-bluetooth": "{icon}{volume}% {format_source}",
-        "format-bluetooth-muted": " {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": " {volume}%",
+        "format": "{format_source} {icon}{volume}%",
+        "format-bluetooth": "{format_source} {icon}{volume}%",
+        "format-bluetooth-muted": "{format_source} ",
+        "format-muted": "{format_source} ",
+        "format-source": "",
         "format-source-muted": " ",
         "on-click": "pavucontrol",
         "format-icons": {
@@ -81,4 +74,11 @@
             "default": "  "
         }
     },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": " ",
+            "deactivated": "󰂒 "
+        }
+    }
 }

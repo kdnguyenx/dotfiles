@@ -18,10 +18,6 @@ window#waybar {
   border: 1px solid @pine;
 }
 
-#clock {
-  margin-right: 6px;
-}
-
 button {
   border-radius: 0;
 }
@@ -63,4 +59,8 @@ button {
 
 #network {
   color: @iris;
+}
+
+#idle_inhibitor {
+  margin-right: 6px;
 }
