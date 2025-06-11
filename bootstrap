@@ -59,7 +59,7 @@ mkdir -p ~/opensource
 touch ~/.profile
 
 echo '[-] installing extended packages [-]'
-sudo dnf install -y parallel vim tmux fzf ripgrep jq
+sudo dnf install -y parallel vim tmux ripgrep jq
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
