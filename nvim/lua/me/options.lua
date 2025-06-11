@@ -18,7 +18,7 @@ vim.opt.splitbelow = true
 vim.opt.colorcolumn = "80"
 vim.opt.updatetime = 100
 -- sets how neovim will display certain whitespace characters in the editor.
-vim.opt.listchars = { tab = "› ", trail = "·", nbsp = "␣", eol = "¬" }
+vim.opt.listchars = { tab = "› ", trail = "·", eol = "¬" }
 vim.opt.list = true
 -- set default indentation
 vim.opt.expandtab = true
@@ -29,7 +29,7 @@ vim.opt.shiftround = true
 -- do not save temporary files.
 vim.opt.backup = false
 vim.opt.swapfile = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.undofile = true
 -- preview substitutions live, as you type
 vim.opt.inccommand = "split"

@@ -7,13 +7,14 @@ autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
 " encoding
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
-set list listchars=tab:›\ ,nbsp:␣,eol:¬,trail:·
+set list listchars=tab:›\ ,eol:¬,trail:·
 set signcolumn=no title
 " set default regexp engine to nfa
 set regexpengine=2
 syntax enable
 " disable temporary files.
-set nobackup noswapfile wrap
+set nobackup noswapfile
+set wrap
 " detect filetype
 filetype on
 filetype indent on

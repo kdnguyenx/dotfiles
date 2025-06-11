@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
-dir=$(find ~/personal ~/repos ~/opensource -maxdepth 3 -type d | fzf --tmux)
-if [ -z "${dir}" ]; then
+# vim: ft=bash
+set -e
+if [ -z "$1" ]; then
+  echo "usage: $0 <repo_name>"
+  exit 1
+fi
+name="$1"
+dir=$(find ~/personal ~/repos ~/opensource -maxdepth 1 -type d -name "$name" | head -n1)
+if [ -z "$dir" ]; then
+  echo 'repository "$name" not found.'
   exit 0
 fi
-name=$(basename "$dir")
-if ! tmux has-session -t $name 2>/dev/null; then
-  tmux new-session -s $name -d -c $dir
-  tmux send-keys -t $name 'nvim .' C-m
+session_name=$(basename "$dir")
+if ! tmux has-session -t "$session_name" 2>/dev/null; then
+  tmux new-session -s "$session_name" -d -c "$dir"
 fi
-tmux switch -t $name
+tmux switch -t "$session_name"
