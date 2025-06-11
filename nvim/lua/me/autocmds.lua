@@ -30,3 +30,27 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
     group = vim.api.nvim_create_augroup("qfonexec", { clear = true }),
     callback = function() vim.cmd.cwindow() end,
 })
+-- wildmenu completion find
+local function complete_find(pattern)
+    return vim.fn.systemlist({"rg", "--files", "--hidden", "--follow", "--glob", pattern})
+end
+-- custom find command
+vim.api.nvim_create_user_command('Find', function(opts)
+    local item = opts.args
+    if vim.fn.filereadable(item) > 0 then
+        vim.cmd('edit ' .. vim.fn.fnameescape(item))
+        return
+    end
+    local matches = complete_find(item)
+    if #matches > 0 then
+        vim.cmd('edit ' .. vim.fn.fnameescape(matches[1]))
+    else
+        vim.notify("no files found", vim.log.levels.WARN)
+    end
+end, { nargs = 1, complete = function(arg_lead, cmd_line, cursor_pos)
+        return complete_find(arg_lead)
+    end })
+-- remap fuzzy find keys
+vim.keymap.set("n", "<leader>f", [[:Find **<Left>]])
+vim.keymap.set("v", "<leader>f", [["0y:Find *<C-r>0*<C-z>]])
+vim.keymap.set("n", "<leader>F", [[:Find *<C-r><C-w>*<C-z>]])

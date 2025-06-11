@@ -59,8 +59,3 @@ if vim.fn.executable("rg") > 0 then
   vim.opt.grepprg = "rg --vimgrep --smart-case --no-heading --column"
   vim.opt.grepformat:prepend("%f:%l:%c:%m")
 end
--- ext_cmdline/messages for the tui
-require("vim._extui").enable({
-    enable = true,
-    msg = { pos = "cmd" }
-})
