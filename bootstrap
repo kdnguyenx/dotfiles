@@ -93,6 +93,7 @@ if [ ! -d "$target_dir" ] ; then
   git clone https://github.com/lbonn/rofi.git $target_dir
   cd $target_dir
   git checkout wayland
+  meson setup build
   ninja -C build
   sudo ninja -C build install
 fi
