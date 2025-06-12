@@ -4,21 +4,17 @@
 # -----
 set -e
 
+echo '[-] checking secure boot state [-]'
 if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
   echo "could not determine the secure boot state."
   exit 1
 fi
 
 echo '[-] installing prerequisite packages [-]'
-sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build parallel vim tmux ripgrep jq
-
-echo '[-] enabling rpmfusion [-]'
-sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-echo '[-] installing rust [-]'
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl wget zip zsh git coreutils watch ncdu gcc clang cmake ninja-build
+sudo apt install -y make autoconf automake pkg-config flex bison check meson
+sudo apt install -y parallel vim tmux ripgrep jq universal-ctags
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -57,9 +53,9 @@ mkdir -p ~/opensource
 touch ~/.profile
 
 echo '[-] installing sway window manager [-]'
-sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y ibus ibus-wayland waybar rofi-wayland
+sudo apt install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
+sudo apt install -y alacritty network-manager pulseaudio pavucontrol gammastep gnupg2 wl-clipboard
+sudo apt install -y wayland wayland-protocols ibus ibus-wayland waybar
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -69,6 +65,36 @@ target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
   echo '[-] cloning zsh-autosuggestions [-]'
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
+fi
+
+if [ ! -f '/etc/apt/sources.list.d/mozilla.list' ]; then
+  sudo snap remove --purge firefox
+  sudo apt purge --autoremove -y firefox
+  sudo apt autoremove -y
+  echo '[-] installing firefox [-]'
+  sudo install -d -m 0755 /etc/apt/keyrings
+  wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+  gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
+  echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
+  echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1001
+' | sudo tee /etc/apt/preferences.d/mozilla
+  sudo apt update -y && sudo apt install -y firefox
+fi
+
+target_dir=~/opensource/rofi
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building rofi on wayland [-]'
+  sudo apt install -y libpango-dev libpangocairo-dev libcairo-dev libcairo-xcb-dev libglib2.0-dev
+  sudo apt install -y libgdk-pixbuf-2.0-dev libstartup-notification-1.0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-dev
+  sudo apt install -y xcb-util-dev xcb-util-wm-dev xcb-util-cursor-dev xcb-imdkit-dev
+  git clone https://github.com/lbonn/rofi.git $target_dir
+  cd $target_dir
+  git checkout wayland
+  ninja -C build
+  sudo ninja -C build install
 fi
 
 target_dir=~/opensource/neovim
@@ -84,7 +110,7 @@ fi
 target_dir=~/opensource/ibus-bamboo
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building ibus-bamboo [-]'
-  sudo dnf install -y ibus make go libX11-devel libXtst-devel gtk3-devel
+  sudo apt install -y ibus make golang libx11-dev libxtst-dev libgtk-3-dev
   git clone https://github.com/BambooEngine/ibus-bamboo.git $target_dir
   cd $target_dir
   sudo make install PREFIX=/usr
@@ -102,7 +128,9 @@ fi
 
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
-  sudo dnf install -y rocm-smi mangohud gamescope
+  sudo dpkg --add-architecture i386
+  sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
+  sudo apt install -y rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
 fi
 
