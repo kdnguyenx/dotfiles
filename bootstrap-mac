@@ -13,7 +13,10 @@ if ! hash brew &> /dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 brew update
-brew install curl wget git coreutils watch ncdu cmake ninja
+brew install curl wget git coreutils watch ncdu cmake ninja parallel tmux ripgrep jq golang
+
+echo '[-] installing rust [-]'
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -41,9 +44,7 @@ echo '[-] creating essential directories [-]'
 mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
-
-echo '[-] installing extended packages [-]'
-brew install parallel tmux ripgrep jq universal-ctags golang
+touch ~/.profile
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

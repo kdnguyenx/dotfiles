@@ -11,16 +11,14 @@ fi
 
 echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build
+sudo dnf install -y curl wget zip zsh git coreutils watch ncdu clang cmake ninja-build parallel vim tmux ripgrep jq
 
 echo '[-] enabling rpmfusion [-]'
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-echo '[-] installing sway window manager [-]'
-sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y ibus ibus-wayland waybar rofi-wayland
+echo '[-] installing rust [-]'
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -58,8 +56,10 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 touch ~/.profile
 
-echo '[-] installing extended packages [-]'
-sudo dnf install -y parallel vim tmux ripgrep jq
+echo '[-] installing sway window manager [-]'
+sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
+sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
+sudo dnf install -y ibus ibus-wayland waybar rofi-wayland
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

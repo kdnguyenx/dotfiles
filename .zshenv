@@ -22,3 +22,5 @@ export COLORTERM=truecolor
 # golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+# rust
+. "$HOME/.cargo/env"
