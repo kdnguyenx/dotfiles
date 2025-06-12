@@ -55,7 +55,7 @@ touch ~/.profile
 echo '[-] installing sway window manager [-]'
 sudo apt install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo apt install -y alacritty network-manager pulseaudio pavucontrol gammastep gnupg2 wl-clipboard
-sudo apt install -y wayland wayland-protocols ibus ibus-wayland waybar
+sudo apt install -y wayland-protocols ibus ibus-wayland waybar
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -87,9 +87,9 @@ fi
 target_dir=~/opensource/rofi
 if [ ! -d "$target_dir" ] ; then
   echo '[-] building rofi on wayland [-]'
-  sudo apt install -y libpango-dev libpangocairo-dev libcairo-dev libcairo-xcb-dev libglib2.0-dev
-  sudo apt install -y libgdk-pixbuf-2.0-dev libstartup-notification-1.0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-dev
-  sudo apt install -y xcb-util-dev xcb-util-wm-dev xcb-util-cursor-dev xcb-imdkit-dev
+  sudo apt install -y libpango1.0-dev libpangocairo-1.0-0 libcairo2-dev libglib2.0-dev libxcb-util-dev libxcb-ewmh-dev
+  sudo apt install -y libgdk-pixbuf-2.0-dev libstartup-notification0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev
+  sudo apt install -y libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-keysyms1-dev
   git clone https://github.com/lbonn/rofi.git $target_dir
   cd $target_dir
   git checkout wayland
