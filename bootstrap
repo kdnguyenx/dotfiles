@@ -14,7 +14,7 @@ echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
 sudo dnf install -y curl wget zip zsh git coreutils watch ncdu gcc clang cmake ninja-build
 sudo dnf install -y make autoconf automake pkg-config flex bison check meson
-sudo dnf install -y parallel vim tmux ripgrep jq universal-ctags
+sudo dnf install -y parallel vim tmux ripgrep jq
 
 echo '[-] enabling rpmfusion [-]'
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -59,7 +59,7 @@ touch ~/.profile
 echo '[-] installing sway window manager [-]'
 sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y wayland-protocols ibus ibus-wayland waybar rofi-wayland
+sudo dnf install -y ibus ibus-wayland waybar rofi-wayland
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -105,6 +105,28 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   sudo dnf install -y rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
 fi
+
+echo '[-] setting up some gnome bindings, just in case [-]'
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Shift>1']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Super><Shift>2']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Super><Shift>3']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super><Shift>4']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Super><Shift>5']"
+gsettings set org.gnome.shell.keybindings toggle-application-view "['<Super>d']"
+gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
