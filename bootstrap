@@ -59,7 +59,7 @@ touch ~/.profile
 echo '[-] installing sway window manager [-]'
 sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y wayland-protocols ibus ibus-wayland waybar rofi-wayland blueman
+sudo dnf install -y wayland-protocols ibus ibus-wayland waybar rofi-wayland
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
