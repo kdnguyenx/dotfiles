@@ -12,13 +12,15 @@ fi
 
 echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils watch ncdu gcc clang cmake ninja-build
-sudo dnf install -y make autoconf automake pkg-config flex bison check meson
-sudo dnf install -y parallel vim tmux ripgrep jq
+sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake ninja-build
+sudo dnf install -y watch ncdu make autoconf automake  meson pkg-config
+sudo dnf install -y flex bison check parallel vim tmux ripgrep jq
 
 echo '[-] enabling rpmfusion [-]'
-sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -63,7 +65,8 @@ sudo dnf install -y ibus ibus-wayland waybar rofi-wayland
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.zsh/plugins/git/git-prompt.sh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
+  -o ~/.zsh/plugins/git/git-prompt.sh
 
 target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
@@ -105,28 +108,6 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   sudo dnf install -y rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
 fi
-
-echo '[-] setting up some gnome bindings, just in case [-]'
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>4']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-5 "['<Super>5']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Super><Shift>1']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Super><Shift>2']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-3 "['<Super><Shift>3']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-4 "['<Super><Shift>4']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-5 "['<Super><Shift>5']"
-gsettings set org.gnome.shell.keybindings toggle-application-view "['<Super>d']"
-gsettings set org.gnome.shell.keybindings switch-to-application-1 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-2 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-3 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-4 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-5 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-6 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-7 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
-gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
