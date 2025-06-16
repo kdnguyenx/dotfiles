@@ -16,7 +16,7 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
-        "format": "| {icon} {count} |",
+        "format": "{icon} {count}",
         "show-empty": false,
         "tooltip": true,
         "tooltip-format": "{app}: {title}",
@@ -77,8 +77,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": " 󰣉 ",
-            "deactivated": " 󰌪 "
+            "activated": " 󱄛 ",
+            "deactivated": " 󰂒 "
         }
     }
 }
