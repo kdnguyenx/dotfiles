@@ -14,10 +14,15 @@ set regexpengine=2
 syntax enable
 " disable temporary files.
 set nobackup noswapfile
-set wrap
 " detect filetype
 filetype on
 filetype indent on
+" re-map leader key
+nnoremap <space> <nop>
+let g:mapleader = ' '
+" disable netrw on server
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrw = 1
 " set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
 " auto read file change
@@ -33,7 +38,7 @@ set backspace=indent,eol,start
 set visualbell
 " add numbers to each line on the left-hand side.
 set number relativenumber ruler hidden
-set nopaste
+set wrap nopaste
 " this option controls the behavior when switching between buffers
 set switchbuf=uselast
 " show several useful info
@@ -42,9 +47,6 @@ set mouse=a mousemodel=popup_setpos
 " the cursor is kept in the same column
 set nostartofline
 set ttyfast history=10000
-" re-map leader key
-nnoremap <space> <nop>
-let g:mapleader = ' '
 " basic theme
 set background=dark laststatus=2
 " searching
@@ -54,15 +56,9 @@ nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
 nnoremap <Left> :vertical resize -5<CR>
 nnoremap <Right> :vertical resize +5<CR>
-" netrw
-nnoremap - :Explore<CR>
-autocmd FileType netrw nnoremap <buffer> <C-c> :Rexplore<CR>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
-cnoremap <M-Left> <S-Left>
-cnoremap <M-Right> <S-Right>
-cnoremap <M-BS> <C-w>
 " navigate through quickfix list
 nnoremap <C-j> :cnext<CR>zz
 nnoremap <C-k> :cprev<CR>zz
@@ -91,9 +87,3 @@ nnoremap <leader>rm :!rm -rf %<C-z>
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
-" basic highlights
-highlight StatusLine cterm=NONE ctermbg=NONE ctermfg=grey
-highlight StatusLineNC cterm=NONE ctermbg=NONE ctermfg=darkgrey
-highlight Normal cterm=NONE ctermbg=NONE guibg=NONE
-highlight NormalNC cterm=NONE ctermbg=NONE guibg=NONE
-highlight VertSplit ctermbg=NONE ctermfg=darkgrey
