@@ -58,10 +58,13 @@ mkdir -p ~/repos
 mkdir -p ~/opensource
 touch ~/.profile
 
-echo '[-] installing sway window manager [-]'
+echo '[-] installing window manager and essential packages [-]'
 sudo dnf install -y sway swaylock dunst grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
 sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme
+
+echo '[-] installing enhanced cli tools [-]'
+sudo dnf install -y tree fastfetch polkit blueman btop duf pdfgrep tldr hyperfine procs bc
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
