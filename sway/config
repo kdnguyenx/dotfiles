@@ -146,8 +146,10 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/gammastep
     # We just use 1-10 as the default.
     # Always open some programs on specified workspace
     assign [app_id="[Ff]irefox"] number 1
-    assign [app_id="[Tt]hunderbird"] number 1
+    assign [app_id="[Tt]hunar"] number 1
+    assign [app_id="1[Pp]assword"] number 1
     assign [app_id="[Aa]lacritty"] number 2
+    assign [app_id="[Tt]hunderbird"] number 4
     assign [class="[Dd]iscord"] number 4
     assign [class="[Ss]team"] number 9
 #
