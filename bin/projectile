@@ -5,14 +5,33 @@ if [ -z "$1" ]; then
   echo "usage: $0 <repo_name>"
   exit 1
 fi
-name="$1"
-dir=$(find ~/personal ~/repos ~/opensource -maxdepth 1 -type d -name "$name" | head -n1)
-if [ -z "$dir" ]; then
-  echo 'repository "$name" not found.'
-  exit 0
+# split by / and get the first part
+IFS='/' read -ra parts <<< "$1"
+name="${parts[0]}"
+if [ ${#parts[@]} -gt 1 ]; then
+  extra=$(IFS=/; echo "${parts[*]:1}")
 fi
-session_name=$(basename "$dir")
-if ! tmux has-session -t "$session_name" 2>/dev/null; then
-  tmux new-session -s "$session_name" -d -c "$dir"
+# find repo by name
+if ! tmux has-session -t "$name" 2>/dev/null; then
+  dir=$(find ~/personal ~/repos ~/opensource -maxdepth 1 -type d -name "$name" | head -n1)
+  if [ -z "$dir" ]; then
+    echo "repo $name not found."
+    exit 1
+  fi
+  # add sub-path if not empty
+  if [ ! -z "$extra" ]; then
+    dir="$dir/$extra"
+  fi
+  # return if not a dir
+  if [ ! -d "$dir" ]; then
+    echo "not a valid repo"
+    exit 1
+  fi
+  # create to session
+  name=$(basename "$dir")
+  if ! tmux has-session -t "$name" 2>/dev/null; then
+    tmux new-session -s "$name" -d -c "$dir"
+  fi
 fi
-tmux switch -t "$session_name"
+# switch
+tmux switch -t "$name"
