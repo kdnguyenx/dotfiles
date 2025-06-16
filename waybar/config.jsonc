@@ -20,7 +20,7 @@
         "show-empty": false,
         "tooltip": true,
         "tooltip-format": "{app}: {title}",
-        "format-icons": ["", "󰂒  "],
+        "format-icons": ["", " "],
     },
     "tray": {
         "icon-size": 15,
@@ -77,8 +77,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "󱄛 ",
-            "deactivated": "󰮤 "
+            "activated": " 󰣉 ",
+            "deactivated": " 󰌪 "
         }
     }
 }

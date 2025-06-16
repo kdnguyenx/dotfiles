@@ -13,8 +13,8 @@ window#waybar {
 
 #workspaces {
   margin-left: 3px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   border: 1px solid @pine;
 }
 
@@ -33,20 +33,22 @@ button {
 
 #mode {
   margin-left: 3px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   padding: 0px 5px;
   border: 1px solid @iris;
   background-color: @surface;
   color: @muted;
 }
 
-#language {
-  color: @pine;
+#scratchpad {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid $iris;
 }
 
 #cpu {
-  color: @rose;
+  color: @love;
 }
 
 #memory {
@@ -58,9 +60,11 @@ button {
 }
 
 #network {
-  color: @iris;
+  color: @pine;
 }
 
 #idle_inhibitor {
-  margin-right: 6px;
+  margin: 5px 6px 5px 0;
+  padding: 3px;
+  border: 1px solid $iris;
 }
