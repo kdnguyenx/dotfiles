@@ -53,9 +53,9 @@
     },
     "network": {
         "format-wifi": "󰤢  {essid} [{bandwidthTotalBits}]",
-        "format-ethernet": "  {ipaddr}/{cidr}",
+        "format-ethernet": "󰈀  {ipaddr}/{cidr}",
         "tooltip-format": "{gwaddr}",
-        "format-linked": "  {ifname} (No IP)",
+        "format-linked": "󰈀  {ifname} (No IP)",
         "format-disconnected": "󰤮 Disconnected",
         "format-alt": "󰤢  {ifname}: {ipaddr}/{cidr}"
     },
