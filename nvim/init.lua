@@ -9,3 +9,4 @@ require("me.lsp")
 -- and update by `git submodule update --remote --rebase --recursive`
 require("me.plugins.colors")
 require("me.plugins.treesitter")
+require("me.plugins.fzf")

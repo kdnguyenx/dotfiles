@@ -1,37 +1,12 @@
 #!/usr/bin/env bash
 # vim: ft=bash
-set -e
-if [ -z "$1" ]; then
-  echo "usage: $0 <repo_name>"
-  exit 1
+dir=$(find ~/personal ~/repos ~/opensource -maxdepth 3 -type d | fzf --tmux)
+if [ -z "${dir}" ]; then
+  exit 0
 fi
-# split by / and get the first part
-IFS='/' read -ra parts <<< "$1"
-name="${parts[0]}"
-if [ ${#parts[@]} -gt 1 ]; then
-  extra=$(IFS=/; echo "${parts[*]:1}")
+name=$(basename "$dir")
+if ! tmux has-session -t $name 2>/dev/null; then
+  tmux new-session -s $name -d -c $dir
+  # tmux send-keys -t $name 'nvim .' C-m
 fi
-# find repo by name
-if ! tmux has-session -t "$name" 2>/dev/null; then
-  dir=$(find ~/personal ~/repos ~/opensource -maxdepth 1 -type d -name "$name" | head -n1)
-  if [ -z "$dir" ]; then
-    echo "repo $name not found."
-    exit 1
-  fi
-  # add sub-path if not empty
-  if [ ! -z "$extra" ]; then
-    dir="$dir/$extra"
-  fi
-  # return if not a dir
-  if [ ! -d "$dir" ]; then
-    echo "not a valid repo"
-    exit 1
-  fi
-  # create to session
-  name=$(basename "$dir")
-  if ! tmux has-session -t "$name" 2>/dev/null; then
-    tmux new-session -s "$name" -d -c "$dir"
-  fi
-fi
-# switch
-tmux switch -t "$name"
+tmux switch -t $name
