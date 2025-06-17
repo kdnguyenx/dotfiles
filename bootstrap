@@ -61,10 +61,10 @@ touch ~/.profile
 echo '[-] installing window manager and essential packages [-]'
 sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
+sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme
 
 echo '[-] installing enhanced cli tools [-]'
-sudo dnf install -y tree fastfetch polkit btop duf pdfgrep tldr hyperfine procs bc
+sudo dnf install -y tree fastfetch polkit htop btop duf pdfgrep tldr hyperfine procs
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/

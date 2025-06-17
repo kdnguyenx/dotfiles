@@ -14,7 +14,7 @@ if ! hash brew &> /dev/null; then
 fi
 brew update
 brew install curl wget git coreutils watch ncdu cmake ninja parallel tmux fzf ripgrep jq golang
-brew install alacritty tree fastfetch btop duf pdfgrep tldr hyperfine procs bc
+brew install alacritty tree fastfetch htop btop duf pdfgrep tldr hyperfine procs
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
