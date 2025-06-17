@@ -14,7 +14,7 @@ echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
 sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake ninja-build
 sudo dnf install -y watch ncdu make autoconf automake  meson pkg-config
-sudo dnf install -y flex bison check parallel vim tmux ripgrep jq
+sudo dnf install -y flex bison check parallel vim tmux ripgrep jq fd-find
 
 echo '[-] enabling rpmfusion [-]'
 sudo dnf install -y \

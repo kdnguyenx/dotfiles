@@ -31,26 +31,35 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
     callback = function() vim.cmd.cwindow() end,
 })
 -- wildmenu completion find
-local function complete_find(pattern)
-    return vim.fn.systemlist({"rg", "--files", "--hidden", "--follow", "--glob", pattern})
+local function complete_fd(pattern)
+    local cmd = { "fd", "-H", "-E", ".git", "-td", "-tf" }
+    if vim.fn.isdirectory(pattern) > 0 then
+        table.insert(cmd, "--full-path")
+        table.insert(cmd, pattern)
+    else
+        table.insert(cmd, "-g")
+        table.insert(cmd, pattern)
+        table.insert(cmd, "--strip-cwd-prefix=always")
+    end
+    return vim.fn.systemlist(cmd)
 end
 -- custom find command
-vim.api.nvim_create_user_command('Find', function(opts)
+vim.api.nvim_create_user_command('Fd', function(opts)
     local item = opts.args
-    if vim.fn.filereadable(item) > 0 then
+    if vim.fn.filereadable(item) > 0 or vim.fn.isdirectory(item) > 0 then
         vim.cmd('edit ' .. vim.fn.fnameescape(item))
         return
     end
-    local matches = complete_find(item)
+    local matches = complete_fd(item)
     if #matches > 0 then
         vim.cmd('edit ' .. vim.fn.fnameescape(matches[1]))
     else
         vim.notify("no files found", vim.log.levels.WARN)
     end
 end, { nargs = 1, complete = function(arg_lead, cmd_line, cursor_pos)
-        return complete_find(arg_lead)
+        return complete_fd(arg_lead)
     end })
 -- remap fuzzy find keys
-vim.keymap.set("n", "<leader>f", [[:Find **<Left>]])
-vim.keymap.set("v", "<leader>f", [["0y:Find *<C-r>0*<C-z>]])
-vim.keymap.set("n", "<leader>F", [[:Find *<C-r><C-w>*<C-z>]])
+vim.keymap.set("n", "<leader>f", [[:Fd *]])
+vim.keymap.set("v", "<leader>f", [["0y:Fd *<C-r>0*]])
+vim.keymap.set("n", "<leader>F", [[:Fd *<C-r><C-w>*]])
