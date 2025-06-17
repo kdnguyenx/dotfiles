@@ -20,9 +20,6 @@ filetype indent on
 " re-map leader key
 nnoremap <space> <nop>
 let g:mapleader = ' '
-" disable netrw on server
-let g:loaded_netrwPlugin = 1
-let g:loaded_netrw = 1
 " set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
 " auto read file change
@@ -38,7 +35,6 @@ set backspace=indent,eol,start
 set visualbell
 " add numbers to each line on the left-hand side.
 set number relativenumber ruler hidden
-set wrap nopaste
 " this option controls the behavior when switching between buffers
 set switchbuf=uselast
 " show several useful info

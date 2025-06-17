@@ -1,26 +1,36 @@
-#!/usr/bin/bash
-# install essential tools for my linux development environment
+#!/usr/bin/env bash
+# install essential tools for my unix-like development environment
 # vim: ft=bash
 # -----
 set -e
 
-echo '[-] checking secure boot state [-]'
-if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
-  echo "could not determine the secure boot state."
-  exit 1
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! xcode-select -p &> /dev/null; then
+    echo '[-] installing xcode command line tools [-]'
+    xcode-select --install
+  fi
+  if ! hash brew &> /dev/null; then
+    echo '[-] installing homebrew [-]'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+
+  echo '[-] installing prerequisite packages [-]'
+  brew update
+  brew install curl wget git coreutils watch ncdu cmake ninja tree
+  brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
+  brew install maccy
+
+  echo '[-] installing favourite font [-]'
+  brew install --cask font-hack
+else
+  echo '[-] installing prerequisite packages [-]'
+  sudo apt update && sudo apt upgrade -y
+  sudo apt install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
+  sudo apt install -y watch ncdu make autoconf automake parallel vim tmux fzf ripgrep jq
+  sudo apt install -y tree htop pdfgrep tldr hyperfine procs
 fi
-
-echo '[-] installing prerequisite packages [-]'
-sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake ninja-build
-sudo dnf install -y watch ncdu make autoconf automake  meson pkg-config
-sudo dnf install -y flex bison check parallel vim tmux fzf ripgrep jq
-
-echo '[-] enabling rpmfusion [-]'
-sudo dnf install -y \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -29,42 +39,17 @@ function linking() {
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
-
-  mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
-  ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
-  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-
-  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
-  mkdir -p $XDG_DATA_HOME/nvim/site
-  ln -sfn $(pwd)/pack $XDG_DATA_HOME/nvim/site/pack
-
-  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
-  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
-
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
-
-  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 }
 echo '[-] linking dotfiles [-]'
 linking
 
 echo '[-] creating essential directories [-]'
-mkdir -p ~/.local/bin
 mkdir -p ~/personal
 mkdir -p ~/repos
 mkdir -p ~/opensource
 touch ~/.profile
-
-echo '[-] installing window manager and essential packages [-]'
-sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme
-
-echo '[-] installing enhanced cli tools [-]'
-sudo dnf install -y tree fastfetch polkit htop btop duf pdfgrep tldr hyperfine procs
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -75,42 +60,14 @@ target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
   echo '[-] cloning zsh-autosuggestions [-]'
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
-fi
-
-target_dir=~/opensource/neovim
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim.git $target_dir
+else
   cd $target_dir
-  # git checkout nightly
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
+  git pull --rebase
 fi
 
-target_dir=~/opensource/ibus-bamboo
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building ibus-bamboo [-]'
-  sudo dnf install -y ibus make go libX11-devel libXtst-devel gtk3-devel
-  git clone https://github.com/BambooEngine/ibus-bamboo.git $target_dir
-  cd $target_dir
-  sudo make install PREFIX=/usr
-fi
-
-target_dir=$XDG_DATA_HOME/fonts
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing favourite font [-]'
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
-  mkdir -p $target_dir
-  unzip Hack.zip -d $target_dir
-  rm -f Hack.zip
-  fc-cache -f -v
-fi
-
-if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
-  echo '[-] installing steam essential packages [-]'
-  sudo dnf install -y steam discord rocm-smi mangohud gamescope
-  echo 'remember to add `mangohud %command%` to steam launch options'
-fi
+echo '[-] downloading vim plugin manager [-]'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 current_shell=$(echo $SHELL)
 if [ "$current_shell" != "/usr/bin/zsh" ]; then
