@@ -8,18 +8,29 @@ autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
 set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 " set the characters for the invisibles
 set list listchars=tab:›\ ,eol:¬,trail:·
-set signcolumn=no title
 " set default regexp engine to nfa
-set regexpengine=2
+set regexpengine=2 title
 syntax enable
 " disable temporary files.
 set nobackup noswapfile
 " detect filetype
 filetype on
+filetype plugin on
 filetype indent on
+filetype indent plugin on
 " re-map leader key
 nnoremap <space> <nop>
 let g:mapleader = ' '
+" list of plugins, make sure you use single quotes
+call plug#begin()
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-signify'
+Plug 'machakann/vim-highlightedyank'
+call plug#end()
 " set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
 " auto read file change
@@ -32,7 +43,7 @@ set formatoptions=tcqj
 set splitbelow splitright
 " allow backspacing over listed items
 set backspace=indent,eol,start
-set visualbell
+set visualbell updatetime=100
 " add numbers to each line on the left-hand side.
 set number relativenumber ruler hidden
 " this option controls the behavior when switching between buffers
@@ -83,3 +94,5 @@ nnoremap <leader>rm :!rm -rf %<C-z>
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
+" plug conf
+let g:highlightedyank_highlight_duration = 150
