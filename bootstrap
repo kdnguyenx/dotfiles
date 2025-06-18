@@ -14,7 +14,6 @@ echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
 sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
 sudo dnf install -y watch ncdu autoconf automake parallel vim tmux fzf ripgrep jq
-sudo dnf install -y tree htop btop pdfgrep tldr hyperfine procs
 
 echo '[-] enabling rpmfusion [-]'
 sudo dnf install -y \
