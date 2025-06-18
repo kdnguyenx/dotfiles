@@ -56,6 +56,7 @@ set nostartofline
 set ttyfast history=10000
 " basic theme
 set background=dark laststatus=2
+colorscheme default
 " searching
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
 " re-size split windows using arrow keys
@@ -94,5 +95,11 @@ nnoremap <leader>rm :!rm -rf %<C-z>
 nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
-" plug conf
+" fzf options
+let g:fzf_vim = {}
+let g:fzf_layout = {'down': '41%'}
+let g:fzf_vim.preview_window = ['right,41%,<70(up,41%)']
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>F :GFiles<CR>
+" highlight yank duration
 let g:highlightedyank_highlight_duration = 150

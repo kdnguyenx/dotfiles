@@ -20,7 +20,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   brew update
   brew install curl wget git coreutils watch ncdu cmake ninja tree
   brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
-  brew install maccy
+  brew install maccy universal-ctags
 
   echo '[-] installing favourite font [-]'
   brew install --cask font-hack
@@ -29,7 +29,7 @@ else
   sudo apt update && sudo apt upgrade -y
   sudo apt install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
   sudo apt install -y watch ncdu make autoconf automake parallel vim tmux fzf ripgrep jq
-  sudo apt install -y tree htop pdfgrep tldr hyperfine procs
+  sudo apt install -y tree htop pdfgrep tldr hyperfine procs universal-ctags
 fi
 
 function linking() {
