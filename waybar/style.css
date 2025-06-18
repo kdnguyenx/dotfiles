@@ -1,0 +1,63 @@
+@define-color bg rgba(24, 24, 24, 0.65);
+@define-color base rgba(35, 33, 54, 0.65);
+@define-color gray rgba(34, 34, 34, 0.65);
+@define-color pine rgba(62, 143, 176, 0.85);
+@define-color iris rgba(196, 167, 231, 0.65);
+@define-color love rgba(235, 111, 146, 0.65);
+
+* {
+  font-family: Adwaita Sans, sans-serif;
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: @bg;
+  color: @text;
+  border: 3px solid @gray;
+}
+
+#workspaces {
+  margin-left: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 1px solid @pine;
+}
+
+button {
+  border-radius: 0;
+}
+
+#workspaces button {
+  padding: 0 3px;
+  background-color: @base;
+}
+
+#workspaces button.focused {
+  background-color: @pine;
+}
+
+#mode {
+  margin-left: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 0px 5px;
+  border: 1px solid @iris;
+}
+
+#scratchpad {
+  margin: 6px 0;
+  padding: 0 5px;
+  border: 1px solid @iris;
+}
+
+#idle_inhibitor {
+  margin: 6px 6px 6px 0;
+  padding-right: 3px;
+  border: 1px solid @iris;
+  color: @iris;
+}
+
+#idle_inhibitor.activated {
+  border-color: @love;
+  color: @love;
+}
