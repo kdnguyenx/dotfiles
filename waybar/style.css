@@ -1,7 +1,7 @@
 @define-color bg rgba(24, 24, 24, 0.65);
 @define-color fg rgba(255, 255, 255, 1);
 @define-color gray rgba(34, 34, 34, 0.65);
-@define-color pine rgba(62, 143, 176, 0.85);
+@define-color blue rgba(40, 85, 119, 0.85);
 @define-color magenta rgba(196, 167, 231, 0.65);
 @define-color red rgba(235, 111, 146, 0.65);
 
@@ -20,7 +20,7 @@ window#waybar {
   margin-left: 3px;
   margin-top: 3px;
   margin-bottom: 3px;
-  border: 1px solid @pine;
+  border: 2px solid @blue;
 }
 
 button {
@@ -28,12 +28,12 @@ button {
 }
 
 #workspaces button {
-  padding: 0 3px;
+  padding: 0 5px;
   background-color: @gray;
 }
 
 #workspaces button.focused {
-  background-color: @magenta;
+  background-color: @blue;
 }
 
 #mode {
@@ -41,7 +41,6 @@ button {
   margin-top: 3px;
   margin-bottom: 3px;
   padding: 0px 5px;
-  border: 1px solid @magenta;
 }
 
 #scratchpad {

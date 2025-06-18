@@ -82,7 +82,7 @@ set history=10000
 " basic theme
 set background=dark
 set laststatus=2
-colorscheme jellybeans
+silent! colorscheme jellybeans
 " searching
 set incsearch
 set hlsearch
