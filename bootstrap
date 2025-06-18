@@ -30,6 +30,7 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
+  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
 
@@ -53,7 +54,7 @@ touch ~/.profile
 
 echo '[-] installing window manager and essential packages [-]'
 sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
+sudo dnf install -y network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
 sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
 
 echo '[-] installing enhanced cli tools [-]'
