@@ -4,8 +4,10 @@
 # -----
 set -e
 
-echo '[-] installing xcode command line tools [-]'
-xcode-select --install
+if ! xcode-select -p &> /dev/null; then
+  echo '[-] installing xcode command line tools [-]'
+  xcode-select --install
+fi
 if ! hash brew &> /dev/null; then
   echo '[-] installing homebrew [-]'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -13,8 +15,9 @@ if ! hash brew &> /dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 brew update
-brew install curl wget git coreutils watch ncdu cmake ninja parallel tmux fzf ripgrep jq golang
-brew install alacritty tree fastfetch htop btop duf pdfgrep tldr hyperfine procs
+brew install curl wget git coreutils watch ncdu cmake ninja tree
+brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
+brew install maccy btop universal-ctags
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -23,15 +26,6 @@ function linking() {
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
-
-  mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-
-  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
-  mkdir -p $XDG_DATA_HOME/nvim/site
-  ln -sfn $(pwd)/pack $XDG_DATA_HOME/nvim/site/pack
-
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
 }
@@ -60,15 +54,5 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo '[-] installing favourite font [-]'
 brew install --cask font-hack-nerd-font
-
-target_dir=~/opensource/neovim
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim.git $target_dir
-  cd $target_dir
-  # git checkout nightly
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-fi
 
 echo '[-] device ready, restart your computer. [-]'

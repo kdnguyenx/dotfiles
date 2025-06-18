@@ -12,9 +12,9 @@ fi
 
 echo '[-] installing prerequisite packages [-]'
 sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake ninja-build
-sudo dnf install -y watch ncdu make autoconf automake  meson pkg-config
-sudo dnf install -y flex bison check parallel vim tmux fzf ripgrep jq
+sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
+sudo dnf install -y watch ncdu autoconf automake parallel vim tmux fzf ripgrep jq
+sudo dnf install -y tree htop btop pdfgrep tldr hyperfine procs
 
 echo '[-] enabling rpmfusion [-]'
 sudo dnf install -y \
@@ -71,15 +71,9 @@ if [ ! -d "$target_dir" ] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
 fi
 
-target_dir=~/opensource/neovim
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building neovim [-]'
-  git clone https://github.com/neovim/neovim.git $target_dir
-  cd $target_dir
-  # git checkout nightly
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-fi
+echo '[-] downloading vim plugin manager [-]'
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 target_dir=~/opensource/ibus-bamboo
 if [ ! -d "$target_dir" ] ; then
@@ -99,10 +93,6 @@ if [ ! -d "$target_dir" ] ; then
   rm -f Hack.zip
   fc-cache -f -v
 fi
-
-echo '[-] downloading vim plugin manager [-]'
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
