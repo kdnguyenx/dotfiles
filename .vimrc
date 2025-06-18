@@ -26,6 +26,7 @@ nnoremap <space> <nop>
 let g:mapleader = ' '
 " list of plugins, make sure you use single quotes
 call plug#begin()
+Plug 'nanotech/jellybeans.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
@@ -81,6 +82,7 @@ set history=10000
 " basic theme
 set background=dark
 set laststatus=2
+colorscheme jellybeans
 " searching
 set incsearch
 set hlsearch
