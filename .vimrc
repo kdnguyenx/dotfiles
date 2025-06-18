@@ -18,6 +18,9 @@ filetype indent on
 filetype indent plugin on
 filetype plugin on
 filetype on
+" ftdetect
+au BufRead,BufNewFile *.log,*.log{.*} set ft=messages
+au BufRead,BufNewFile *.psql setlocal ft=sql
 " re-map leader key
 nnoremap <space> <nop>
 let g:mapleader = ' '
@@ -31,6 +34,11 @@ Plug 'tpope/vim-surround'
 Plug 'mhinz/vim-signify'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
+" language specifi config
+au FileType c,cpp,java,python setl sw=4 ts=4 sts=4 et
+au FileType javascript,typescript setl sw=2 ts=2 sts=2 et
+au FileType go setl sw=4 ts=4 sts=4 noet
+au FileType json setl sw=4 ts=4 sts=4 et formatprg=jq
 " set default indentation
 set expandtab
 set smarttab
@@ -106,9 +114,9 @@ nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
 " enable auto completion menu after pressing tab.
 set wildmenu
+set wildoptions=pum,tagfile
 set wildmode=full
 set wildcharm=<C-z>
-set wildmenu
 set wildignore=*.o,*~,*.a,*.so,*.pyc,*.swp,*.class
 set wildignore+=*/target/*,*/build/*,*/generated-sources/*
 set wildignore+=*/__pycache__/*,*/node_modules/*
@@ -146,7 +154,7 @@ nnoremap <silent> gd mMgd
 nnoremap <silent> # mM#
 nnoremap <silent> * mM*
 " clear highlights on search when pressing <esc> in normal mode and exit terminal
-nnoremap <Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc> :nohlsearch<CR>
 nnoremap - :Explore<CR>
 autocmd FileType netrw nnoremap <buffer> <C-c> <Cmd>Rexplore<CR>
 " -- plugins configuration --
