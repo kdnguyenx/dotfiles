@@ -26,6 +26,12 @@ function linking() {
   ln -sfn $(pwd)/.psqlrc ~/.psqlrc
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
+  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+
+  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
+  mkdir -p $XDG_DATA_HOME/nvim/site
+  ln -sfn $(pwd)/pack $XDG_DATA_HOME/nvim/site/pack
+
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
 }

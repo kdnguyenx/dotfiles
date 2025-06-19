@@ -19,21 +19,6 @@ vim.opt.updatetime = 100
 -- sets how neovim will display certain whitespace characters in the editor.
 vim.opt.listchars = { tab = "› ", trail = "·", eol = "¬" }
 vim.opt.list = true
--- set default indentation
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftround = true
--- do not save temporary files.
-vim.opt.backup = false
-vim.opt.swapfile = false
-vim.opt.wrap = true
-vim.opt.undofile = true
--- preview substitutions live, as you type
-vim.opt.inccommand = "split"
-vim.opt.startofline = false
-vim.opt.diffopt:append("vertical")
 -- enable auto completion menu after pressing tab
 vim.opt.wildmenu = true
 vim.opt.wildmode = { "full" }
@@ -49,6 +34,21 @@ if vim.fn.has("mac") > 0 then
   vim.opt.wildignore:append("*/Library/*")
   vim.opt.wildignore:append("*/.DS_Store")
 end
+-- set default indentation
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftround = true
+-- do not save temporary files.
+vim.opt.backup = false
+vim.opt.swapfile = false
+vim.opt.wrap = true
+vim.opt.undofile = true
+-- preview substitutions live, as you type
+vim.opt.inccommand = "split"
+vim.opt.startofline = false
+vim.opt.diffopt:append("vertical")
 -- basic theming
 vim.opt.background = "dark"
 vim.opt.termguicolors = false

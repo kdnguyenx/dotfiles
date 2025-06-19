@@ -60,13 +60,6 @@ if vim.fn.executable("rg") > 0 then
     vim.keymap.set("n", "<leader>G", [[:silent grep! --case-sensitive '<C-r><C-w>'<CR>]])
     vim.keymap.set("n", "<leader>/", [[:silent grep! --hidden --no-ignore ''<Left>]])
 end
--- diff mode
-vim.keymap.set("n", "<leader>du", function() vim.cmd.diffget("//3") end)
-vim.keymap.set("n", "<leader>dh", function() vim.cmd.diffget("//2") end)
--- set global mark before gd/#/*
-vim.keymap.set("n", "gd", "mMgd")
-vim.keymap.set("n", "#", "mM#")
-vim.keymap.set("n", "*", "mM*")
 -- run ctags in the background
 vim.keymap.set("n", "<leader>tg", function()
     if vim.fn.executable("ctags") < 1 then
@@ -76,3 +69,10 @@ vim.keymap.set("n", "<leader>tg", function()
     local job = vim.fn.jobstart({ "ctags", "--tag-relative=never", "-G", "-R", "." })
     print("generate tags..., id: " .. job)
 end)
+-- set global mark before gd/#/*
+vim.keymap.set("n", "gd", "mMgd")
+vim.keymap.set("n", "#", "mM#")
+vim.keymap.set("n", "*", "mM*")
+-- diff mode
+vim.keymap.set("n", "<leader>du", function() vim.cmd.diffget("//3") end)
+vim.keymap.set("n", "<leader>dh", function() vim.cmd.diffget("//2") end)

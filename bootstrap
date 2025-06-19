@@ -30,9 +30,13 @@ function linking() {
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
+  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
+
+  mkdir -p ${XDG_DATA_HOME:=~/.local/share}
+  mkdir -p $XDG_DATA_HOME/nvim/site
+  ln -sfn $(pwd)/pack $XDG_DATA_HOME/nvim/site/pack
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
