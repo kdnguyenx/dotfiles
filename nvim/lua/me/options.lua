@@ -19,6 +19,7 @@ vim.opt.updatetime = 100
 -- sets how neovim will display certain whitespace characters in the editor.
 vim.opt.listchars = { tab = "› ", trail = "·", eol = "¬" }
 vim.opt.list = true
+vim.opt.colorcolumn = "80"
 -- enable auto completion menu after pressing tab
 vim.opt.wildmenu = true
 vim.opt.wildmode = { "full" }
@@ -62,3 +63,8 @@ if vim.fn.executable("rg") > 0 then
   vim.opt.grepprg = "rg --vimgrep --smart-case --no-heading --column"
   vim.opt.grepformat:prepend("%f:%l:%c:%m")
 end
+-- enable experimental tui
+require("vim._extui").enable({
+    enable = true,
+    msg = { target = "cmd" },
+})
