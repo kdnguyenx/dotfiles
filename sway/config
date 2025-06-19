@@ -16,7 +16,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term xfce4-terminal
+set $term alacritty
 # Your preferred application launcher
 # rofi-wayland
 set $rofi_cmd rofi -terminal '$term'
@@ -146,7 +146,7 @@ bindsym $mod+Shift+n exec ~/dotfiles/bin/gammastep
     # We just use 1-10 as the default.
     # Always open some programs on specified workspace
     assign [app_id="[Ff]irefox"] number 1
-    assign [app_id="[Tt]erminal"] number 2
+    assign [app_id="[Aa]lacritty"] number 2
     assign [class="[Dd]iscord"] number 4
     assign [class="[Ss]team"] number 9
 #
