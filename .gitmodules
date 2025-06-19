@@ -13,3 +13,6 @@
 [submodule "pack/plugins/start/treesitter"]
 	path = pack/plugins/start/treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
+[submodule "pack/plugins/start/rose-pine"]
+	path = pack/plugins/start/rose-pine
+	url = https://github.com/rose-pine/neovim

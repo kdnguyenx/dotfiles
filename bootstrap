@@ -32,6 +32,7 @@ function linking() {
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
+  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
   mkdir -p ${XDG_DATA_HOME:=~/.local/share}
@@ -61,7 +62,7 @@ touch ~/.profile
 
 echo '[-] installing window manager and essential packages [-]'
 sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
+sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
 sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
 
 echo '[-] installing enhanced cli tools [-]'
@@ -76,6 +77,16 @@ target_dir=~/.zsh/zsh-autosuggestions
 if [ ! -d "$target_dir" ] ; then
   echo '[-] cloning zsh-autosuggestions [-]'
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
+fi
+
+target_dir=~/opensource/neovim
+if [ ! -d "$target_dir" ] ; then
+  echo '[-] building neovim [-]'
+  git clone https://github.com/neovim/neovim.git $target_dir
+  cd $target_dir
+  # git checkout nightly
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
 fi
 
 target_dir=~/opensource/ibus-bamboo

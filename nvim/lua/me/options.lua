@@ -1,6 +1,6 @@
 -- enable mouse mode
 vim.opt.mouse = "a"
-vim.opt.regexpengine = 2
+vim.opt.regexpengine = 0
 -- don"t show the mode, since it"s already in the status line
 vim.opt.showmode = true
 vim.opt.showcmd = true
@@ -53,7 +53,7 @@ vim.opt.diffopt:append("vertical")
 vim.opt.background = "dark"
 vim.opt.termguicolors = false
 vim.opt.laststatus = 2
-vim.cmd.colorscheme("default")
+vim.cmd.colorscheme("evening")
 -- remove background
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'NONE' })

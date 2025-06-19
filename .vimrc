@@ -10,7 +10,7 @@ set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
 set list listchars=tab:›\ ,eol:¬,trail:·
 set signcolumn=no title
 " set default regexp engine to nfa
-set regexpengine=2
+set regexpengine=0
 syntax enable
 " disable temporary files.
 set nobackup noswapfile
