@@ -70,11 +70,6 @@ nnoremap * mM*
 " -----
 " neovim specific options
 if has('nvim')
-  set inccommand=split  " shows effects of substitute and other commands
-  set undofile  " enable undo history
-  set number relativenumber ruler  " add numbers to each line on the left-hand side.
-  set cursorline
-
   " yank marked text/paste to/from global register
   nnoremap <leader>Y "+Y
   vnoremap <leader>y "+y
@@ -113,6 +108,10 @@ if has('nvim')
   Plug 'junegunn/fzf.vim'
   Plug 'mhinz/vim-signify'
   call plug#end()
+
+  set inccommand=split  " shows effects of substitute and other commands
+  set undofile  " enable undo history
+  set cursorline
 
   " clear highlights on search when pressing <esc> in normal mode
   nnoremap <silent> <Esc> <Cmd>nohlsearch<CR>
