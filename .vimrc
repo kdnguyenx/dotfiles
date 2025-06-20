@@ -1,20 +1,16 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 set background=dark
-" set regexpengine=2 " set default regexp engine to nfa
+set regexpengine=2 " set default regexp engine to nfa
 
 " re-map leader key
 nnoremap <Space> <Nop>
 let g:mapleader = ' '
 
-syntax enable  " enable syntax
-filetype on  " detect filetype
-filetype indent on  " filetype indentation
-
 set encoding=utf-8 fileencoding=utf-8  " encoding
 set nobackup noswapfile  " disable temporary files.
 set switchbuf=uselast  " this option controls the behavior when switching between buffers
-set laststatus=0  " disable statusline
+set laststatus=2  " enable statusline
 
 set list listchars=tab:›\ ,eol:¬,trail:·  " set the characters for the invisibles
 set title visualbell hidden
@@ -29,7 +25,6 @@ set wildmenu wildmode=full wildcharm=<C-z> wildmenu  " enable auto completion me
 
 set splitbelow splitright  " preferred split behaviour
 set backspace=indent,eol,start  " allow backspacing over listed items
-set number relativenumber ruler  " add numbers to each line on the left-hand side.
 
 set mouse=a mousemodel=popup_setpos
 set nostartofline  " the cursor is kept in the same column
@@ -67,14 +62,6 @@ vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
 " search current marked text
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
 
-" yank marked text/paste to/from global register
-nnoremap <leader>Y "+Y
-vnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-nnoremap <leader>cf :let @+=expand('%')<CR>
-
 " set global mark before gd/#/*
 nnoremap gd mMgd
 nnoremap # mM#
@@ -83,13 +70,21 @@ nnoremap * mM*
 " -----
 " neovim specific options
 if has('nvim')
-  set laststatus=2
   set inccommand=split  " shows effects of substitute and other commands
-  set colorcolumn=80
   set undofile  " enable undo history
+  set number relativenumber ruler  " add numbers to each line on the left-hand side.
+  set cursorline
+
+  " yank marked text/paste to/from global register
+  nnoremap <leader>Y "+Y
+  vnoremap <leader>y "+y
+  nnoremap <leader>p "+p
+  nnoremap <leader>P "+P
+  vnoremap <leader>p "+p
+  nnoremap <leader>cf :let @+=expand('%')<CR>
 
   autocmd QuickFixCmdPost [^l]* cwindow " open the quickfix window whenever a quickfix command is executed
-  autocmd TextYankPost * silent! lua vim.hl.on_yank{ higroup='IncSearch', timeout=100 }
+  autocmd TextYankPost * silent! lua vim.hl.on_yank { higroup='IncSearch', timeout=100 }
 
   " quick exit some filetypes
   autocmd FileType help,qf,checkhealth,fugitive,fugitiveblame
@@ -112,23 +107,15 @@ if has('nvim')
 
   " plugins, make sure you use single quotes
   call plug#begin()
-  Plug 'rose-pine/neovim', { 'as': 'rose-pine' }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'mhinz/vim-signify'
-  Plug 'nvim-treesitter/nvim-treesitter'
   call plug#end()
 
-  set termguicolors
-  lua require"rose-pine".setup { dark_variant = "moon", styles = { italic = false } }
-  silent! colorscheme rose-pine
-  hi Normal ctermbg=NONE guibg=NONE
-  hi NormalNC ctermbg=NONE guibg=NONE
-
   " clear highlights on search when pressing <esc> in normal mode
-  nnoremap <Esc> <Cmd>nohlsearch<CR>
+  nnoremap <silent> <Esc> <Cmd>nohlsearch<CR>
   nnoremap - <Cmd>Explore<CR>
   autocmd FileType netrw nnoremap <buffer> <C-c> <Cmd>Rexplore<CR>
   autocmd FileType netrw setl colorcolumn=
@@ -144,33 +131,25 @@ if has('nvim')
   au BufRead,BufNewFile *.psql setl ft=sql
 
   " custom fzf
-  let g:fzf_layout = { 'down': "41%" }
+  let g:fzf_layout = { 'down': '41%' }
   let g:fzf_vim = { 'preview_window': [ 'right,41%,<70(up,41%)' ] }
+  autocmd! FileType fzf set laststatus=0 noshowmode noruler
+        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
   nnoremap <leader>ff <Cmd>Files<CR>
   nnoremap <leader>fg <Cmd>GFiles<CR>
 
-" --
-" neovim lua configs go here
-lua << EOF
--- enable experimental tui
-require("vim._extui").enable({
-  enable = true,
-  msg = { target = "cmd" },
-})
+  " enable experimental tui
+  lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' }, })
+  set termguicolors  " enable 24-bit RGB color
+  hi Normal ctermbg=NONE guibg=NONE
+  hi NormalNC ctermbg=NONE guibg=NONE
 
--- treesitter config
-require("nvim-treesitter.configs").setup({
-  modules = {},
-  ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown" },
-  sync_install = false,
-  auto_install = true,
-  ignore_install = {},
-  highlight = { enable = true, additional_vim_regex_highlighting = false },
-  indent = { enable = true }
-})
+" --
+" neovim lua multiple lines config
+lua << EOF
 
 -- default for all servers
-vim.lsp.config("*", {
+vim.lsp.config('*', {
   on_attach = function(client, bufnr)
     -- enable inlay hint
     vim.lsp.inlay_hint.enable(true)
@@ -178,29 +157,29 @@ vim.lsp.config("*", {
     -- mappings.
     -- see `:help vim.lsp.*` for documentation on any of the below functions
     -- lsp navigation keymaps
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, { buffer = bufnr })
-    vim.keymap.set("i", "<C-s>", function()
-    vim.lsp.buf.signature_help({ border = "single", title = "help" })
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'single' }) end, { buffer = bufnr })
+    vim.keymap.set('i', '<C-s>', function()
+      vim.lsp.buf.signature_help({ border = 'single', title = 'help' })
     end, { buffer = bufnr })
 
     -- lsp actions
-    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
-    vim.keymap.set("v", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
-    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = bufnr })
+    vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set('v', 'ga', vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set('n', 'gR', vim.lsp.buf.rename, { buffer = bufnr })
 
     -- diagnostics keymaps
-    vim.keymap.set("n", "<C-p>", function() vim.diagnostic.jump({ count = -1, float = false }) end)
-    vim.keymap.set("n", "<C-n>", function() vim.diagnostic.jump({ count = 1, float = false }) end)
+    vim.keymap.set('n', '<C-p>', function() vim.diagnostic.jump({ count = -1, float = false }) end)
+    vim.keymap.set('n', '<C-n>', function() vim.diagnostic.jump({ count = 1, float = false }) end)
 
     -- diagnostics list
-    vim.keymap.set("n", "<leader>xx", function()
-    vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+    vim.keymap.set('n', '<leader>xx', function()
+      vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
     end)
 
     -- diagnostic signs
-    vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
+    vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = 'single', } })
 
     -- completion
     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
@@ -209,19 +188,19 @@ vim.lsp.config("*", {
 })
 
 -- clangd
-vim.lsp.config("clangd", {
-  cmd = { "clangd" },
-  filetypes = { "c", "cpp", "proto" },
-  root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", ".git" }
+vim.lsp.config('clangd', {
+  cmd = { 'clangd' },
+  filetypes = { 'c', 'cpp', 'proto' },
+  root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', '.git' }
 })
 
 -- pyright
-vim.lsp.config("pyright", {
-  cmd = { "pyright-langserver", "--stdio" },
-  filetypes = { "python" },
+vim.lsp.config('pyright', {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
   -- root_markers = {
-  --   "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt",
-  --   "Pipfile", "pyrightconfig.json", ".git"
+  --   'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
+  --   'Pipfile', 'pyrightconfig.json', '.git'
   -- },
   root_dir = vim.fn.getcwd(),
   settings = {
@@ -229,21 +208,21 @@ vim.lsp.config("pyright", {
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
-        diagnosticMode = "openFilesOnly",
+        diagnosticMode = 'openFilesOnly',
       },
     },
   }
 })
 
 -- tsserver
-vim.lsp.config("tsserver", {
-  cmd = { "typescript-language-server", "--stdio" },
-  filetypes = { "javascript", "typescript" },
-  root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
-  init_options = { hostInfo = "neovim" },
+vim.lsp.config('tsserver', {
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = { 'javascript', 'typescript' },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  init_options = { hostInfo = 'neovim' },
 })
 
--- can be disabled by `:lua vim.lsp.enable("tsserver", false)` for example
-vim.lsp.enable({ "clangd", "pyright", "tsserver" })
+-- can be disabled by `:lua vim.lsp.enable('tsserver', false)` for example
+vim.lsp.enable({ 'clangd', 'pyright', 'tsserver' })
 EOF
 endif

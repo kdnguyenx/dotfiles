@@ -42,6 +42,6 @@ nmap <C-p> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
 
 " clear highlights on search when pressing <esc> in normal mode
-nnoremap <silent> <Esc> :noh<CR>
+nnoremap <silent> <Esc> :nohlsearch<CR>
 " search current marked text
 vnoremap // "0y/\V<C-r>0<CR>

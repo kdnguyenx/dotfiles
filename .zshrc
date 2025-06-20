@@ -25,7 +25,6 @@ GIT_PS1_SHOWUPSTREAM='verbose'
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
 GIT_PS1_COMPRESSSPARSESTATE=true
 # enable command-subsitution in ps1
-autoload -U colors && colors
 setopt PROMPT_SUBST
 NL=$'\n'
 PS1='$NL%B%F{cyan}%0~%f%b% %F{magenta}$(__git_ps1 "  %s")%f$NL%B%(?.%F{green}.%F{red})%(!.#.$)%f%b '
