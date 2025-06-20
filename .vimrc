@@ -1,86 +1,233 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
-" open the quickfix window whenever a quickfix command is executed
-autocmd QuickFixCmdPost [^l]* cwindow
-" quick exit some filetypes
-autocmd FileType help,qf,diff nnoremap <silent> <buffer> q :quit<CR>
-" encoding
-set encoding=utf-8 fileencoding=utf-8 termencoding=utf-8
-" set the characters for the invisibles
-set list listchars=tab:›\ ,eol:¬,trail:·
-set signcolumn=no title
-" set default regexp engine to nfa
-set regexpengine=0
-syntax enable
-" disable temporary files.
-set nobackup noswapfile
-" detect filetype
-filetype on
-filetype indent on
+set background=dark
+set regexpengine=2 " set default regexp engine to nfa
+
 " re-map leader key
-nnoremap <space> <nop>
+nnoremap <Space> <Nop>
 let g:mapleader = ' '
+
+syntax enable  " enable syntax
+filetype on  " detect filetype
+filetype indent on  " filetype indentation
+
+set encoding=utf-8 fileencoding=utf-8  " encoding
+set nobackup noswapfile  " disable temporary files.
+set switchbuf=uselast  " this option controls the behavior when switching between buffers
+set laststatus=0  " disable statusline
+
+set list listchars=tab:›\ ,eol:¬,trail:·  " set the characters for the invisibles
+set title visualbell hidden
+set wrap nopaste
+set showcmd showmode showmatch  " show useful info
+
 " set default indentation
 set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround
-" auto read file change
-set autoread autoindent
-" scan to put in completion
-set complete=.,w,b,u,t completeopt=menu,preview
-" sequence of letters which describes how automatic formatting is to be done
-set formatoptions=tcqj
-" split behaviour
-set splitbelow splitright
-" allow backspacing over listed items
-set backspace=indent,eol,start
-set visualbell
-" add numbers to each line on the left-hand side.
-set number relativenumber ruler hidden
-set wrap nopaste
-" this option controls the behavior when switching between buffers
-set switchbuf=uselast
-" show several useful info
-set showcmd showmode showmatch
-set mouse=a mousemodel=popup_setpos
-" the cursor is kept in the same column
-set nostartofline
-set ttyfast history=10000
-" basic theme
-set background=dark laststatus=2
-" searching
+set autoread autoindent  " auto read file change and indentation
 set incsearch hlsearch ignorecase smartcase matchpairs+=<:>
+set wildmenu wildmode=full wildcharm=<C-z> wildmenu  " enable auto completion menu after pressing tab.
+
+set splitbelow splitright  " preferred split behaviour
+set backspace=indent,eol,start  " allow backspacing over listed items
+set number relativenumber ruler  " add numbers to each line on the left-hand side.
+
+set mouse=a mousemodel=popup_setpos
+set nostartofline  " the cursor is kept in the same column
+set ttyfast history=10000
+set updatetime=100  " reduce update time for faster response
+set wrap  " wrap long lines
+
 " re-size split windows using arrow keys
 nnoremap <Up> :resize +5<CR>
 nnoremap <Down> :resize -5<CR>
 nnoremap <Left> :vertical resize -5<CR>
 nnoremap <Right> :vertical resize +5<CR>
+
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
-" navigate through quickfix list
+
+" navigate through quickfix list or buffers
 nnoremap <C-j> :cnext<CR>zz
 nnoremap <C-k> :cprev<CR>zz
-" navigate through buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
-" enable auto completion menu after pressing tab.
-set wildmenu wildmode=full wildcharm=<C-z> wildmenu
-" find files
+
+" basic find files and grep
 nnoremap <leader>e :e %:h<C-z><C-z>
 nnoremap <leader>b :b <C-z>
-nnoremap <leader>g :vimgrep //f **<S-Left><S-Left><Right>
-vnoremap <leader>g "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
-nnoremap <leader>/ :vimgrep /<C-r><C-w>/f **
-nnoremap <leader>ma :marks<CR>
-" search current marked text
-vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
+nnoremap <leader>gg :vimgrep //f **<S-Left><S-Left><Right>
+vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
+nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
+
 " find and replace
 nnoremap <leader>rr :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
-" unix commands
-nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
-nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
-nnoremap <leader>rm :!rm -rf %<C-z>
-" set mark before gd/#/*
-nnoremap <silent> gd mMgd
-nnoremap <silent> # mM#
-nnoremap <silent> * mM*
+
+" search current marked text
+vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
+
+" yank marked text/paste to/from global register
+nnoremap <leader>Y "+Y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+nnoremap <leader>cf :let @+=expand('%')<CR>
+
+" set global mark before gd/#/*
+nnoremap gd mMgd
+nnoremap # mM#
+nnoremap * mM*
+
+" -----
+" neovim specific options
+if has('nvim')
+  set laststatus=2
+  set inccommand=split  " shows effects of substitute and other commands
+  set colorcolumn=80
+  set undofile  " enable undo history
+
+  autocmd QuickFixCmdPost [^l]* cwindow " open the quickfix window whenever a quickfix command is executed
+  autocmd TextYankPost * silent! lua vim.hl.on_yank{ higroup='IncSearch', timeout=100 }
+
+  " quick exit some filetypes
+  autocmd FileType help,qf,checkhealth,fugitive,fugitiveblame
+        \ nnoremap <silent> <buffer> q :quit<CR>
+
+  " unix commands
+  nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
+  nnoremap <leader>mv :!mv %<C-z> %:h<C-z>
+  nnoremap <leader>rm :!rm -rf %<C-z>
+
+  " program to use for the :grep command
+  if executable('rg')
+    set grepprg=rg\ --vimgrep\ --smart-case\ --no-heading\ --column
+    set grepformat^=%f:%l:%c:%m
+    nnoremap <leader>gg :silent grep! ''<Left>
+    vnoremap <leader>gg "0y:silent grep! --case-sensitive '<C-r>0'<Left>
+    nnoremap <leader>gw :silent grep! --case-sensitive '<C-r><C-w>'<CR>
+    nnoremap <leader>ga :silent grep! --hidden --no-ignore ''<Left>
+  endif
+
+  " plugins, make sure you use single quotes
+  call plug#begin()
+  Plug 'rose-pine/neovim', { 'as': 'rose-pine' }
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'mhinz/vim-signify'
+  Plug 'nvim-treesitter/nvim-treesitter'
+  call plug#end()
+
+  set termguicolors
+  lua require'rose-pine'.setup { dark_variant = 'moon', styles = { italic = false } }
+  silent! colorscheme rose-pine
+  hi Normal ctermbg=NONE guibg=NONE
+  hi NormalNC ctermbg=NONE guibg=NONE
+
+  " clear highlights on search when pressing <esc> in normal mode
+  nnoremap <Esc> <Cmd>nohlsearch<CR>
+  nnoremap - <Cmd>Explore<CR>
+  autocmd FileType netrw nnoremap <buffer> <C-c> <Cmd>Rexplore<CR>
+  autocmd FileType netrw setl colorcolumn=
+
+  " indent by filetype
+  au FileType c,cpp,java,python sw=4 ts=4 sts=4 et
+  au FileType go sw=4 ts=4 sts=4 noet
+  au FileType json sw=4 ts=4 sts=4 formatprg=jq et
+  au FileType javascript,typescript sw=2 ts=2 sts=2 et
+
+  " ftdetect
+  au BufRead,BufNewFile *.log,*.log{.*} set ft=messages
+  au BufRead,BufNewFile *.psql setlocal ft=sql
+
+  " enable experimental tui
+  lua require'vim._extui'.enable { enable = true, msg = { target = 'cmd' } }
+
+  " treesitter config
+  lua require'nvim-treesitter.configs'.setup { auto_install = true, indent = { enable = true } }
+
+  " custom fzf
+  let g:fzf_layout = { 'down': "41%" }
+  let g:fzf_vim = { 'preview_window': [ 'right,41%,<70(up,41%)' ] }
+  nnoremap <leader>ff <Cmd>Files<CR>
+  nnoremap <leader>fg <Cmd>GFiles<CR>
+endif
+
+" neovim lsp config
+if has('nvim')
+lua << EOF
+-- default for all servers
+vim.lsp.config("*", {
+  on_attach = function(client, bufnr)
+  -- enable inlay hint
+  vim.lsp.inlay_hint.enable(true)
+  -- mappings.
+  -- see `:help vim.lsp.*` for documentation on any of the below functions
+  -- lsp navigation keymaps
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, { buffer = bufnr })
+  vim.keymap.set("i", "<C-s>", function()
+  vim.lsp.buf.signature_help({ border = "single", title = "help" })
+  end, { buffer = bufnr })
+  -- lsp actions
+  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+  vim.keymap.set("v", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+  vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = bufnr })
+  -- diagnostics keymaps
+  vim.keymap.set("n", "<C-p>", function() vim.diagnostic.jump({ count = -1, float = false }) end)
+  vim.keymap.set("n", "<C-n>", function() vim.diagnostic.jump({ count = 1, float = false }) end)
+  -- diagnostics list
+  vim.keymap.set("n", "<leader>xx", function()
+  vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+  end)
+  -- diagnostic signs
+  vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
+  -- completion
+  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+  end,
+  detached = true,
+})
+
+-- clangd
+vim.lsp.config("clangd", {
+  cmd = { "clangd" },
+  filetypes = { "c", "cpp", "proto" },
+  root_markers = { ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", ".git" }
+})
+
+-- pyright
+vim.lsp.config("pyright", {
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  -- root_markers = {
+  --   "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt",
+  --   "Pipfile", "pyrightconfig.json", ".git"
+  -- },
+  root_dir = vim.fn.getcwd(),
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "openFilesOnly",
+      },
+    },
+  }
+})
+
+-- tsserver
+vim.lsp.config("tsserver", {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "typescript" },
+  root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+  init_options = { hostInfo = "neovim" },
+})
+
+-- can be disabled by `:lua vim.lsp.enable("tsserver", false)` for example
+vim.lsp.enable({ "clangd", "pyright", "tsserver" })
+EOF
+endif

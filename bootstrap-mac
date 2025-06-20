@@ -27,21 +27,17 @@ function linking() {
   ln -sfn $(pwd)/.vimrc ~/.vimrc
   ln -sfn $(pwd)/.ideavimrc ~/.ideavimrc
 
-  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-
   mkdir -p ${XDG_DATA_HOME:=~/.local/share}
-  mkdir -p $XDG_DATA_HOME/nvim/site
-  ln -sfn $(pwd)/pack $XDG_DATA_HOME/nvim/site/pack
+  mkdir -p ${XDG_CONFIG_HOME:=~/.config}
+  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
+  mkdir -p $XDG_CONFIG_HOME/nvim
+  ln -sfn $(pwd)/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
 }
 echo '[-] linking dotfiles [-]'
 linking
-
-echo '[-] initializing submodules [-]'
-git submodule update --init --remote --recursive
 
 echo '[-] creating essential directories [-]'
 mkdir -p ~/personal
@@ -58,6 +54,10 @@ if [ ! -d "$target_dir" ] ; then
   echo '[-] cloning zsh-autosuggestions [-]'
   git clone https://github.com/zsh-users/zsh-autosuggestions $target_dir
 fi
+
+echo '[-] downloading vim-plug [-]'
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 target_dir=~/opensource/neovim
 if [ ! -d "$target_dir" ] ; then
