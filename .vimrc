@@ -1,7 +1,7 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 set background=dark
-set regexpengine=2 " set default regexp engine to nfa
+" set regexpengine=2 " set default regexp engine to nfa
 
 " re-map leader key
 nnoremap <Space> <Nop>
@@ -122,7 +122,7 @@ if has('nvim')
   call plug#end()
 
   set termguicolors
-  lua require'rose-pine'.setup { dark_variant = 'moon', styles = { italic = false } }
+  lua require"rose-pine".setup { dark_variant = "moon", styles = { italic = false } }
   silent! colorscheme rose-pine
   hi Normal ctermbg=NONE guibg=NONE
   hi NormalNC ctermbg=NONE guibg=NONE
@@ -134,14 +134,14 @@ if has('nvim')
   autocmd FileType netrw setl colorcolumn=
 
   " indent by filetype
-  au FileType c,cpp,java,python sw=4 ts=4 sts=4 et
-  au FileType go sw=4 ts=4 sts=4 noet
-  au FileType json sw=4 ts=4 sts=4 formatprg=jq et
-  au FileType javascript,typescript sw=2 ts=2 sts=2 et
+  au FileType c,cpp,java,python setl sw=4 ts=4 sts=4 et
+  au FileType go setl sw=4 ts=4 sts=4 noet
+  au FileType json setl sw=4 ts=4 sts=4 formatprg=jq et
+  au FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 
   " ftdetect
-  au BufRead,BufNewFile *.log,*.log{.*} set ft=messages
-  au BufRead,BufNewFile *.psql setlocal ft=sql
+  au BufRead,BufNewFile *.log,*.log{.*} setl ft=messages
+  au BufRead,BufNewFile *.psql setl ft=sql
 
   " custom fzf
   let g:fzf_layout = { 'down': "41%" }
@@ -172,32 +172,38 @@ require("nvim-treesitter.configs").setup({
 -- default for all servers
 vim.lsp.config("*", {
   on_attach = function(client, bufnr)
-  -- enable inlay hint
-  vim.lsp.inlay_hint.enable(true)
-  -- mappings.
-  -- see `:help vim.lsp.*` for documentation on any of the below functions
-  -- lsp navigation keymaps
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, { buffer = bufnr })
-  vim.keymap.set("i", "<C-s>", function()
-  vim.lsp.buf.signature_help({ border = "single", title = "help" })
-  end, { buffer = bufnr })
-  -- lsp actions
-  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
-  vim.keymap.set("v", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
-  vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = bufnr })
-  -- diagnostics keymaps
-  vim.keymap.set("n", "<C-p>", function() vim.diagnostic.jump({ count = -1, float = false }) end)
-  vim.keymap.set("n", "<C-n>", function() vim.diagnostic.jump({ count = 1, float = false }) end)
-  -- diagnostics list
-  vim.keymap.set("n", "<leader>xx", function()
-  vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
-  end)
-  -- diagnostic signs
-  vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
-  -- completion
-  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
+    -- enable inlay hint
+    vim.lsp.inlay_hint.enable(true)
+
+    -- mappings.
+    -- see `:help vim.lsp.*` for documentation on any of the below functions
+    -- lsp navigation keymaps
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, { buffer = bufnr })
+    vim.keymap.set("i", "<C-s>", function()
+    vim.lsp.buf.signature_help({ border = "single", title = "help" })
+    end, { buffer = bufnr })
+
+    -- lsp actions
+    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set("v", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = bufnr })
+
+    -- diagnostics keymaps
+    vim.keymap.set("n", "<C-p>", function() vim.diagnostic.jump({ count = -1, float = false }) end)
+    vim.keymap.set("n", "<C-n>", function() vim.diagnostic.jump({ count = 1, float = false }) end)
+
+    -- diagnostics list
+    vim.keymap.set("n", "<leader>xx", function()
+    vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+    end)
+
+    -- diagnostic signs
+    vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = "single", } })
+
+    -- completion
+    vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
   end,
   detached = true,
 })
