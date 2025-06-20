@@ -143,22 +143,32 @@ if has('nvim')
   au BufRead,BufNewFile *.log,*.log{.*} set ft=messages
   au BufRead,BufNewFile *.psql setlocal ft=sql
 
-  " enable experimental tui
-  lua require'vim._extui'.enable { enable = true, msg = { target = 'cmd' } }
-
-  " treesitter config
-  lua require'nvim-treesitter.configs'.setup { auto_install = true, indent = { enable = true } }
-
   " custom fzf
   let g:fzf_layout = { 'down': "41%" }
   let g:fzf_vim = { 'preview_window': [ 'right,41%,<70(up,41%)' ] }
   nnoremap <leader>ff <Cmd>Files<CR>
   nnoremap <leader>fg <Cmd>GFiles<CR>
-endif
 
-" neovim lsp config
-if has('nvim')
+" --
+" neovim lua configs go here
 lua << EOF
+-- enable experimental tui
+require("vim._extui").enable({
+  enable = true,
+  msg = { target = "cmd" },
+})
+
+-- treesitter config
+require("nvim-treesitter.configs").setup({
+  modules = {},
+  ensure_installed = { "lua", "vim", "vimdoc", "query", "markdown" },
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
+  highlight = { enable = true, additional_vim_regex_highlighting = false },
+  indent = { enable = true }
+})
+
 -- default for all servers
 vim.lsp.config("*", {
   on_attach = function(client, bufnr)
