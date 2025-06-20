@@ -1,7 +1,7 @@
 " disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 set background=dark
-set regexpengine=2 " set default regexp engine to nfa
+set regexpengine=2  " set default regexp engine to nfa
 
 " re-map leader key
 nnoremap <Space> <Nop>
@@ -30,7 +30,6 @@ set mouse=a mousemodel=popup_setpos
 set nostartofline  " the cursor is kept in the same column
 set ttyfast history=10000
 set updatetime=100  " reduce update time for faster response
-set wrap  " wrap long lines
 
 " re-size split windows using arrow keys
 nnoremap <Up> :resize +5<CR>
@@ -55,35 +54,30 @@ nnoremap <leader>gg :vimgrep //f **<S-Left><S-Left><Right>
 vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>
 nnoremap <leader>gw :vimgrep /<C-r><C-w>/f **
 
+" search current marked text
+vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
+
 " find and replace
 nnoremap <leader>rr :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
 
-" search current marked text
-vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
-
-" set global mark before gd/#/*
-nnoremap gd mMgd
-nnoremap # mM#
-nnoremap * mM*
-
 " -----
 " neovim specific options
 if has('nvim')
+  set inccommand=split  " shows effects of substitute and other commands
+  set undofile  " enable undo history
+
   " yank marked text/paste to/from global register
   nnoremap <leader>Y "+Y
   vnoremap <leader>y "+y
   nnoremap <leader>p "+p
   nnoremap <leader>P "+P
   vnoremap <leader>p "+p
-  nnoremap <leader>cf :let @+=expand('%')<CR>
-
-  autocmd QuickFixCmdPost [^l]* cwindow " open the quickfix window whenever a quickfix command is executed
-  autocmd TextYankPost * silent! lua vim.hl.on_yank { higroup='IncSearch', timeout=100 }
 
   " quick exit some filetypes
-  autocmd FileType help,qf,checkhealth,fugitive,fugitiveblame
-        \ nnoremap <silent> <buffer> q :quit<CR>
+  autocmd FileType help,qf,checkhealth,fugitive,fugitiveblame nnoremap <silent> <buffer> q :quit<CR>
+  autocmd QuickFixCmdPost [^l]* cwindow  " open the quickfix window whenever a quickfix command is executed
+  autocmd TextYankPost * silent! lua vim.hl.on_yank { higroup='IncSearch', timeout=100 }
 
   " unix commands
   nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
@@ -104,20 +98,16 @@ if has('nvim')
   call plug#begin()
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
+  Plug 'rose-pine/neovim', { 'as': 'rose-pine' }
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'mhinz/vim-signify'
   call plug#end()
 
-  set inccommand=split  " shows effects of substitute and other commands
-  set undofile  " enable undo history
-  set cursorline
-
   " clear highlights on search when pressing <esc> in normal mode
   nnoremap <silent> <Esc> <Cmd>nohlsearch<CR>
   nnoremap - <Cmd>Explore<CR>
   autocmd FileType netrw nnoremap <buffer> <C-c> <Cmd>Rexplore<CR>
-  autocmd FileType netrw setl colorcolumn=
 
   " indent by filetype
   au FileType c,cpp,java,python setl sw=4 ts=4 sts=4 et
@@ -138,15 +128,17 @@ if has('nvim')
   nnoremap <leader>fg <Cmd>GFiles<CR>
 
   " enable experimental tui
-  lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' }, })
+  lua require'vim._extui'.enable { enable = true, msg = { target = 'cmd' } }
+
   set termguicolors  " enable 24-bit RGB color
+  lua require'rose-pine'.setup { dark_variant = 'moon', styles = { italic = false } }
+  silent! colorscheme rose-pine
   hi Normal ctermbg=NONE guibg=NONE
   hi NormalNC ctermbg=NONE guibg=NONE
 
 " --
 " neovim lua multiple lines config
 lua << EOF
-
 -- default for all servers
 vim.lsp.config('*', {
   on_attach = function(client, bufnr)
