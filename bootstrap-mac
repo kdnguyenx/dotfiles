@@ -1,5 +1,5 @@
 #!/bin/bash
-# install essential tools for my mac development environment
+# bootstrap script for my mac development
 # vim: ft=bash
 # -----
 set -e
@@ -29,9 +29,9 @@ function linking() {
 
   mkdir -p ${XDG_DATA_HOME:=~/.local/share}
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
   mkdir -p $XDG_CONFIG_HOME/nvim
   ln -sfn $(pwd)/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+  ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'

@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# install essential tools for my linux development environment
+# bootstrap script for my linux development with wm + xfce
 # vim: ft=bash
 # -----
 set -e
@@ -31,20 +31,17 @@ function linking() {
 
   mkdir -p ${XDG_DATA_HOME:=~/.local/share}
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
+  mkdir -p $XDG_CONFIG_HOME/nvim
+  ln -sfn $(pwd)/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
   ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
   ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
-
-  mkdir -p $XDG_CONFIG_HOME/nvim
-  ln -sfn $(pwd)/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
 
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
-
-  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 }
 echo '[-] linking dotfiles [-]'
 linking
@@ -60,8 +57,6 @@ echo '[-] installing window manager and essential packages [-]'
 sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
 sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
-
-echo '[-] installing enhanced cli tools [-]'
 sudo dnf install -y tree fastfetch polkit htop btop duf pdfgrep tldr hyperfine procs
 
 echo '[-] downloading git-prompt.sh script [-]'
@@ -112,6 +107,7 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dnf install -y steam discord rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
+  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 fi
 
 current_shell=$(echo $SHELL)
