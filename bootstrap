@@ -22,6 +22,7 @@ sudo dnf install -y \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 function linking() {
+  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
@@ -107,7 +108,6 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
   echo '[-] installing steam essential packages [-]'
   sudo dnf install -y steam discord rocm-smi mangohud gamescope
   echo 'remember to add `mangohud %command%` to steam launch options'
-  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
 fi
 
 current_shell=$(echo $SHELL)
