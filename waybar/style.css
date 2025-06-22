@@ -25,10 +25,11 @@ window#waybar {
 
 button {
   border-radius: 0;
+  padding: 0;
+  margin: 0;
 }
 
 #workspaces button {
-  padding: 0 5px;
   background-color: @gray;
 }
 
@@ -40,7 +41,6 @@ button {
   margin-left: 3px;
   margin-top: 3px;
   margin-bottom: 3px;
-  padding: 0px 5px;
 }
 
 #scratchpad {
