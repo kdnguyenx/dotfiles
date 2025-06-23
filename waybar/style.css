@@ -1,62 +1,44 @@
-@define-color bg rgba(24, 24, 24, 0.65);
-@define-color fg rgba(255, 255, 255, 1);
-@define-color gray rgba(34, 34, 34, 0.65);
-@define-color blue rgba(40, 85, 119, 0.85);
-@define-color magenta rgba(196, 167, 231, 0.65);
-@define-color red rgba(235, 111, 146, 0.65);
+@define-color bg #000000;
+@define-color fg #ffffff;
+@define-color gray 323232;
+@define-color blue #285577;
 
 * {
   font-family: Adwaita Sans, sans-serif;
   font-size: 12px;
+  margin: 0;
+  padding: 0;
 }
 
 window#waybar {
-  background-color: @bg;
+  background-color: alpha(@bg, 0.65);
   color: @fg;
-  border: 3px solid @gray;
 }
 
 #workspaces {
-  margin-left: 3px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  border: 2px solid @blue;
-}
-
-button {
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
+  margin-left: 5px;
 }
 
 #workspaces button {
   background-color: @gray;
+  border-radius: 0;
 }
 
 #workspaces button.focused {
   background-color: @blue;
 }
 
-#mode {
-  margin-left: 3px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
 #scratchpad {
-  margin: 6px 0;
-  padding: 0 5px;
-  border: 1px solid @magenta;
+  border: 1px solid @blue;
+  color: @blue;
+  margin: 5px 0;
+  padding: 0 3px;
 }
 
 #idle_inhibitor {
-  margin: 6px 6px 6px 0;
-  padding-right: 3px;
-  border: 1px solid @magenta;
-  color: @magenta;
+  padding-right: 5px;
 }
 
 #idle_inhibitor.activated {
-  border-color: @red;
-  color: @red;
+  color: @blue;
 }

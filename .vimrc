@@ -3,10 +3,6 @@ set nocompatible
 set background=dark
 set regexpengine=2  " set default regexp engine to nfa
 
-" re-map leader key
-nnoremap <Space> <Nop>
-let g:mapleader = ' '
-
 set encoding=utf-8 fileencoding=utf-8  " encoding
 set nobackup noswapfile  " disable temporary files.
 set switchbuf=uselast  " this option controls the behavior when switching between buffers
@@ -61,18 +57,18 @@ vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
 nnoremap <leader>rr :%s/<C-r><C-w>//gI<Left><Left><Left>
 vnoremap <leader>rr "0y:%s/<C-r>=escape(@0,'/\')<CR>//gI<Left><Left><Left>
 
+" yank marked text/paste to/from global register
+nnoremap <leader>Y "+Y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+
 " -----
 " neovim specific options
 if has('nvim')
   set inccommand=split  " shows effects of substitute and other commands
   set undofile  " enable undo history
-
-  " yank marked text/paste to/from global register
-  nnoremap <leader>Y "+Y
-  vnoremap <leader>y "+y
-  nnoremap <leader>p "+p
-  nnoremap <leader>P "+P
-  vnoremap <leader>p "+p
 
   " quick exit some filetypes
   autocmd FileType help,qf,checkhealth,fugitive,fugitiveblame nnoremap <silent> <buffer> q :quit<CR>
