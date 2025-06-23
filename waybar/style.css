@@ -1,6 +1,6 @@
 @define-color bg #000000;
 @define-color fg #ffffff;
-@define-color gray 323232;
+@define-color gray #323232;
 @define-color blue #285577;
 
 * {
@@ -16,16 +16,22 @@ window#waybar {
 }
 
 #workspaces {
-  margin-left: 5px;
+  border: 3px solid alpha(@blue, 0.65);
 }
 
 #workspaces button {
-  background-color: @gray;
   border-radius: 0;
 }
 
 #workspaces button.focused {
-  background-color: @blue;
+  background-color: alpha(@blue, 0.65);
+}
+
+#mode {
+  border: 1px solid @gray;
+  color: @gray;
+  margin: 5px 0;
+  padding: 0 3px;
 }
 
 #scratchpad {
