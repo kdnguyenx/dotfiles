@@ -1,7 +1,8 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+# -----------------
 # bootstrap script for my linux development with wm + xfce
 # vim: ft=bash
-# -----
+# ------------
 set -e
 
 echo '[-] checking secure boot state [-]'
@@ -43,18 +44,17 @@ function linking() {
 
   mkdir -p $XDG_CONFIG_HOME/gtk-3.0
   cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
+
+  mkdir -p ~/.local/bin
+  mkdir -p ~/personal
+  mkdir -p ~/repos
+  mkdir -p ~/opensource
+  touch ~/.profile
 }
 echo '[-] linking dotfiles [-]'
 linking
 
-echo '[-] creating essential directories [-]'
-mkdir -p ~/.local/bin
-mkdir -p ~/personal
-mkdir -p ~/repos
-mkdir -p ~/opensource
-touch ~/.profile
-
-echo '[-] installing window manager and essential packages [-]'
+echo '[-] installing essential packages [-]'
 sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
 sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
 sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
@@ -111,7 +111,7 @@ if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
 fi
 
 current_shell=$(echo $SHELL)
-if [ "$current_shell" != "/usr/bin/zsh" ]; then
+if [ "$current_shell" != '/usr/bin/zsh' ]; then
   echo '[-] change default shell to zsh [-]'
   chsh -s $(which zsh)
   echo '[-] device ready, restart your computer. [-]'

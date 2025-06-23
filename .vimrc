@@ -3,6 +3,10 @@ set nocompatible
 set background=dark
 set regexpengine=2  " set default regexp engine to nfa
 
+" re-map leader key
+nnoremap <Space> <Nop>
+let g:mapleader = ' '
+
 set encoding=utf-8 fileencoding=utf-8  " encoding
 set nobackup noswapfile  " disable temporary files.
 set switchbuf=uselast  " this option controls the behavior when switching between buffers
@@ -67,6 +71,7 @@ vnoremap <leader>p "+p
 " -----
 " neovim specific options
 if has('nvim')
+  set cursorline
   set inccommand=split  " shows effects of substitute and other commands
   set undofile  " enable undo history
 

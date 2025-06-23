@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# -----------------
 # bootstrap script for my mac development
 # vim: ft=bash
-# -----
+# ------------
 set -e
 
 if ! xcode-select -p &> /dev/null; then
@@ -14,10 +15,13 @@ if ! hash brew &> /dev/null; then
   (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+echo '[-] installing essential packages [-]'
 brew update
 brew install curl wget git coreutils watch ncdu cmake ninja tree
 brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
 brew install alacritty maccy btop universal-ctags
+brew install --cask font-hack-nerd-font
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc
@@ -35,15 +39,14 @@ function linking() {
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
+
+  mkdir -p ~/personal
+  mkdir -p ~/repos
+  mkdir -p ~/opensource
+  touch ~/.profile
 }
 echo '[-] linking dotfiles [-]'
 linking
-
-echo '[-] creating essential directories [-]'
-mkdir -p ~/personal
-mkdir -p ~/repos
-mkdir -p ~/opensource
-touch ~/.profile
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -68,8 +71,5 @@ if [ ! -d "$target_dir" ] ; then
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
 fi
-
-echo '[-] installing favourite font [-]'
-brew install --cask font-hack-nerd-font
 
 echo '[-] device ready, restart your computer. [-]'
