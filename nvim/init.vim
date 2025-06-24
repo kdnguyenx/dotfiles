@@ -1,15 +1,19 @@
 set regexpengine=2  " set default regexp engine to nfa
-set nobackup noswapfile  " disable temporary files.
-set list listchars=tab:›\ ,eol:¬,trail:·  " set the characters for the invisibles
-set showmode showmatch  " show useful info
-set expandtab smarttab shiftwidth=2 tabstop=2 softtabstop=2 shiftround  " set default indentation
+set noswapfile  " do not use swapfile for buffer
+set showmatch  " show matching brackets
+set shiftwidth=2 tabstop=2 softtabstop=2 expandtab shiftround  " set default indentation
 set splitbelow splitright  " preferred split behaviour
-set nostartofline  " the cursor is kept in the same column
 set updatetime=100  " reduce update time for faster response
 set cursorline  " highlight the text line of the cursor
 set inccommand=split  " shows effects of substitute and other commands
 set undofile  " enable undo history
-set title visualbell smartcase matchpairs+=<:> background=dark
+set title  " set the window title
+set visualbell  " use visual bell instead of beeping
+set smartcase  " override the 'ignorecase' option if the search pattern contains upper case characters
+set matchpairs+=<:>  " additional character that form pairs
+set background=dark  " dark bg
+set list  " enable list mode that set the characters for the invisibles
+let &showbreak='\ '  " string to put at the start of lines that have been wrapped
 
 " re-map leader key
 nnoremap <Space> <Nop>
@@ -17,6 +21,7 @@ let g:mapleader = ' '
 
 " plugins, make sure you use single quotes
 call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'rose-pine/neovim', { 'as': 'rose-pine' }
@@ -96,9 +101,12 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
 nnoremap <leader>ff <Cmd>Files<CR>
 nnoremap <leader>fg <Cmd>GFiles<CR>
 
+" load lua modules
+lua require('plugins.treesitter')
+lua require('lsp')
+
 " enable experimental tui
 lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' } })
-lua require('lsp')
 
 set termguicolors  " enable 24-bit RGB color
 lua require('rose-pine').setup({ dark_variant = 'moon', styles = { italic = false } })

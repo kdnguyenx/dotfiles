@@ -37,40 +37,10 @@ vim.lsp.config('*', {
     detached = true,
 })
 
--- clangd
-vim.lsp.config('clangd', {
-    cmd = { 'clangd' },
-    filetypes = { 'c', 'cpp', 'proto' },
-    root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', '.git' }
-})
-
--- pyright
-vim.lsp.config('pyright', {
-    cmd = { 'pyright-langserver', '--stdio' },
-    filetypes = { 'python' },
-    -- root_markers = {
-    --   'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
-    --   'Pipfile', 'pyrightconfig.json', '.git'
-    -- },
-    root_dir = vim.fn.getcwd(),
-    settings = {
-        python = {
-            analysis = {
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                diagnosticMode = 'openFilesOnly',
-            },
-        },
-    }
-})
-
--- tsserver
-vim.lsp.config('tsserver', {
-    cmd = { 'typescript-language-server', '--stdio' },
-    filetypes = { 'javascript', 'typescript' },
-    root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
-    init_options = { hostInfo = 'neovim' },
-})
+-- load servers
+require('lsp.clangd')
+require('lsp.pyright')
+require('lsp.tsserver')
 
 -- can be disabled by `:lua vim.lsp.enable('tsserver', false)` for example
 vim.lsp.enable({ 'clangd', 'pyright', 'tsserver' })

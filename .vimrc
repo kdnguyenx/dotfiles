@@ -12,9 +12,8 @@ set nobackup noswapfile  " disable temporary files.
 set switchbuf=uselast  " this option controls the behavior when switching between buffers
 set laststatus=2  " enable statusline
 
-set list listchars=tab:›\ ,eol:¬,trail:·  " set the characters for the invisibles
-set title visualbell hidden
-set wrap nopaste
+set list lcs=tab:>\ ,trail:-,nbsp:+  " set the characters for the invisibles
+set wrap nopaste title visualbell hidden
 set showcmd showmode showmatch  " show useful info
 
 " set default indentation
