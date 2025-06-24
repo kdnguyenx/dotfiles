@@ -13,7 +13,7 @@ set smartcase  " override the 'ignorecase' option if the search pattern contains
 set matchpairs+=<:>  " additional character that form pairs
 set background=dark  " dark bg
 set list  " enable list mode that set the characters for the invisibles
-let &showbreak='\ '  " string to put at the start of lines that have been wrapped
+let &showbreak='+++ '  " string to put at the start of lines that have been wrapped
 
 " re-map leader key
 nnoremap <Space> <Nop>
