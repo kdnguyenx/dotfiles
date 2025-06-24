@@ -9,10 +9,6 @@ vim.lsp.config('*', {
         -- lsp navigation keymaps
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr })
-        vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = 'single' }) end, { buffer = bufnr })
-        vim.keymap.set('i', '<C-s>', function()
-            vim.lsp.buf.signature_help({ border = 'single', title = 'help' })
-        end, { buffer = bufnr })
 
         -- lsp actions
         vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, { buffer = bufnr })
@@ -29,7 +25,7 @@ vim.lsp.config('*', {
         end)
 
         -- diagnostic signs
-        vim.diagnostic.config({ virtual_text = true, underline = true, float = { border = 'single', } })
+        vim.diagnostic.config({ virtual_text = true, underline = true })
 
         -- completion
         vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = false })
