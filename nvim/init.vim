@@ -21,7 +21,6 @@ let g:mapleader = ' '
 
 " plugins, make sure you use single quotes
 call plug#begin()
-Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'rose-pine/neovim', { 'as': 'rose-pine' }
@@ -93,6 +92,9 @@ au FileType go setl sw=4 ts=4 sts=4 noet
 au FileType json setl sw=4 ts=4 sts=4 formatprg=jq et
 au FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 
+" load lua modules
+lua require('lsp')
+
 " custom fzf
 let g:fzf_layout = { 'down': '41%' }
 let g:fzf_vim = { 'preview_window': [ 'right,41%,<70(up,41%)' ] }
@@ -100,10 +102,6 @@ autocmd! FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 nnoremap <leader>ff <Cmd>Files<CR>
 nnoremap <leader>fg <Cmd>GFiles<CR>
-
-" load lua modules
-lua require('plugins.treesitter')
-lua require('lsp')
 
 " enable experimental tui
 lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' } })
