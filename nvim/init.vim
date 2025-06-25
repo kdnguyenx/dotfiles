@@ -5,14 +5,12 @@ set shiftwidth=2 tabstop=2 softtabstop=2 expandtab shiftround  " set default ind
 set splitbelow splitright  " preferred split behaviour
 set updatetime=100  " reduce update time for faster response
 set cursorline  " highlight the text line of the cursor
-set inccommand=split  " shows effects of substitute and other commands
 set undofile  " enable undo history
 set title  " set the window title
 set visualbell  " use visual bell instead of beeping
 set ignorecase  " ignore case in search patterns
 set smartcase  " override the 'ignorecase' option if the search pattern contains upper case characters
 set matchpairs+=<:>  " additional character that form pairs
-set background=dark  " dark bg
 set list  " enable list mode that set the characters for the invisibles
 let &showbreak='+++ '  " string to put at the start of lines that have been wrapped
 
@@ -47,7 +45,7 @@ nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
 
 " find files
-nnoremap <leader>e :e %:h<C-z><C-z>
+nnoremap <leader>e :e %:h<C-z>
 nnoremap <leader>b :b <C-z>
 vnoremap // "0y/\V<C-r>=escape(@0,'/\')<CR><CR>
 
@@ -75,7 +73,7 @@ vnoremap <leader>p "+p
 " quick exit some filetypes
 au FileType help,qf,checkhealth,fugitive,fugitiveblame nn <silent> <buffer> q :quit<CR>
 au QuickFixCmdPost [^l]* cwindow  " open the quickfix window whenever a quickfix command is executed
-au TextYankPost * silent! lua vim.hl.on_yank { higroup='IncSearch', timeout=100 }
+au TextYankPost * silent! lua vim.hl.on_yank { higroup="IncSearch", timeout=100 }
 
 " unix commands
 nnoremap <leader>cp :!cp -r %<C-z> %:h<C-z>
@@ -105,13 +103,14 @@ nnoremap <leader>fg <Cmd>GFiles<CR>
 vnoremap <leader>fg "+y:GFiles<CR>
 
 " enable experimental tui
-lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' } })
+lua require"vim._extui".enable { enable = true, msg = { target = 'cmd' } }
 
 set termguicolors  " enable 24-bit RGB color
-lua require('rose-pine').setup({ dark_variant = 'moon', styles = { italic = false } })
+lua require"rose-pine".setup { dark_variant = 'moon', styles = { italic = false } }
 silent! colorscheme rose-pine
 hi Normal ctermbg=NONE guibg=NONE
 hi NormalNC ctermbg=NONE guibg=NONE
 
 " load lua modules
-lua require('lsp')
+lua require"lsp"
+lua require"utils"

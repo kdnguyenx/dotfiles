@@ -32,7 +32,7 @@ nnoremap <C-k> :cprev<CR>zz
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprev<CR>
 " basic find files and grep
-nnoremap <leader>e :e %:h<C-z><C-z>
+nnoremap <leader>e :e %:h<C-z>
 nnoremap <leader>b :b <C-z>
 nnoremap <leader>gg :vimgrep //f **<S-Left><S-Left><Right>
 vnoremap <leader>gg "0y:vimgrep /<C-r>=escape(@0,'/\')<CR>/f **<S-Left><Left><Left><Left>

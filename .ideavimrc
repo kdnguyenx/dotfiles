@@ -6,17 +6,17 @@ source ~/.vimrc
 set breakindent
 " ide specific options
 set ideastatusicon=gray
-set ideajoin
-set ideamarks
 set ideawrite=file
 set visualdelay=50
+set ideajoin
+set ideamarks
 " enable ideavim plugins https://jb.gg/ideavim-plugins
 set commentary
 set surround
 set highlightedyank
 " map ide actions to ideavim -- https://jb.gg/abva4t
 nmap <leader>ff <action>(GotoFile)
-nmap <leader>fc <action>(GotoClass)
+vmap <leader>ff <action>(GotoFile)
 nmap <leader>e <action>(ShowNavBar)
 nmap <leader>b <action>(Switcher)
 nmap <leader>gg <action>(FindInPath)
@@ -36,7 +36,7 @@ nmap - <action>(SelectInProjectView)
 nmap <C-n> <action>(GotoNextError)
 nmap <C-p> <action>(GotoPreviousError)
 nmap <C-w>o <action>(HideAllWindows)
+" search current marked text in intellij only
+vnoremap // "0y/\V<C-r>0<CR>
 " clear highlights on search when pressing <esc> in normal mode
 nnoremap <silent> <Esc> :nohlsearch<CR>
-" search current marked text
-vnoremap // "0y/\V<C-r>0<CR>

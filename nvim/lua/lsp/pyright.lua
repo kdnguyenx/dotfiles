@@ -1,9 +1,9 @@
-vim.lsp.config('pyright', {
-    cmd = { 'pyright-langserver', '--stdio' },
-    filetypes = { 'python' },
+vim.lsp.config("pyright", {
+    cmd = { "pyright-langserver", "--stdio" },
+    filetypes = { "python" },
     -- root_markers = {
-    --   'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
-    --   'Pipfile', 'pyrightconfig.json', '.git'
+    --   "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt",
+    --   "Pipfile", "pyrightconfig.json", ".git"
     -- },
     root_dir = vim.fn.getcwd(),
     settings = {
@@ -11,7 +11,7 @@ vim.lsp.config('pyright', {
             analysis = {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
-                diagnosticMode = 'openFilesOnly',
+                diagnosticMode = "openFilesOnly",
             },
         },
     }
