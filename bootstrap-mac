@@ -20,8 +20,7 @@ echo '[-] installing essential packages [-]'
 brew update
 brew install curl wget git coreutils watch ncdu cmake ninja tree
 brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
-brew install alacritty maccy btop universal-ctags
-brew install --cask font-hack-nerd-font
+brew install alacritty maccy btop font-hack-nerd-font
 
 function linking() {
   ln -sfn $(pwd)/.zshrc ~/.zshrc

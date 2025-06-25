@@ -4,12 +4,10 @@ set noswapfile  " do not use swapfile for buffer
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab shiftround  " set default indentation
 set showmatch  " show matching brackets
 set splitbelow splitright  " preferred split behaviour
-set updatetime=100  " reduce update time for faster response
 set cursorline  " highlight the text line of the cursor
-set inccommand=split  " shows effects of substitute and other commands
-set undofile  " enable undo history
 set title  " set the window title
 set visualbell  " use visual bell instead of beeping
+set ignorecase  " ignore case in search patterns
 set smartcase  " override the 'ignorecase' option if the search pattern contains upper case characters
 set matchpairs+=<:>  " additional character that form pairs
 set background=dark  " dark bg
@@ -25,11 +23,6 @@ let &showbreak='+++ '  " string to put at the start of lines that have been wrap
 " re-map leader key
 nnoremap <Space> <Nop>
 let g:mapleader = ' '
-" resize window using arrow keys
-nnoremap <Up> :resize +5<CR>
-nnoremap <Down> :resize -5<CR>
-nnoremap <Left> :vertical resize -5<CR>
-nnoremap <Right> :vertical resize +5<CR>
 " command mode navigation
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>

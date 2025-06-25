@@ -9,6 +9,7 @@ set inccommand=split  " shows effects of substitute and other commands
 set undofile  " enable undo history
 set title  " set the window title
 set visualbell  " use visual bell instead of beeping
+set ignorecase  " ignore case in search patterns
 set smartcase  " override the 'ignorecase' option if the search pattern contains upper case characters
 set matchpairs+=<:>  " additional character that form pairs
 set background=dark  " dark bg
@@ -92,16 +93,16 @@ au FileType go setl sw=4 ts=4 sts=4 noet
 au FileType json setl sw=4 ts=4 sts=4 formatprg=jq et
 au FileType javascript,typescript setl sw=2 ts=2 sts=2 et
 
-" load lua modules
-lua require('lsp')
-
 " custom fzf
 let g:fzf_layout = { 'down': '41%' }
 let g:fzf_vim = { 'preview_window': [ 'right,41%,<70(up,41%)' ] }
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 nnoremap <leader>ff <Cmd>Files<CR>
+vnoremap <leader>ff "+y:Files<CR>
+nnoremap <leader>fw :let @+=expand('<cword>') \| Files<CR>
 nnoremap <leader>fg <Cmd>GFiles<CR>
+vnoremap <leader>fg "+y:GFiles<CR>
 
 " enable experimental tui
 lua require('vim._extui').enable({ enable = true, msg = { target = 'cmd' } })
@@ -111,3 +112,6 @@ lua require('rose-pine').setup({ dark_variant = 'moon', styles = { italic = fals
 silent! colorscheme rose-pine
 hi Normal ctermbg=NONE guibg=NONE
 hi NormalNC ctermbg=NONE guibg=NONE
+
+" load lua modules
+lua require('lsp')
