@@ -1,29 +1,7 @@
 #!/usr/bin/env bash
-# -----------------
-# bootstrap script for my linux development with wm + xfce
-# vim: ft=bash
-# ------------
 set -e
 
-echo '[-] checking secure boot state [-]'
-if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
-  echo "could not determine the secure boot state."
-  exit 1
-fi
-
-echo '[-] installing prerequisite packages [-]'
-sudo dnf upgrade -y
-sudo dnf install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
-sudo dnf install -y watch ncdu autoconf automake parallel vim tmux fzf ripgrep jq
-
-echo '[-] enabling rpmfusion [-]'
-sudo dnf install -y \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
 function linking() {
-  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
   ln -sfn $(pwd)/.zshrc ~/.zshrc
   ln -sfn $(pwd)/.zshenv ~/.zshenv
   ln -sfn $(pwd)/.tmux.conf ~/.tmux.conf
@@ -33,16 +11,11 @@ function linking() {
 
   mkdir -p ${XDG_DATA_HOME:=~/.local/share}
   mkdir -p ${XDG_CONFIG_HOME:=~/.config}
-  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
-  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
-  ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
   ln -sfn $(pwd)/alacritty $XDG_CONFIG_HOME/alacritty
+  ln -sfn $(pwd)/nvim $XDG_CONFIG_HOME/nvim
 
   ln -sfn $(pwd)/.gitignore ~/.gitignore
   git config --global core.excludesFile '~/.gitignore'
-
-  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
-  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
 
   mkdir -p ~/.local/bin
   mkdir -p ~/personal
@@ -53,11 +26,88 @@ function linking() {
 echo '[-] linking dotfiles [-]'
 linking
 
-echo '[-] installing essential packages [-]'
-sudo dnf install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
-sudo dnf install -y alacritty network-manager-applet pavucontrol gammastep gnupg2 wl-clipboard
-sudo dnf install -y ibus ibus-wayland waybar rofi-wayland elementary-icon-theme lightdm-gtk-greeter-settings
-sudo dnf install -y tree fastfetch polkit htop btop duf pdfgrep tldr hyperfine procs
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! xcode-select -p &> /dev/null; then
+    echo '[-] installing xcode command line tools [-]'
+    xcode-select --install
+  fi
+  if ! hash brew &> /dev/null; then
+    echo '[-] installing homebrew [-]'
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+
+  echo '[-] installing essential packages [-]'
+  brew update
+  brew install curl wget git coreutils watch ncdu cmake ninja tree
+  brew install parallel tmux fzf ripgrep jq golang htop pdfgrep tldr hyperfine procs
+  brew install alacritty maccy universal-ctags font-hack-nerd-font
+else
+  echo '[-] checking secure boot state [-]'
+  if [[ "$(mokutil --sb-state)" != *"SecureBoot enabled"* ]]; then
+    echo "could not determine the secure boot state."
+    exit 1
+  fi
+
+  echo '[-] additional linking [-]'
+  ln -sfn $(pwd)/sway $XDG_CONFIG_HOME/sway
+  ln -sfn $(pwd)/waybar $XDG_CONFIG_HOME/waybar
+  ln -sfn $(pwd)/MangoHud $XDG_CONFIG_HOME/MangoHud
+
+  mkdir -p $XDG_CONFIG_HOME/gtk-3.0
+  cp $(pwd)/templates/settings.ini $XDG_CONFIG_HOME/gtk-3.0/settings.ini
+
+  echo '[-] installing essential packages [-]'
+  sudo apt update && sudo apt upgrade -y
+  sudo apt install -y curl wget zip zsh git coreutils gcc clang cmake make ninja-build
+  sudo apt install -y watch ncdu autoconf automake parallel make pkg-config flex bison check meson
+  sudo apt install -y alacritty tree fastfetch htop pdfgrep tldr hyperfine procs vim tmux fzf ripgrep jq universal-ctags
+  sudo apt install -y sway swaylock dunst thunar blueman grim slurp xdg-desktop-portal xdg-desktop-portal-wlr
+  sudo apt install -y network-manager polkit pulseaudio pavucontrol gammastep gnupg2 wl-clipboard
+  sudo apt install -y wayland-protocols ibus ibus-wayland waybar elementary-icon-theme
+
+  target_dir=$XDG_DATA_HOME/fonts
+  if [ ! -d "$target_dir" ] ; then
+    echo '[-] installing favourite font [-]'
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
+    mkdir -p $target_dir
+    unzip Hack.zip -d $target_dir
+    rm -f Hack.zip
+    fc-cache -f -v
+  fi
+
+  target_dir=~/opensource/ibus-bamboo
+  if [ ! -d "$target_dir" ] ; then
+    echo '[-] building ibus-bamboo [-]'
+    sudo apt install -y ibus make go libX11-devel libXtst-devel gtk3-devel
+    git clone https://github.com/BambooEngine/ibus-bamboo.git $target_dir
+    cd $target_dir
+    sudo make install PREFIX=/usr
+  fi
+
+  target_dir=~/opensource/rofi
+  if [ ! -d "$target_dir" ] ; then
+    echo '[-] building rofi on wayland [-]'
+    sudo apt install -y libpango1.0-dev libpangocairo-1.0-0 libcairo2-dev libglib2.0-dev libxcb-util-dev libxcb-ewmh-dev
+    sudo apt install -y libgdk-pixbuf-2.0-dev libstartup-notification0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb1-dev
+    sudo apt install -y libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-keysyms1-dev
+    git clone https://github.com/lbonn/rofi.git $target_dir
+    cd $target_dir
+    git checkout wayland
+    meson setup build
+    ninja -C build
+    sudo ninja -C build install
+  fi
+
+  if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
+    echo '[-] installing steam essential packages [-]'
+    sudo dpkg --add-architecture i386
+    sudo apt update -y && sudo apt install -y libgl1-mesa-dri:i386 libgl1:i386
+    sudo apt install -y rocm-smi mangohud gamescope
+    echo 'remember to add `gamemoderun mangohud %command%` to steam launch options'
+  fi
+fi
 
 echo '[-] downloading git-prompt.sh script [-]'
 mkdir -p ~/.zsh/plugins/git/
@@ -84,34 +134,13 @@ if [ ! -d "$target_dir" ] ; then
   sudo make install
 fi
 
-target_dir=~/opensource/ibus-bamboo
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] building ibus-bamboo [-]'
-  sudo dnf install -y ibus make go libX11-devel libXtst-devel gtk3-devel
-  git clone https://github.com/BambooEngine/ibus-bamboo.git $target_dir
-  cd $target_dir
-  sudo make install PREFIX=/usr
-fi
-
-target_dir=$XDG_DATA_HOME/fonts
-if [ ! -d "$target_dir" ] ; then
-  echo '[-] installing favourite font [-]'
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
-  mkdir -p $target_dir
-  unzip Hack.zip -d $target_dir
-  rm -f Hack.zip
-  fc-cache -f -v
-fi
-
-if lspci | grep -E "VGA|3D" | grep -iq "AMD"; then
-  echo '[-] installing steam essential packages [-]'
-  sudo dnf install -y steam discord rocm-smi mangohud gamescope
-  echo 'remember to add `mangohud %command%` to steam launch options'
-fi
-
 current_shell=$(echo $SHELL)
-if [ "$current_shell" != '/usr/bin/zsh' ]; then
+if [ "$current_shell" != '/usr/bin/zsh' ] && [ "$current_shell" != '/bin/zsh' ]; then
   echo '[-] change default shell to zsh [-]'
   chsh -s $(which zsh)
   echo '[-] device ready, restart your computer. [-]'
+else
+  echo '[-] device ready. [-]'
 fi
+
+# vim: ft=bash

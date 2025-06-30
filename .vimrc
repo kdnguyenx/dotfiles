@@ -4,7 +4,6 @@ set noswapfile  " do not use swapfile for buffer
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab shiftround  " set default indentation
 set showmatch  " show matching brackets
 set splitbelow splitright  " preferred split behaviour
-set cursorline  " highlight the text line of the cursor
 set title  " set the window title
 set visualbell  " use visual bell instead of beeping
 set ignorecase  " ignore case in search patterns
